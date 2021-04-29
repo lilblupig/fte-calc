@@ -1,5 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;200;300;400;500;600;700&display=swap');
 
 body {
     font-family: Lato, Helvetica, sans-serif;
+}
+
+.purple {
+    background-color: #8e4e99;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.quick-link {
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
 }
