@@ -18,8 +18,18 @@ body {
     color: #fff;
 }
 
+.logo:hover {
+    color: #57245E;
+    background-color: #F2EDF7;
+}
+
 .quick-link {
     font-size: 30px;
     font-weight: 500;
     color: #fff;
+}
+
+.quick-link:hover {
+    color: #fff;
+    background-color: #57245E;
 }
