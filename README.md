@@ -143,14 +143,13 @@ In line with structure map and user needs, the wireframes show the initial desir
 ### **Surface**
 
 #### Colours
-Thought process behind colour choices and palette development.
+The colours used are taken from the brand of the trust involved in production of the page to give an inclusive, seamless feel for staff using the tool.  Some of the colours have been changed slightly to improve distiction for colourblind users.
 ![Colours option 1](assets/readme-images/colors-opt-1.png)
 
 #### Typography
-Thought process behind font choices.
-1. 
-1. 
-1. 
+Thought process behind font choices:
+
+As with colours, the font chosen is taken from the branding of the trust.  Various weights are used for the logo, headinngs, body and calculator to give the feel of variety but maintain consistency.
 
 ![Example fonts](assets/readme-images/typography.png)
 
