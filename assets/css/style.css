@@ -39,7 +39,7 @@ body {
 /* Calculator */
 
 #region-chooser p {
-    display: inline;
+    margin-bottom: 0;
 }
 
 #region-chooser button {
