@@ -4,6 +4,10 @@ body {
     font-family: Lato, Helvetica, sans-serif;
 }
 
+.text-justify {
+    text-align: justify;
+}
+
 .purple {
     background-color: #8e4e99;
 }
