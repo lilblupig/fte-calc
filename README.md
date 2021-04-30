@@ -59,25 +59,31 @@ The footer also contains a Contact modal link which feeds back to the developer,
 These stories are addressed fully in the [Testing](TESTING.md) document.
 
 ### **Strategy**
-Who is the website for?
-What does the owner of the website need/want?
-What do the users of the website need/want?
+*Who is the website for?*
 
-Broadly, how does the website meet these needs?
+The website is for academic institutions with one or more payscales/holiday allowances who need to quickly and accurately calculate term-time only salaries from full time equivalent figures.
+
+*What does the owner of the website need/want?*
+
+The owner of the website wants its staff to quickly and accurately obtain the data they need for HR and payroll purposes.
+
+*What do the users of the website need/want?*
+
+The user needs are closely aligned with the owner needs and wants, in that they too wish to spend as little time as possible on the task at hand, whilst simultaneously improving accuracy.
+
+*Broadly, how does the website meet these needs?*
+
+Single page application, no wasted navigation time. The interface is also designed to reduce the click burden of the user which in turn should improve time consumption.  The results should be displayed after 5 clicks and two keystrokes. There is an intermediate check of the full time figures obtained, to ensure source data is correct.
 
 Owner aims:
-* 
-* 
-* 
-* 
-* 
+* Improve accuracy and reduce payroll and contractual errors requiring resolution.
+* Provide intuitive, clear resource for staff to improve efficiency.
+* Updatable source data, prefereably by user/owner. 
 
 User aims:
-* 
-* 
-* 
-* 
-* 
+* Improve accuracy to reduce human error requiring resolution.
+* Spend less time on manual calculations and reading tables.
+* Current, relevant data at all times.
 
 ### **Scope**
 Why does the website exist?  What does it need to meet the user/owner aims?
