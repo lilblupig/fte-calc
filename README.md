@@ -121,19 +121,21 @@ Third increment:
 * See Information Grouping [mind map here](assets/documents/structure.pdf).
 
 ### **Skeleton**
-In line with structure planning... 
+In line with structure map and user needs, the wireframes show the initial desired layout which has the primary intention of reducing user input to a minimum.  Website is most likely to be used on laptop/PC with second large screen, but should be scalable for field staff working from Surfaces/iPads as a minimum.
 
 #### Wireframes
 
 ##### Original
-1. [Mobile](assets/documents/XXXXX-mobile.pdf) 375px
-1. [Tablet](assets/documents/XXXXX-tablet.pdf) 768px
-1. [PC/Laptop](assets/documents/XXXXX-pc.pdf) 1200px
+1. [Mobile](assets/documents/fte-calc-mobile.pdf) 375px
+1. [Tablet](assets/documents/fte-calc-tablet.pdf) 768px
+1. [PC/Laptop](assets/documents/fte-calc-pc.pdf) 1200px
+1. [Large Screen](assets/documents/fte-calc-large.pdf) 2560px
 
 ##### Final
-1. [Mobile](assets/documents/XXXXX-mobile-final.pdf) 375px
-1. [Tablet](assets/documents/XXXXX-tablet-final.pdf) 768px
-1. [PC/Laptop](assets/documents/XXXXX-pc-final.pdf) 1200px
+1. [Mobile](assets/documents/fte-calc-mobile-final.pdf) 375px
+1. [Tablet](assets/documents/fte-calc-tablet-final.pdf) 768px
+1. [PC/Laptop](assets/documents/fte-calc-pc-final.pdf) 1200px
+1. [Large Screen](assets/documents/fte-calc-large.pdf) 2560px
 
 ##### Summary of Changes
 * 
