@@ -86,26 +86,36 @@ User aims:
 * Current, relevant data at all times.
 
 ### **Scope**
-Why does the website exist?  What does it need to meet the user/owner aims?
+*Why does the website exist?*
+
+The website exists to meet a real world need for accurate and timely data.
+
+*What does it need to meet the user/owner aims?*
+
+It needs to be clearly laid out, with obvious instructions and an intuitive interface.  It also needs to always produce reliable data or explain why it cannot so that the user can alter their approach as necessary.
 
 #### Feature Viability
 
 | # | Feature | Importance | Viability | Comment |
 |---| ------- | :--------: | :-------: | ------- |
-1.| Feature  | 0 | 0 | Y - Why
-2.| Feature  | 0 | 0 | Y - Why
-3.| Feature  | 0 | 0 | Y - Why
-T.| Total score | 0 | 0 |
+1.| Clear instructions | 5 | 5 | Y - Essential for use, easy to include
+2.| Direct navigation | 5 | 5 | Y - One aim is to improve efficiency
+3.| Dynamic response to data input | 5 | 4 | Y - This is the purpose of the website
+4.| Elegant error handling | 4 | 4 | Y - Required for user feedback
+5.| Enable user/owner data updates | 3 | 2 | M - Developer unsure of source data accessibility
+T.| Total score | 22 | 20 |
 
 #### Feature Plan
 First increment:
-* 
+* Include features 1-4 above.
+* Responsive design, though primary use likely to be via PC/laptop.  Include design for larger screen sizes.
+* Data source either from csv or arrays/objects within code.
 
 Second increment:
-* 
+* Improve data source to csv or Google Sheets API.
 
 Third increment:
-* 
+* Enable user update of data source and provide instructions on how-to.
 
 ### **Structure**
 * See Information Grouping [mind map here](assets/documents/structure.pdf).
