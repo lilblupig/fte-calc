@@ -36,6 +36,24 @@ body {
     background-color: #57245E;
 }
 
+.hamburger {
+    border: solid 1px #57245E;
+    border-radius: 0.25rem;
+    background-color: white;
+    padding: 10px 12px;
+    margin: 5px 0;
+}
+
+.fte-toggler-icon {
+    background-image: url(../images/icons8-menu.svg);
+}
+
+@media (min-width: 768px) {
+    #calcnavlinks {
+        display: block;
+    }
+}
+
 /* Calculator */
 
 #region-chooser p {
