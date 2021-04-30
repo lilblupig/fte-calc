@@ -12,6 +12,8 @@ body {
     background-color: #8e4e99;
 }
 
+/* Nav Bar */
+
 .logo {
     font-size: 30px;
     font-weight: 700;
@@ -32,4 +34,19 @@ body {
 .quick-link:hover {
     color: #fff;
     background-color: #57245E;
+}
+
+/* Calculator */
+
+#region-chooser p {
+    display: inline;
+}
+
+#region-chooser button {
+    background-color: #F2EDF7;
+    border-color: #8e4e99;
+}
+
+#region-chooser button:hover {
+    background-color: #8e4e99;
 }
