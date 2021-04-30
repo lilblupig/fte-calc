@@ -205,7 +205,7 @@ The website was created using [GitPod](https://www.gitpod.io/). Version control 
 ### **Deployment of the Page**
 1. In the IDE, ensure the tree is clean, and all required items have been committed and pushed to the repository in GitHub.
 1. Sign in to GitHub.
-1. Navigate to the appropriate repository: `XXXXX`
+1. Navigate to the appropriate repository: https://github.com/lilblupig/fte-calc
 1. From the repository menu, choose Settings.
 ![GitHub menu snip](assets/readme-images/deploy-1.png)
 1. On the sidebar menu to the left, find the Pages section.
@@ -307,4 +307,4 @@ The images for this README are from the following sources:
 
 **Created by Amy Hacker.**
 
-[Back to Top](#XXXXX)
+[Back to Top](#fte-calc)
