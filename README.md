@@ -49,12 +49,12 @@ There is a closing summary at the bottom of the page referring to any publicly a
 The footer also contains a Contact modal link which feeds back to the developer, so that any issues can be resolved.
 
 ### **User Stories**
-1. As a new user, I want to 
-1. As a new user, I want to 
-1. As a new user, I want to 
-1. As a returning user, I want to 
-1. As a returning user, I want to 
-1. As a frequent user, I want to 
+1. As a new user, I want to immediately find information on how to use the website.
+1. As a new user, I want to immediately find information on what I need to complete the task I came for.
+1. As a new user, I want to very quickly, intuitively learn exactly how the calculator is used to get the data I came for.
+1. As a returning user, I want to get straight to using the calculator without pointless interaction such as scrolling or clicking.
+1. As a returning user, I want to be able to provide feedback with regard to my needs/issues with the website.
+1. As a frequent user, I want to know that the webiste is updated with relevant infomation in a timely manner, or to be able to update the source data myself.
 
 These stories are addressed fully in the [Testing](TESTING.md) document.
 
