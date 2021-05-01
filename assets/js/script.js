@@ -7,10 +7,6 @@ const buttons = document.querySelectorAll(".btn");
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
-        if(classes.contains("r-one")) {
-            console.log(this.innerHTML);
-        } else if (classes.contains("r-two")) {
-            console.log(this.innerHTML);
-        }
+        console.log(this.innerHTML);
     })
 });
