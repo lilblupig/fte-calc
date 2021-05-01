@@ -4,6 +4,11 @@ body {
     font-family: Lato, Helvetica, sans-serif;
 }
 
+.lighter-text {
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+}
+
 .text-justify {
     text-align: justify;
 }
@@ -92,6 +97,16 @@ body {
 
 .disc-btn:focus {
     box-shadow: 0 0 0 0.25rem #8e4e997e;
+}
+
+.ft-check {
+    width: 80px;
+    height: 38px;
+    border: solid 1px #a1a1a1;
+    border-radius: 0.25rem;
+    background-color: #eeeeee;
+    margin: 0 auto;
+    padding: 5px 0;
 }
 
 /* Footer */
