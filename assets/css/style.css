@@ -109,6 +109,24 @@ body {
     padding: 5px 0;
 }
 
+#hours-box {
+    width: 80px;
+    height: 38px;
+    border: solid 1px #8e4e99;
+    border-radius: 0.25rem;
+    margin: 0 auto;
+    padding: 5px 0;
+    text-align: right;
+}
+
+#hours-box:hover {
+    background-color: #F2EDF7;
+}
+
+#hours-box:focus {
+    box-shadow: 0 0 0 0.25rem #8e4e997e;
+}
+
 /* Footer */
 
 footer {
