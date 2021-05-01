@@ -8,8 +8,6 @@ buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
         if(classes.contains("region-btn")) {
-            $(this).siblings().removeClass('selected-btn');
-            $(this).addClass('selected-btn');
             console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("grade-btn")) {
             console.log("Grade", this.innerHTML);
@@ -23,6 +21,7 @@ buttons.forEach(function(button){
             console.log("Unknown button type");
         };
 
-
+        $(this).siblings().removeClass('selected-btn');
+        $(this).addClass('selected-btn');
     })
 });
