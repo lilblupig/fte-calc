@@ -89,8 +89,8 @@
                                 <p>Choose Region:</p>
                             </div>
                             <div class="col-12 col-md-4 col-xl-2 text-center">
-                                <button class="btn btn-info">Region 1</button>
-                                <button class="btn btn-info">Region 2</button>
+                                <button class="btn calculator-btn">Region 1</button>
+                                <button class="btn calculator-btn">Region 2</button>
                             </div>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                             <p>Enter Hours Worked per Week:</p>
                         </div>
                         <div class="pb-2">
-                            <input id="hours-box" type="number" placeholder="0" />
+                            <input id="hours-box" type="number" placeholder="0" required />
                         </div>
                         <div>
                             <p class="lighter-text">FTE Hours</p>
@@ -214,9 +214,20 @@
                     </div>
 <!-- Service Length Chooser -->
                     <div id="service-length" class="col-12 col-md-4 text-center py-4">
-                        Placeholder for Service Length input
+                        <div>
+                            <p>Select Service Length:</p>
+                        </div>
+                        <div id="service-input" class="text-center">
+                            <div>
+                                <button class="btn calculator-btn">Less than 5 years</button>
+                            </div>
+                            <div>
+                                <button class="btn calculator-btn">5 years or more</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+<!-- Results Area -->
                 <div class="row">
                     <div id="result-pay" class="col-12 col-md-6">
                         Placeholder for Pay & FTE Results
