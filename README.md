@@ -138,7 +138,7 @@ In line with structure map and user needs, the wireframes show the initial desir
 1. [Large Screen](assets/documents/fte-calc-large.pdf) 2560px
 
 ##### Summary of Changes
-* 
+* Changed service length input from Radio to matched buttons as better fit with the rest of the style of the webpage.  Even with styling adjusted, the radio buttons looked small and out of touch with the rest of the inputs.
 
 ### **Surface**
 
