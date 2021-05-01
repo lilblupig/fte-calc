@@ -67,12 +67,32 @@ body {
 
 #region-chooser button:hover {
     background-color: #8e4e99;
+    border: solid 1px #57245E;
 }
 
 #region-chooser button:focus {
     box-shadow: 0 0 0 0.25rem #8e4e997e;
 }
 
+.disc-btn {
+    display: inline-block;
+    background-color: #F2EDF7;
+    border: solid 1px #8e4e99;
+    width: 38px;
+    height: 38px;
+    padding: 12px 0;
+    border-radius: 50%;
+    line-height: 10px;
+}
+
+.disc-btn:hover {
+    background-color: #8e4e99;
+    border: solid 1px #57245E;
+}
+
+.disc-btn:focus {
+    box-shadow: 0 0 0 0.25rem #8e4e997e;
+}
 
 /* Footer */
 
