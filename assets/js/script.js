@@ -8,19 +8,21 @@ buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
         if(classes.contains("region-btn")) {
-            console.log(this.innerHTML);
+            $(this).siblings().removeClass('selected-btn');
+            $(this).addClass('selected-btn');
+            console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("grade-btn")) {
-            console.log(this.innerHTML);
+            console.log("Grade", this.innerHTML);
         } else if (classes.contains("scp-btn")) {
-            console.log(this.innerHTML);
+            console.log("SCP", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
-            console.log(this.innerHTML);
+            console.log("Working weeks", this.innerHTML);
         } else if (classes.contains("service-btn")) {
-            console.log(this.innerHTML);
+            console.log("Service length", this.innerHTML);
         } else {
             console.log("Unknown button type");
-        }
+        };
+
+
     })
 });
-
-console.log(this.innerHTML);
