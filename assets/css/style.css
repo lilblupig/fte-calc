@@ -139,6 +139,12 @@ body {
     padding: 0;
 }
 
+/* More Information */
+
+#more-info a {
+    color: #57245E;
+}
+
 /* Footer */
 
 footer {
