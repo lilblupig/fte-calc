@@ -280,6 +280,8 @@ Where did the website content come from?
 #### Media
 * The photographs used for the website were obtained from [Pexels.com](https://www.pexels.com/):
 
+* Icon used for Favicon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
+
 * The diagrams used for the website were obtained from various places:
 
 #### Acknowledgements
