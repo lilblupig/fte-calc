@@ -6,7 +6,7 @@ const rTwoBtn = document.getElementById("#region-btn-2");
 
 const buttons = document.querySelectorAll(".btn");
 
-function addBtn() {
+function addROneGradeBtns() {
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
 
@@ -20,11 +20,31 @@ function addBtn() {
     };
 };
 
+function addRTwoGradeBtns() {
+    let clearBtns = document.getElementById("grade-bucket");
+    clearBtns.innerHTML = "";
+
+    for (let i = 0; i < rTwoGrades.length; i++) {
+        let newBtn = document.createElement("button");
+        newBtn.innerHTML = rTwoGrades[i];
+        newBtn.classList.add("btn", "disc-btn", "grade-btn");
+    
+        let gradeBucket = document.getElementById("grade-bucket");
+        gradeBucket.appendChild(newBtn);
+    };
+};
+
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
         if(classes.contains("region-btn")) {
-            addBtn();
+            if (this.id == "region-btn-1") {
+                addROneGradeBtns();
+            } else if (this.id == "region-btn-2") {
+                addRTwoGradeBtns();
+            } else {
+                console.log("Unknown Region requested")
+            };
             console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("grade-btn")) {
             console.log("Grade", this.innerHTML);
