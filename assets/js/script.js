@@ -1,13 +1,30 @@
-// Define region buttons
+const rOneGrades = ["A", "B", "C", "D"];
+const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
+
 const rOneBtn = document.getElementById("#region-btn-1");
 const rTwoBtn = document.getElementById("#region-btn-2");
 
 const buttons = document.querySelectorAll(".btn");
 
+function addBtn() {
+    let clearBtns = document.getElementById("grade-bucket");
+    clearBtns.innerHTML = "";
+
+    for (let i = 0; i < rOneGrades.length; i++) {
+        let newBtn = document.createElement("button");
+        newBtn.innerHTML = rOneGrades[i];
+        newBtn.classList.add("btn", "disc-btn", "grade-btn");
+    
+        let gradeBucket = document.getElementById("grade-bucket");
+        gradeBucket.appendChild(newBtn);
+    };
+};
+
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
         if(classes.contains("region-btn")) {
+            addBtn();
             console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("grade-btn")) {
             console.log("Grade", this.innerHTML);
