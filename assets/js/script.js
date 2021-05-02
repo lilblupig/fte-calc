@@ -1,11 +1,11 @@
+// Placeholder Grade arrays
 const rOneGrades = ["A", "B", "C", "D"];
 const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
 
-const rOneBtn = document.getElementById("#region-btn-1");
-const rTwoBtn = document.getElementById("#region-btn-2");
-
+// Get all elements with the class 'btn'
 const buttons = document.querySelectorAll(".btn");
 
+//Generates Grade buttons for Region 1
 function addROneGradeBtns() {
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
@@ -20,6 +20,7 @@ function addROneGradeBtns() {
     };
 };
 
+// Generates Grade buttons for Region 2
 function addRTwoGradeBtns() {
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
@@ -34,6 +35,7 @@ function addRTwoGradeBtns() {
     };
 };
 
+// Listen for all hard-coded calculator button clicks
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
@@ -46,8 +48,6 @@ buttons.forEach(function(button){
                 console.log("Unknown Region requested")
             };
             console.log("Calculating FTE for", this.innerHTML);
-        } else if (classes.contains("grade-btn")) {
-            console.log("Grade", this.innerHTML);
         } else if (classes.contains("scp-btn")) {
             console.log("SCP", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
@@ -61,4 +61,11 @@ buttons.forEach(function(button){
         $(this).siblings().removeClass('selected-btn');
         $(this).addClass('selected-btn');
     })
+});
+
+// Listen for generated Grade button clicks
+$('#grade-bucket').on('click', 'button', function(){
+    $(this).siblings().removeClass('selected-btn');
+    $(this).addClass('selected-btn');
+    console.log("Grade", this.innerHTML);
 });
