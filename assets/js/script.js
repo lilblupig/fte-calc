@@ -1,6 +1,6 @@
-// Placeholder Grade/SCP arrays/objects
+// Placeholder pay scale information
 const rOneGrades = ["A", "B", "C", "D", "E", "F"];
-const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
+const rTwoGrades = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 const rOneSCPs = {
     "A": [1, 2, 3],
@@ -16,7 +16,10 @@ const rTwoSCPs = {
     "3": [3, 4],
     "4": [4, 5],
     "5": [5, 6, 7],
-    "6": [7, 8, 9]
+    "6": [7, 8, 9],
+    "7": [8, 9, 10],
+    "8": [9, 11],
+    "9": [11, 12]
 };
 
 const rOneScales = {
@@ -37,7 +40,65 @@ const rTwoScales = {
     "6": 20600,
     "7": 21000,
     "8": 21400,
-    "9": 21900
+    "9": 21900,
+    "11": 22700,
+    "12": 22100
+};
+
+const rOneHolidaysL5 = {
+    "38": 5.6,
+    "39": 5.65,
+    "40": 5.8,
+    "41": 5.94,
+    "42": 6.09,
+    "43": 6.23,
+    "44": 6.38
+};
+const rOneHolidaysM5 = {
+    "38": 6.48,
+    "39": 6.65,
+    "40": 6.83,
+    "41": 6.99,
+    "42": 7.17,
+    "43": 7.33,
+    "44": 7.51
+};
+
+const rTwoHolidaysL5L8 = {
+    "38": 5.6,
+    "39": 5.65,
+    "40": 5.8,
+    "41": 5.94,
+    "42": 6.09,
+    "43": 6.23,
+    "44": 6.38
+};
+const rTwoHolidaysM5L8 = {
+    "38": 6.09,
+    "39": 6.25,
+    "40": 6.41,
+    "41": 6.57,
+    "42": 6.73,
+    "43": 6.89,
+    "44": 7.05
+};
+const rTwoHolidaysL5M8 = {
+    "38": 6.48,
+    "39": 6.65,
+    "40": 6.83,
+    "41": 6.99,
+    "42": 7.17,
+    "43": 7.33,
+    "44": 7.51
+};
+const rTwoHolidaysM5M8 = {
+    "38": 7.09,
+    "39": 7.28,
+    "40": 7.46,
+    "41": 7.65,
+    "42": 7.84,
+    "43": 8.02,
+    "44": 8.21
 };
 
 // Get elements needed globally
@@ -67,6 +128,9 @@ function addGradeBtns() {
     // Clear any previously displayed FTE/hours checks
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
+    // Clear any selected weeks
+    chosenWeeks = 0;
+    $(".weeks-btn").removeClass('selected-btn');
 
     // Determine region and get all associated grades as array
     let regionGrades;
@@ -89,7 +153,7 @@ function addGradeBtns() {
         gradeBucket.appendChild(newBtn);
     };
     
-    // Log chosen grade to console
+    // Log chosen region to console
     console.log("Calculating FTE for", chosenRegion);
 };
 
@@ -101,6 +165,9 @@ function addSCPBtns() {
     // Clear any previously displayed FTE/hours checks
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
+    // Clear any selected weeks
+    chosenWeeks = 0;
+    $(".weeks-btn").removeClass('selected-btn');
 
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
@@ -129,6 +196,9 @@ function addSCPBtns() {
 
 // SCP click event handler
 function makeFTEChecks() {
+    // Clear any selected weeks
+    chosenWeeks = 0;
+    $(".weeks-btn").removeClass('selected-btn');
     // Determine region and get salary for selected SCP
     if (chosenRegion == "rOne") {
         chosenSalary = rOneScales[chosenSCP];
@@ -148,15 +218,38 @@ function makeFTEChecks() {
     hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
 };
 
+// Weeks click event handler
+function weeksCalc() {
+    let paidWeeks;
+    if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
+        paidWeeks = Math.round((chosenWeeks + rOneHolidaysL5[chosenWeeks] + Number.EPSILON) * 100) / 100;
+    } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
+        paidWeeks = Math.round((chosenWeeks + rOneHolidaysM5[chosenWeeks] + Number.EPSILON) * 100) / 100;
+    } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysL5L8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+    } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysM5L8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+    } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysL5M8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+    } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysM5M8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+    } else {
+        console.log("No idea what's going on");
+    }
+    console.log("Weeks", chosenWeeks);
+    console.log("Weeks", chosenGrade);
+    console.log(paidWeeks);
+};
+
 // Event listener for all hard-coded calculator button clicks
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
         // Update global variable with chosen region
         if(classes.contains("region-btn")) {
-            if (this.id == "region-btn-1") {
+            if (this.id === "region-btn-1") {
                 chosenRegion = "rOne";
-            } else if (this.id == "region-btn-2") {
+            } else if (this.id === "region-btn-2") {
                 chosenRegion = "rTwo";
             } else {
                 console.log("Unknown Region passed to main event listener")
@@ -164,10 +257,15 @@ buttons.forEach(function(button){
             };
             // Populate the grade bucket with buttons
             addGradeBtns();
-        } else if (classes.contains("weeks-btn")) {
-            console.log("Working weeks", this.innerHTML);
         } else if (classes.contains("service-btn")) {
+            chosenService = this.innerHTML;
+            // Clear any selected weeks
+            chosenWeeks = 0;
+            $(".weeks-btn").removeClass('selected-btn');
             console.log("Service length", this.innerHTML);
+        } else if (classes.contains("weeks-btn")) {
+            chosenWeeks = Number(this.innerHTML);
+            weeksCalc();
         } else {
             console.log("Unknown button type passed to calculator");
             alert("A button of unknown type has been passed to the calculator.")
