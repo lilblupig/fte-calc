@@ -1,14 +1,15 @@
 // Placeholder Grade/SCP arrays/objects
-const rOneGrades = ["A", "B", "C", "D"];
+const rOneGrades = ["A", "B", "C", "D", "E", "F"];
 const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
 
 const rOneSCPs = {
     "A": [1, 2, 3],
     "B": [2, 3],
     "C": [3, 4],
-    "D": [4, 5]
+    "D": [4, 5, 6],
+    "E": [5, 6],
+    "F": [6, 7]
 };
-
 const rTwoSCPs = {
     "1": [1, 2],
     "2": [2, 3],
@@ -16,6 +17,27 @@ const rTwoSCPs = {
     "4": [4, 5],
     "5": [5, 6, 7],
     "6": [7, 8, 9]
+};
+
+const rOneScales = {
+    "1": 17800,
+    "2": 18100,
+    "3": 18500,
+    "4": 18900,
+    "5": 19300,
+    "6": 19600,
+    "7": 20000
+};
+const rTwoScales = {
+    "1": 18800,
+    "2": 19100,
+    "3": 19500,
+    "4": 19900,
+    "5": 20300,
+    "6": 20600,
+    "7": 21000,
+    "8": 21400,
+    "9": 21900
 };
 
 // Get all elements with the class 'c-btn'
@@ -28,6 +50,7 @@ const hoursBox = document.getElementById("hours-box");
 let chosenRegion;
 let chosenGrade;
 let chosenSCP;
+let chosenSalary;
 let chosenWeeks;
 let chosenHours;
 let chosenService;
@@ -42,11 +65,9 @@ function addGradeBtns() {
     // Determine region and get all associated grades as array
     let regionGrades;
     if (chosenRegion == "rOne") {
-        regionGrades = rOneGrades; 
-        console.log(regionGrades);
+        regionGrades = rOneGrades;
     } else if (chosenRegion == "rTwo") {
         regionGrades = rTwoGrades;
-        console.log(regionGrades);
     } else {
         console.log("Unknown Region passed to addGradeBtns");
         alert("An unknown Region variable has been passed to the calculator while adding grade buttons.")
@@ -73,10 +94,8 @@ function addSCPBtns() {
     let gradeSCPs;
     if (chosenRegion == "rOne") {
         gradeSCPs = rOneSCPs[chosenGrade]; 
-        console.log(gradeSCPs);
     } else if (chosenRegion == "rTwo") {
         gradeSCPs = rTwoSCPs[chosenGrade];
-        console.log(gradeSCPs);
     } else {
         console.log("Unknown Region passed to addSCPbtns");
         alert("An unknown Region variable has been passed to the calculator while adding SCP buttons.")
@@ -147,12 +166,24 @@ $('#grade-bucket').on('click', 'button', function (){
 
 // Listen for generated SCP button clicks
 $('#scp-bucket').on('click', 'button', function(){
-        // Log chosen SCP to console
-        console.log("SCP", this.innerHTML);
+    chosenSCP = this.innerHTML;
 
-        // Clear any previous selection and highlight selected item
-        $(this).siblings().removeClass('selected-btn');
-        $(this).addClass('selected-btn');
+    if (chosenRegion == "rOne") {
+        chosenSalary = rOneScales[chosenSCP];
+    } else if (chosenRegion == "rTwo") {
+        chosenSalary = rTwoScales[chosenSCP];
+    } else {
+        console.log("Unknown Region passed to SCP click listener");
+        alert("An unknown Region variable has been passed to the calculator while selecting salary.")
+    };
+    
+    // Log chosen SCP to console
+    console.log("SCP", chosenSCP);
+    console.log("Chosen salary", chosenSalary);
+
+    // Clear any previous selection and highlight selected item
+    $(this).siblings().removeClass('selected-btn');
+    $(this).addClass('selected-btn');
     
 });
 
