@@ -260,6 +260,16 @@ function getResults() {
     console.log("Weeks FTE", weeksFTE);
     console.log("Hours FTE", hoursFTE);
     console.log("FTE", FTE);
+
+    document.getElementById("result-grade").innerHTML = chosenGrade + chosenSCP;
+    document.getElementById("result-fte").innerHTML = FTE;
+    document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE +Number.EPSILON) * 100) / 100;
+    document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
+    document.getElementById("result-pension").innerHTML = "To Do";
+    document.getElementById("weeks-total").innerHTML = paidWeeks;
+    document.getElementById("weeks-working").innerHTML = chosenWeeks;
+    document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
+    document.getElementById("week-hours").innerHTML = chosenHours;
 };
 
 // Event listener for all hard-coded calculator button clicks
