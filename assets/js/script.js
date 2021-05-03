@@ -55,15 +55,15 @@ function addRTwoGradeBtns() {
 
 // Generates SCP buttons for Region 1
 function addROneSCPBtns() {
-    let clearBtns = document.getElementById("scp-bucket");
+    let clearBtns = document.getElementById("scp-bucket"); // Clears any existing data from bucket
     clearBtns.innerHTML = "";
     
-    console.log("Get chosen grade:", chosenGrade);
+    console.log("Get chosen grade:", chosenGrade); // Logs chosen grade
 
-    let gradeSCPs = rOneSCPs[chosenGrade];
+    let gradeSCPs = rOneSCPs[chosenGrade]; // Gets all SCPs associated with chosen grade as array
     console.log(gradeSCPs);
 
-    for (let i = 0; i < gradeSCPs.length; i++) {
+    for (let i = 0; i < gradeSCPs.length; i++) { // Generates SCP buttons
         let newBtn = document.createElement("button");
         newBtn.innerHTML = gradeSCPs[i];
         newBtn.classList.add("btn", "disc-btn", "scp-btn");
@@ -81,8 +81,12 @@ buttons.forEach(function(button){
         if(classes.contains("region-btn")) {
             if (this.id == "region-btn-1") {
                 addROneGradeBtns();
+                let clearBtns = document.getElementById("scp-bucket");
+                clearBtns.innerHTML = "";
             } else if (this.id == "region-btn-2") {
                 addRTwoGradeBtns();
+                let clearBtns = document.getElementById("scp-bucket");
+                clearBtns.innerHTML = "";
             } else {
                 console.log("Unknown Region requested")
             };
