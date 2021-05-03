@@ -122,12 +122,17 @@ function addGradeBtns() {
     // Clear any existing data from Grade bucket
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
+    chosenGrade = "";
     // Clear any previously produced SCP buttons from bucket
     let clearSCP = document.getElementById("scp-bucket");
     clearSCP.innerHTML = "";
+    chosenSCP = "";
     // Clear any previously displayed FTE/hours checks
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
+    // Clear selected service length
+    chosenService = 0;
+    $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
@@ -162,9 +167,13 @@ function addSCPBtns() {
     // Clear any existing data from SCP bucket
     let clearBtns = document.getElementById("scp-bucket"); 
     clearBtns.innerHTML = "";
+    chosenSCP = "";
     // Clear any previously displayed FTE/hours checks
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
+    // Clear selected service length
+    chosenService = 0;
+    $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
@@ -199,6 +208,10 @@ function makeFTEChecks() {
     // Clear any selected weeks
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
+    // Clear selected service length
+    chosenService = 0;
+    $(".service-btn").removeClass('selected-btn');
+    
     // Determine region and get salary for selected SCP
     if (chosenRegion == "rOne") {
         chosenSalary = rOneScales[chosenSCP];
@@ -236,9 +249,7 @@ function weeksCalc() {
     } else {
         console.log("No idea what's going on");
     }
-    console.log("Weeks", chosenWeeks);
-    console.log("Weeks", chosenGrade);
-    console.log(paidWeeks);
+    console.log("Paid weeks", paidWeeks);
 };
 
 // Event listener for all hard-coded calculator button clicks
