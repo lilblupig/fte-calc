@@ -26,12 +26,15 @@ let chosenRegion;
 let chosenGrade;
 let chosenSCP;
 
-// Generates Grade buttons
+// Generate Grade buttons
 function addGradeBtns() {
+
+    // Clear any existing data from bucket
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
 
-    let regionGrades; // Determines region and gets all associated grades as array
+    // Determine region and get all associated grades as array
+    let regionGrades;
     if (chosenRegion == "rOne") {
         regionGrades = rOneGrades; 
         console.log(regionGrades);
@@ -39,10 +42,11 @@ function addGradeBtns() {
         regionGrades = rTwoGrades;
         console.log(regionGrades);
     } else {
-        console.log("Unknown Region");
-        alert("An unknown Region variable has been passed to the calculator.")
+        console.log("Unknown Region passed to addGradeBtns");
+        alert("An unknown Region variable has been passed to the calculator while adding grade buttons.")
     };
 
+    // Produce HTML elements for buttons and append to parent
     for (let i = 0; i < regionGrades.length; i++) {
         let newBtn = document.createElement("button");
         newBtn.innerHTML = regionGrades[i];
@@ -53,15 +57,14 @@ function addGradeBtns() {
     };
 };
 
-// Generates SCP buttons
-function addROneSCPBtns() {
-    let clearBtns = document.getElementById("scp-bucket"); // Clears any existing data from bucket
+// Generate SCP buttons
+function addSCPBtns() {
+    // Clear any existing data from bucket
+    let clearBtns = document.getElementById("scp-bucket"); 
     clearBtns.innerHTML = "";
-
-    console.log("get chosen region:", chosenRegion); // Logs chosen region
-    console.log("Get chosen grade:", chosenGrade); // Logs chosen grade
     
-    let gradeSCPs; // Determines region and gets all SCPs associated with chosen grade as array
+    // Determine region and get all SCPs associated with chosen grade as array
+    let gradeSCPs;
     if (chosenRegion == "rOne") {
         gradeSCPs = rOneSCPs[chosenGrade]; 
         console.log(gradeSCPs);
@@ -69,11 +72,12 @@ function addROneSCPBtns() {
         gradeSCPs = rTwoSCPs[chosenGrade];
         console.log(gradeSCPs);
     } else {
-        console.log("Unknown Region");
-        alert("An unknown Region variable has been passed to the calculator.")
+        console.log("Unknown Region passed to addSCPbtns");
+        alert("An unknown Region variable has been passed to the calculator while adding SCP buttons.")
     };
 
-    for (let i = 0; i < gradeSCPs.length; i++) { // Generates SCP buttons
+    // Produce HTML elements for buttons and append to parent
+    for (let i = 0; i < gradeSCPs.length; i++) {
         let newBtn = document.createElement("button");
         newBtn.innerHTML = gradeSCPs[i];
         newBtn.classList.add("btn", "disc-btn", "scp-btn");
@@ -88,29 +92,30 @@ function addROneSCPBtns() {
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
+        // Update global variable with chosen region
         if(classes.contains("region-btn")) {
             if (this.id == "region-btn-1") {
                 chosenRegion = "rOne";
-                let clearBtns = document.getElementById("scp-bucket");
-                clearBtns.innerHTML = "";
-
             } else if (this.id == "region-btn-2") {
                 chosenRegion = "rTwo";
-                let clearBtns = document.getElementById("scp-bucket");
-                clearBtns.innerHTML = "";
             } else {
-                console.log("Unknown Region requested")
+                console.log("Unknown Region passed to main event listener")
                 alert("An unknown Region variable has been passed to the calculator.")
             };
+            // Populate the grade bucket with buttons
             addGradeBtns();
+            // Clear any previously produced SCP buttons
+            let clearBtns = document.getElementById("scp-bucket");
+            clearBtns.innerHTML = "";
+            // Log chosen grade to console
             console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
             console.log("Working weeks", this.innerHTML);
         } else if (classes.contains("service-btn")) {
             console.log("Service length", this.innerHTML);
         } else {
-            console.log("Unknown button type");
-            alert("A button of unknown type has been activated")
+            console.log("Unknown button type passed to calculator");
+            alert("A button of unknown type has been passed to the calculator.")
         };
 
         $(this).siblings().removeClass('selected-btn');
@@ -120,19 +125,27 @@ buttons.forEach(function(button){
 
 // Listen for generated Grade button clicks
 $('#grade-bucket').on('click', 'button', function (){
-    console.log("Grade", this.innerHTML); // Log chosen grade to console
+    // Log chosen grade to console
+    console.log("Grade", this.innerHTML);
 
-    chosenGrade = this.innerHTML; // Update global variable with chosen grade
+    // Update global variable with chosen grade
+    chosenGrade = this.innerHTML;
 
-    addROneSCPBtns(); // Generate the relevant SCP buttons
+    // Generate the relevant SCP buttons
+    addSCPBtns();
 
-    $(this).siblings().removeClass('selected-btn'); // Clear any previous selection
-    $(this).addClass('selected-btn'); // Highlight selected item
+    // Clear any previous selection and highlight selected item
+    $(this).siblings().removeClass('selected-btn');
+    $(this).addClass('selected-btn');
 });
 
 // Listen for generated SCP button clicks
 $('#scp-bucket').on('click', 'button', function(){
-    $(this).siblings().removeClass('selected-btn');
-    $(this).addClass('selected-btn');
-    console.log("SCP", this.innerHTML);
+        // Log chosen SCP to console
+        console.log("SCP", this.innerHTML);
+
+        // Clear any previous selection and highlight selected item
+        $(this).siblings().removeClass('selected-btn');
+        $(this).addClass('selected-btn');
+    
 });
