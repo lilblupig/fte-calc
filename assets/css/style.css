@@ -100,8 +100,13 @@ body {
     box-shadow: 0 0 0 0.25rem #8e4e997e;
 }
 
+.selected-btn {
+    background-color: #8e4e99;
+    border: solid 1px #57245E;
+}
+
 .btn-bucket {
-    width: 130px;
+    width: 150px;
     margin: 0 auto;
 }
 
