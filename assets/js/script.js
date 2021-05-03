@@ -20,8 +20,8 @@ const rTwoSCPs = {
 };
 
 const rOneScales = {
-    "1": 17800,
-    "2": 18100,
+    "1": 17800.50,
+    "2": 18100.99,
     "3": 18500,
     "4": 18900,
     "5": 19300,
@@ -40,11 +40,11 @@ const rTwoScales = {
     "9": 21900
 };
 
-// Get all elements with the class 'c-btn'
-const buttons = document.querySelectorAll(".c-btn");
-
-// Get the hours worked input box
-const hoursBox = document.getElementById("hours-box");
+// Get elements needed globally
+const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
+const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
+const fteCheck = document.getElementById("fte-check"); // Get the FTE salary display
+const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
 
 // Store the currently selected options
 let chosenRegion;
@@ -132,6 +132,9 @@ buttons.forEach(function(button){
             // Clear any previously produced SCP buttons
             let clearBtns = document.getElementById("scp-bucket");
             clearBtns.innerHTML = "";
+            // Clear any previously displayed FTE/hours checks
+            fteCheck.innerHTML = "0.00";
+            hourlyCheck.innerHTML = "0.00";
             // Log chosen grade to console
             console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
@@ -162,6 +165,10 @@ $('#grade-bucket').on('click', 'button', function (){
     // Clear any previous selection and highlight selected item
     $(this).siblings().removeClass('selected-btn');
     $(this).addClass('selected-btn');
+
+    // Clear any previously displayed FTE/hours checks
+    fteCheck.innerHTML = "0.00";
+    hourlyCheck.innerHTML = "0.00";
 });
 
 // Listen for generated SCP button clicks
@@ -185,6 +192,8 @@ $('#scp-bucket').on('click', 'button', function(){
     $(this).siblings().removeClass('selected-btn');
     $(this).addClass('selected-btn');
     
+    fteCheck.innerHTML = chosenSalary.toFixed(2);
+    hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
 });
 
 // Listen for hard-coded keystrokes
