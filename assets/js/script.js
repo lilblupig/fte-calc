@@ -112,9 +112,10 @@ let chosenRegion;
 let chosenGrade;
 let chosenSCP;
 let chosenSalary;
+let chosenService;
 let chosenWeeks;
 let chosenHours;
-let chosenService;
+let paidWeeks;
 
 // Region click event handler
 function addGradeBtns() {
@@ -211,7 +212,7 @@ function makeFTEChecks() {
     // Clear selected service length
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
-    
+
     // Determine region and get salary for selected SCP
     if (chosenRegion == "rOne") {
         chosenSalary = rOneScales[chosenSCP];
@@ -233,7 +234,6 @@ function makeFTEChecks() {
 
 // Weeks click event handler
 function weeksCalc() {
-    let paidWeeks;
     if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
         paidWeeks = Math.round((chosenWeeks + rOneHolidaysL5[chosenWeeks] + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
@@ -250,6 +250,16 @@ function weeksCalc() {
         console.log("No idea what's going on");
     }
     console.log("Paid weeks", paidWeeks);
+};
+
+// Hours keydown event handler - GET RESULTS
+function getResults() {
+    let weeksFTE = paidWeeks / 52.1428;
+    let hoursFTE = chosenHours / 37;
+    let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
+    console.log("Weeks FTE", weeksFTE);
+    console.log("Hours FTE", hoursFTE);
+    console.log("FTE", FTE);
 };
 
 // Event listener for all hard-coded calculator button clicks
@@ -316,4 +326,6 @@ hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     chosenHours = hoursBox.value
     console.log(chosenHours);
+
+    getResults();
 };
