@@ -2,12 +2,12 @@
 const rOneGrades = ["A", "B", "C", "D"];
 const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
 
-const rOneSCPs = [
-    {"AA": [1, 2]},
-    {"BB": [2, 3]},
-    {"CC": [3, 4]},
-    {"DD": [4, 5]}
-];
+const rOneSCPs = {
+    "A": [1, 2, 3],
+    "B": [2, 3],
+    "C": [3, 4],
+    "D": [4, 5]
+};
 
 const rTwoSCPs = [
     {"1": [1, 2]},
@@ -60,7 +60,7 @@ function addROneSCPBtns() {
     
     console.log("Get chosen grade:", chosenGrade);
 
-    let gradeSCPs = rOneSCPs[0].AA;
+    let gradeSCPs = rOneSCPs[chosenGrade];
     console.log(gradeSCPs);
 
     for (let i = 0; i < gradeSCPs.length; i++) {
