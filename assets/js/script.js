@@ -21,10 +21,16 @@ const rTwoSCPs = {
 // Get all elements with the class 'c-btn'
 const buttons = document.querySelectorAll(".c-btn");
 
+// Get the hours worked input box
+const hoursBox = document.getElementById("hours-box");
+
 // Store the currently selected options
 let chosenRegion;
 let chosenGrade;
 let chosenSCP;
+let chosenWeeks;
+let chosenHours;
+let chosenService;
 
 // Generate Grade buttons
 function addGradeBtns() {
@@ -149,3 +155,10 @@ $('#scp-bucket').on('click', 'button', function(){
         $(this).addClass('selected-btn');
     
 });
+
+// Listen for hard-coded keystrokes
+hoursBox.addEventListener("input", hoursInput);
+function hoursInput() {
+    chosenHours = hoursBox.value
+    console.log(chosenHours);
+};
