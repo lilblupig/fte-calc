@@ -120,15 +120,25 @@
                         </div>
                         <div class="pb-2">
                             <p class="lighter-text">Full Time Salary</p>
-                            <div class="ft-check">
-                                £28,000
+                            <div id="fte-check" class="ft-check">
+                                0.00
                             </div>
                         </div>
                         <div>
                             <p class="lighter-text">Hourly Rate</p>
-                            <div class="ft-check">
-                                £15.00
+                            <div id="hourly-check" class="ft-check">
+                                0.00
                             </div>
+                        </div>
+                    </div>
+<!-- Service Length Chooser -->
+                    <div id="service-length" class="col-12 col-md-6 col-lg-4 text-center py-4">
+                        <div>
+                             <p>Select Service Length:</p>
+                        </div>
+                        <div id="service-input" class="text-center btn-bucket">
+                            <button class="btn c-btn calculator-btn service-btn">Less than 5 years</button>
+                            <button class="btn c-btn calculator-btn service-btn">5 years or more</button>
                         </div>
                     </div>
 <!-- Working Weeks Chooser -->
@@ -166,23 +176,13 @@
                             <p>Enter Hours Worked per Week:</p>
                         </div>
                         <div class="pb-2">
-                            <input id="hours-box" type="number" placeholder="0" required />
+                            <input id="hours-box" type="number" placeholder="0" />
                         </div>
                         <div>
                             <p class="lighter-text">FTE Hours</p>
                             <div class="ft-check">
                                 37
                             </div>
-                        </div>
-                    </div>
-<!-- Service Length Chooser -->
-                    <div id="service-length" class="col-12 col-md-6 col-lg-4 text-center py-4">
-                        <div>
-                            <p>Select Service Length:</p>
-                        </div>
-                        <div id="service-input" class="text-center btn-bucket">
-                            <button class="btn c-btn calculator-btn service-btn">Less than 5 years</button>
-                            <button class="btn c-btn calculator-btn service-btn">5 years or more</button>
                         </div>
                     </div>
                 </div>
@@ -194,20 +194,20 @@
                     <div id="result-pay" class="col-12 col-md-6">
                         <p>Pay & FTE:</p>
                         <ul>
-                            <li>Grade: <span id="">I19</span></li>
-                            <li>FTE: <span id="">0.3650</span></li>
-                            <li>Salary: <span id="">£10,466.19</span></li>
-                            <li>Hourly rate: <span id="">£14.86</span></li>
-                            <li>Pension band: <span id="">5.5%</span></li>
+                            <li>Grade: <span id="result-grade">I19</span></li>
+                            <li>FTE: <span id="result-fte">0.3650</span></li>
+                            <li>Salary: £<span id="result-salary">10,466.19</span></li>
+                            <li>Hourly rate: £<span id="result-rate">14.86</span></li>
+                            <li>Pension band: <span id="result-pension">5.5</span>%</li>
                         </ul>
                     </div>
                     <div id="result-weeks" class="col-12 col-md-6">
                         <p>Working and Holiday Weeks:</p>
                         <ul>
-                            <li>Total paid weeks: <span id="">46.95</span></li>
-                            <li>Working weeks: <span id="">41</span></li>
-                            <li>Holiday weeks: <span id="">5.95</span></li>
-                            <li>Working hours: <span id="">15</span></li>
+                            <li>Total paid weeks: <span id="weeks-total">46.95</span></li>
+                            <li>Working weeks: <span id="weeks-working">41</span></li>
+                            <li>Holiday weeks: <span id="weeks-holiday">5.95</span></li>
+                            <li>Working hours: <span id="week-hours">15</span></li>
                         </ul>
                     </div>
                 </div>
