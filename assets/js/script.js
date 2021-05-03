@@ -137,6 +137,9 @@ function addGradeBtns() {
     // Clear any selected weeks
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
+    // Clear any entered hours
+    hoursBox.value = "";
+    chosenHours = 0;
 
     // Determine region and get all associated grades as array
     let regionGrades;
@@ -178,6 +181,9 @@ function addSCPBtns() {
     // Clear any selected weeks
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
+    // Clear any entered hours
+    hoursBox.value = "";
+    chosenHours = 0;
 
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
@@ -212,6 +218,9 @@ function makeFTEChecks() {
     // Clear selected service length
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
+    // Clear any entered hours
+    hoursBox.value = "";
+    chosenHours = 0;
 
     // Determine region and get salary for selected SCP
     if (chosenRegion == "rOne") {
@@ -250,6 +259,10 @@ function weeksCalc() {
         console.log("No idea what's going on");
     }
     console.log("Paid weeks", paidWeeks);
+
+    // Clear any entered hours
+    hoursBox.value = "";
+    chosenHours = 0;
 };
 
 // Hours keydown event handler - GET RESULTS
@@ -293,6 +306,9 @@ buttons.forEach(function(button){
             // Clear any selected weeks
             chosenWeeks = 0;
             $(".weeks-btn").removeClass('selected-btn');
+            // Clear any entered hours
+            hoursBox.value = "";
+            chosenHours = 0;
             console.log("Service length", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
             chosenWeeks = Number(this.innerHTML);
