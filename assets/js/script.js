@@ -26,14 +26,26 @@ let chosenRegion;
 let chosenGrade;
 let chosenSCP;
 
-//Generates Grade buttons for Region 1
-function addROneGradeBtns() {
+// Generates Grade buttons
+function addGradeBtns() {
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
 
-    for (let i = 0; i < rOneGrades.length; i++) {
+    let regionGrades; // Determines region and gets all associated grades as array
+    if (chosenRegion == "rOne") {
+        regionGrades = rOneGrades; 
+        console.log(regionGrades);
+    } else if (chosenRegion == "rTwo") {
+        regionGrades = rTwoGrades;
+        console.log(regionGrades);
+    } else {
+        console.log("Unknown Region");
+        alert("An unknown Region variable has been passed to the calculator.")
+    };
+
+    for (let i = 0; i < regionGrades.length; i++) {
         let newBtn = document.createElement("button");
-        newBtn.innerHTML = rOneGrades[i];
+        newBtn.innerHTML = regionGrades[i];
         newBtn.classList.add("btn", "disc-btn", "grade-btn");
     
         let gradeBucket = document.getElementById("grade-bucket");
@@ -41,22 +53,7 @@ function addROneGradeBtns() {
     };
 };
 
-// Generates Grade buttons for Region 2
-function addRTwoGradeBtns() {
-    let clearBtns = document.getElementById("grade-bucket");
-    clearBtns.innerHTML = "";
-
-    for (let i = 0; i < rTwoGrades.length; i++) {
-        let newBtn = document.createElement("button");
-        newBtn.innerHTML = rTwoGrades[i];
-        newBtn.classList.add("btn", "disc-btn", "grade-btn");
-    
-        let gradeBucket = document.getElementById("grade-bucket");
-        gradeBucket.appendChild(newBtn);
-    };
-};
-
-// Generates SCP buttons for all Regions
+// Generates SCP buttons
 function addROneSCPBtns() {
     let clearBtns = document.getElementById("scp-bucket"); // Clears any existing data from bucket
     clearBtns.innerHTML = "";
@@ -93,19 +90,19 @@ buttons.forEach(function(button){
         let classes = event.currentTarget.classList;
         if(classes.contains("region-btn")) {
             if (this.id == "region-btn-1") {
-                addROneGradeBtns();
-                let clearBtns = document.getElementById("scp-bucket");
-                clearBtns.innerHTML = "";
                 chosenRegion = "rOne";
-            } else if (this.id == "region-btn-2") {
-                addRTwoGradeBtns();
                 let clearBtns = document.getElementById("scp-bucket");
                 clearBtns.innerHTML = "";
+
+            } else if (this.id == "region-btn-2") {
                 chosenRegion = "rTwo";
+                let clearBtns = document.getElementById("scp-bucket");
+                clearBtns.innerHTML = "";
             } else {
                 console.log("Unknown Region requested")
                 alert("An unknown Region variable has been passed to the calculator.")
             };
+            addGradeBtns();
             console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
             console.log("Working weeks", this.innerHTML);
