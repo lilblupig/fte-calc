@@ -1,4 +1,4 @@
-// Placeholder Grade arrays
+// Placeholder Grade/SCP arrays
 const rOneGrades = ["A", "B", "C", "D"];
 const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
 
@@ -9,18 +9,20 @@ const rOneSCPs = {
     "D": [4, 5]
 };
 
-const rTwoSCPs = [
-    {"1": [1, 2]},
-    {"2": [2, 3]},
-    {"3": [3, 4]},
-    {"4": [4, 5]},
-    {"5": [5, 6, 7]},
-    {"6": [7, 8, 9]}
-];
+const rTwoSCPs = {
+    "1": [1, 2],
+    "2": [2, 3],
+    "3": [3, 4],
+    "4": [4, 5],
+    "5": [5, 6, 7],
+    "6": [7, 8, 9]
+};
 
 // Get all elements with the class 'btn'
 const buttons = document.querySelectorAll(".btn");
 
+// Store the currently selected options
+let chosenRegion;
 let chosenGrade;
 
 //Generates Grade buttons for Region 1
@@ -53,15 +55,22 @@ function addRTwoGradeBtns() {
     };
 };
 
-// Generates SCP buttons for Region 1
+// Generates SCP buttons for all Regions
 function addROneSCPBtns() {
     let clearBtns = document.getElementById("scp-bucket"); // Clears any existing data from bucket
     clearBtns.innerHTML = "";
-    
-    console.log("Get chosen grade:", chosenGrade); // Logs chosen grade
 
-    let gradeSCPs = rOneSCPs[chosenGrade]; // Gets all SCPs associated with chosen grade as array
-    console.log(gradeSCPs);
+    console.log("get chosen region:", chosenRegion); // Logs chosen region
+    console.log("Get chosen grade:", chosenGrade); // Logs chosen grade
+    
+    let gradeSCPs; // Determines region and gets all SCPs associated with chosen grade as array
+    if (chosenRegion == "rOne") {
+        gradeSCPs = rOneSCPs[chosenGrade]; 
+        console.log(gradeSCPs);
+    } else if (chosenRegion == "rTwo") {
+        gradeSCPs = rTwoSCPs[chosenGrade];
+        console.log(gradeSCPs);
+    };
 
     for (let i = 0; i < gradeSCPs.length; i++) { // Generates SCP buttons
         let newBtn = document.createElement("button");
@@ -83,10 +92,12 @@ buttons.forEach(function(button){
                 addROneGradeBtns();
                 let clearBtns = document.getElementById("scp-bucket");
                 clearBtns.innerHTML = "";
+                chosenRegion = "rOne";
             } else if (this.id == "region-btn-2") {
                 addRTwoGradeBtns();
                 let clearBtns = document.getElementById("scp-bucket");
                 clearBtns.innerHTML = "";
+                chosenRegion = "rTwo";
             } else {
                 console.log("Unknown Region requested")
             };
