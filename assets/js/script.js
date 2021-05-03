@@ -1,4 +1,4 @@
-// Placeholder Grade/SCP arrays
+// Placeholder Grade/SCP arrays/objects
 const rOneGrades = ["A", "B", "C", "D"];
 const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
 
@@ -18,12 +18,13 @@ const rTwoSCPs = {
     "6": [7, 8, 9]
 };
 
-// Get all elements with the class 'btn'
-const buttons = document.querySelectorAll(".btn");
+// Get all elements with the class 'c-btn'
+const buttons = document.querySelectorAll(".c-btn");
 
 // Store the currently selected options
 let chosenRegion;
 let chosenGrade;
+let chosenSCP;
 
 //Generates Grade buttons for Region 1
 function addROneGradeBtns() {
@@ -70,6 +71,9 @@ function addROneSCPBtns() {
     } else if (chosenRegion == "rTwo") {
         gradeSCPs = rTwoSCPs[chosenGrade];
         console.log(gradeSCPs);
+    } else {
+        console.log("Unknown Region");
+        alert("An unknown Region variable has been passed to the calculator.")
     };
 
     for (let i = 0; i < gradeSCPs.length; i++) { // Generates SCP buttons
@@ -100,6 +104,7 @@ buttons.forEach(function(button){
                 chosenRegion = "rTwo";
             } else {
                 console.log("Unknown Region requested")
+                alert("An unknown Region variable has been passed to the calculator.")
             };
             console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
@@ -108,6 +113,7 @@ buttons.forEach(function(button){
             console.log("Service length", this.innerHTML);
         } else {
             console.log("Unknown button type");
+            alert("A button of unknown type has been activated")
         };
 
         $(this).siblings().removeClass('selected-btn');
