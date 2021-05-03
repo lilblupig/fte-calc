@@ -55,12 +55,18 @@ let chosenWeeks;
 let chosenHours;
 let chosenService;
 
-// Generate Grade buttons
+// Region click event handler
 function addGradeBtns() {
 
-    // Clear any existing data from bucket
+    // Clear any existing data from Grade bucket
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
+    // Clear any previously produced SCP buttons from bucket
+    let clearSCP = document.getElementById("scp-bucket");
+    clearSCP.innerHTML = "";
+    // Clear any previously displayed FTE/hours checks
+    fteCheck.innerHTML = "0.00";
+    hourlyCheck.innerHTML = "0.00";
 
     // Determine region and get all associated grades as array
     let regionGrades;
@@ -82,14 +88,20 @@ function addGradeBtns() {
         let gradeBucket = document.getElementById("grade-bucket");
         gradeBucket.appendChild(newBtn);
     };
+    
+    // Log chosen grade to console
+    console.log("Calculating FTE for", chosenRegion);
 };
 
-// Generate SCP buttons
+// Grade click event handler
 function addSCPBtns() {
-    // Clear any existing data from bucket
+    // Clear any existing data from SCP bucket
     let clearBtns = document.getElementById("scp-bucket"); 
     clearBtns.innerHTML = "";
-    
+    // Clear any previously displayed FTE/hours checks
+    fteCheck.innerHTML = "0.00";
+    hourlyCheck.innerHTML = "0.00";
+
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
     if (chosenRegion == "rOne") {
@@ -111,9 +123,32 @@ function addSCPBtns() {
         gradeBucket.appendChild(newBtn);
     };
 
+    // Log chosen grade to console
+    console.log("Grade", chosenGrade);
 };
 
-// Listen for all hard-coded calculator button clicks
+// SCP click event handler
+function makeFTEChecks() {
+    // Determine region and get salary for selected SCP
+    if (chosenRegion == "rOne") {
+        chosenSalary = rOneScales[chosenSCP];
+    } else if (chosenRegion == "rTwo") {
+        chosenSalary = rTwoScales[chosenSCP];
+    } else {
+        console.log("Unknown Region passed to SCP click listener");
+        alert("An unknown Region variable has been passed to the calculator while selecting salary.")
+    };
+    
+    // Log chosen SCP & related salary to console
+    console.log("SCP", chosenSCP);
+    console.log("Chosen salary", chosenSalary);
+    
+    // Populate FTE/hourly rate check
+    fteCheck.innerHTML = chosenSalary.toFixed(2);
+    hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
+};
+
+// Event listener for all hard-coded calculator button clicks
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         let classes = event.currentTarget.classList;
@@ -129,14 +164,6 @@ buttons.forEach(function(button){
             };
             // Populate the grade bucket with buttons
             addGradeBtns();
-            // Clear any previously produced SCP buttons
-            let clearBtns = document.getElementById("scp-bucket");
-            clearBtns.innerHTML = "";
-            // Clear any previously displayed FTE/hours checks
-            fteCheck.innerHTML = "0.00";
-            hourlyCheck.innerHTML = "0.00";
-            // Log chosen grade to console
-            console.log("Calculating FTE for", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
             console.log("Working weeks", this.innerHTML);
         } else if (classes.contains("service-btn")) {
@@ -151,52 +178,31 @@ buttons.forEach(function(button){
     })
 });
 
-// Listen for generated Grade button clicks
+// Event listener for generated Grade button clicks
 $('#grade-bucket').on('click', 'button', function (){
-    // Log chosen grade to console
-    console.log("Grade", this.innerHTML);
+    // Clear any previous selection and highlight selected item
+    $(this).siblings().removeClass('selected-btn');
+    $(this).addClass('selected-btn');
 
     // Update global variable with chosen grade
     chosenGrade = this.innerHTML;
 
     // Generate the relevant SCP buttons
     addSCPBtns();
-
-    // Clear any previous selection and highlight selected item
-    $(this).siblings().removeClass('selected-btn');
-    $(this).addClass('selected-btn');
-
-    // Clear any previously displayed FTE/hours checks
-    fteCheck.innerHTML = "0.00";
-    hourlyCheck.innerHTML = "0.00";
 });
 
-// Listen for generated SCP button clicks
+// Event listener for generated SCP button clicks
 $('#scp-bucket').on('click', 'button', function(){
     chosenSCP = this.innerHTML;
 
-    if (chosenRegion == "rOne") {
-        chosenSalary = rOneScales[chosenSCP];
-    } else if (chosenRegion == "rTwo") {
-        chosenSalary = rTwoScales[chosenSCP];
-    } else {
-        console.log("Unknown Region passed to SCP click listener");
-        alert("An unknown Region variable has been passed to the calculator while selecting salary.")
-    };
-    
-    // Log chosen SCP to console
-    console.log("SCP", chosenSCP);
-    console.log("Chosen salary", chosenSalary);
-
     // Clear any previous selection and highlight selected item
     $(this).siblings().removeClass('selected-btn');
     $(this).addClass('selected-btn');
-    
-    fteCheck.innerHTML = chosenSalary.toFixed(2);
-    hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
+
+    makeFTEChecks();
 });
 
-// Listen for hard-coded keystrokes
+// Event listener for hard-coded keystrokes
 hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     chosenHours = hoursBox.value
