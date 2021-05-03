@@ -2,8 +2,26 @@
 const rOneGrades = ["A", "B", "C", "D"];
 const rTwoGrades = ["1", "2", "3", "4", "5", "6"];
 
+const rOneSCPs = [
+    {"AA": [1, 2]},
+    {"BB": [2, 3]},
+    {"CC": [3, 4]},
+    {"DD": [4, 5]}
+];
+
+const rTwoSCPs = [
+    {"1": [1, 2]},
+    {"2": [2, 3]},
+    {"3": [3, 4]},
+    {"4": [4, 5]},
+    {"5": [5, 6, 7]},
+    {"6": [7, 8, 9]}
+];
+
 // Get all elements with the class 'btn'
 const buttons = document.querySelectorAll(".btn");
+
+let chosenGrade;
 
 //Generates Grade buttons for Region 1
 function addROneGradeBtns() {
@@ -35,6 +53,27 @@ function addRTwoGradeBtns() {
     };
 };
 
+// Generates SCP buttons for Region 1
+function addROneSCPBtns() {
+    let clearBtns = document.getElementById("scp-bucket");
+    clearBtns.innerHTML = "";
+    
+    console.log("Get chosen grade:", chosenGrade);
+
+    let gradeSCPs = rOneSCPs[0].AA;
+    console.log(gradeSCPs);
+
+    for (let i = 0; i < gradeSCPs.length; i++) {
+        let newBtn = document.createElement("button");
+        newBtn.innerHTML = gradeSCPs[i];
+        newBtn.classList.add("btn", "disc-btn", "scp-btn");
+    
+        let gradeBucket = document.getElementById("scp-bucket");
+        gradeBucket.appendChild(newBtn);
+    };
+
+};
+
 // Listen for all hard-coded calculator button clicks
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
@@ -48,8 +87,6 @@ buttons.forEach(function(button){
                 console.log("Unknown Region requested")
             };
             console.log("Calculating FTE for", this.innerHTML);
-        } else if (classes.contains("scp-btn")) {
-            console.log("SCP", this.innerHTML);
         } else if (classes.contains("weeks-btn")) {
             console.log("Working weeks", this.innerHTML);
         } else if (classes.contains("service-btn")) {
@@ -64,8 +101,20 @@ buttons.forEach(function(button){
 });
 
 // Listen for generated Grade button clicks
-$('#grade-bucket').on('click', 'button', function(){
+$('#grade-bucket').on('click', 'button', function (){
+    console.log("Grade", this.innerHTML); // Log chosen grade to console
+
+    chosenGrade = this.innerHTML; // Update global variable with chosen grade
+
+    addROneSCPBtns(); // Generate the relevant SCP buttons
+
+    $(this).siblings().removeClass('selected-btn'); // Clear any previous selection
+    $(this).addClass('selected-btn'); // Highlight selected item
+});
+
+// Listen for generated SCP button clicks
+$('#scp-bucket').on('click', 'button', function(){
     $(this).siblings().removeClass('selected-btn');
     $(this).addClass('selected-btn');
-    console.log("Grade", this.innerHTML);
+    console.log("SCP", this.innerHTML);
 });
