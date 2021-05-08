@@ -140,6 +140,8 @@ In line with structure map and user needs, the wireframes show the initial desir
 ##### Summary of Changes
 * Changed paragraph order in About section to move required info list to the end as disrupting read flow and display.
 * Changed service length input from Radio to matched buttons as better fit with the rest of the style of the webpage.  Even with styling adjusted, the radio buttons looked small and out of touch with the rest of the inputs.
+* After meeting with partner, change weeks to text input as some legacy agreements contain working weeks such as 38.2 to represent term time only plus a certain number of inset days.  This does produce issues with anticipated error handing and data input control which will be addressed below.
+* Make About and More Info sections collapsible for regular users to avoid unnecessary scrolling.
 
 ### **Surface**
 
@@ -277,10 +279,13 @@ You can find more information on cloning a repository from GitHub [here](https:/
 #### Content
 Where did the website content come from?
 
+slideToggle status fix found at https://forum.jquery.com/topic/state-of-slidetoggle
+
 #### Media
 * The photographs used for the website were obtained from [Pexels.com](https://www.pexels.com/):
 
 * Icon used for Favicon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
+* Icons used for Togglers made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
 
 * The diagrams used for the website were obtained from various places:
 
