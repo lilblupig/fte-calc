@@ -148,64 +148,9 @@ const rTwoScales = {
     "71": 86900
 };
 
-const rOneHolidaysL5 = {
-    "38": 5.6,
-    "39": 5.65,
-    "40": 5.8,
-    "41": 5.94,
-    "42": 6.09,
-    "43": 6.23,
-    "44": 6.38
-};
-const rOneHolidaysM5 = {
-    "38": 6.48,
-    "39": 6.65,
-    "40": 6.83,
-    "41": 6.99,
-    "42": 7.17,
-    "43": 7.33,
-    "44": 7.51
-};
-
-const rTwoHolidaysL5L8 = {
-    "38": 5.6,
-    "39": 5.65,
-    "40": 5.8,
-    "41": 5.94,
-    "42": 6.09,
-    "43": 6.23,
-    "44": 6.38
-};
-const rTwoHolidaysM5L8 = {
-    "38": 6.09,
-    "39": 6.25,
-    "40": 6.41,
-    "41": 6.57,
-    "42": 6.73,
-    "43": 6.89,
-    "44": 7.05
-};
-const rTwoHolidaysL5M8 = {
-    "38": 6.48,
-    "39": 6.65,
-    "40": 6.83,
-    "41": 6.99,
-    "42": 7.17,
-    "43": 7.33,
-    "44": 7.51
-};
-const rTwoHolidaysM5M8 = {
-    "38": 7.09,
-    "39": 7.28,
-    "40": 7.46,
-    "41": 7.65,
-    "42": 7.84,
-    "43": 8.02,
-    "44": 8.21
-};
-
 // Get elements needed globally
 const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
+const weeksBox = document.getElementById("weeks-box") // Get the weeks worked input box
 const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
 const fteCheck = document.getElementById("fte-check"); // Get the FTE salary display
 const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
@@ -238,6 +183,7 @@ function addGradeBtns() {
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
+    weeksBox.value = "";
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
     // Clear any entered hours
@@ -282,6 +228,7 @@ function addSCPBtns() {
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
+    weeksBox.value = "";
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
     // Clear any entered hours
@@ -316,8 +263,8 @@ function addSCPBtns() {
 // SCP click event handler
 function makeFTEChecks() {
     // Clear any selected weeks
+    weeksBox.value = "";
     chosenWeeks = 0;
-    $(".weeks-btn").removeClass('selected-btn');
     // Clear selected service length
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
@@ -344,23 +291,25 @@ function makeFTEChecks() {
     hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
 };
 
-// Weeks click event handler
-function weeksCalc() {
+// Weeks keydown event handler
+function calculateWeeks() {
     if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round((chosenWeeks + rOneHolidaysL5[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-        paidWeeks = Math.round((chosenWeeks + rOneHolidaysM5[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysL5L8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysM5L8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.2/44.94) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysL5M8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysM5M8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 8.2/43.94) + Number.EPSILON) * 100) / 100;
     } else {
-        console.log("No idea what's going on");
+        console.log("Invalid number of weeks entered during weeks input");
+        alert("Please complete the preceding fields before entering Weeks.")
     }
+    
     console.log("Paid weeks", paidWeeks);
 
     // Clear any entered hours
@@ -377,9 +326,9 @@ function getResults() {
     console.log("Hours FTE", hoursFTE);
     console.log("FTE", FTE);
 
-    document.getElementById("result-grade").innerHTML = chosenGrade + chosenSCP;
+    document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
     document.getElementById("result-fte").innerHTML = FTE;
-    document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE +Number.EPSILON) * 100) / 100;
+    document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
     document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
     document.getElementById("result-pension").innerHTML = "To Do";
     document.getElementById("weeks-total").innerHTML = paidWeeks;
@@ -407,8 +356,8 @@ buttons.forEach(function(button){
         } else if (classes.contains("service-btn")) {
             chosenService = this.innerHTML;
             // Clear any selected weeks
+            weeksBox.value = "";
             chosenWeeks = 0;
-            $(".weeks-btn").removeClass('selected-btn');
             // Clear any entered hours
             hoursBox.value = "";
             chosenHours = 0;
@@ -450,7 +399,16 @@ $('#scp-bucket').on('click', 'button', function(){
     makeFTEChecks();
 });
 
-// Event listener for hard-coded keystrokes
+// Event listener for weeks keystrokes
+weeksBox.addEventListener("input", weeksInput);
+function weeksInput() {
+    chosenWeeks = Number(weeksBox.value);
+    console.log(chosenWeeks);
+
+    calculateWeeks();
+};
+
+// Event listener for hours keystrokes
 hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     chosenHours = hoursBox.value
