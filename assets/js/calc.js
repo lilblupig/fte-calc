@@ -159,9 +159,9 @@ const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly r
 let chosenRegion;
 let chosenGrade;
 let chosenSCP;
-let chosenSalary;
+let chosenSalary = 0;
 let chosenService;
-let chosenWeeks;
+let chosenWeeks = 0;
 let chosenHours;
 let paidWeeks;
 
@@ -176,11 +176,12 @@ function addGradeBtns() {
     let clearSCP = document.getElementById("scp-bucket");
     clearSCP.innerHTML = "";
     chosenSCP = "";
+    chosenSalary = 0;
     // Clear any previously displayed FTE/hours checks
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
     // Clear selected service length
-    chosenService = 0;
+    chosenService = "";
     $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
     weeksBox.value = "";
@@ -221,11 +222,12 @@ function addSCPBtns() {
     let clearBtns = document.getElementById("scp-bucket"); 
     clearBtns.innerHTML = "";
     chosenSCP = "";
+    chosenSalary = 0;
     // Clear any previously displayed FTE/hours checks
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
     // Clear selected service length
-    chosenService = 0;
+    chosenService = "";
     $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
     weeksBox.value = "";
@@ -262,12 +264,12 @@ function addSCPBtns() {
 
 // SCP click event handler
 function makeFTEChecks() {
+    // Clear selected service length
+    chosenService = "";
+    $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
     weeksBox.value = "";
     chosenWeeks = 0;
-    // Clear selected service length
-    chosenService = 0;
-    $(".service-btn").removeClass('selected-btn');
     // Clear any entered hours
     hoursBox.value = "";
     chosenHours = 0;
@@ -291,7 +293,29 @@ function makeFTEChecks() {
     hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
 };
 
-// Weeks keydown event handler
+// Service Length click event handler
+function selectService() {
+    // Clear any selected weeks
+    weeksBox.value = "";
+    chosenWeeks = 0;
+    // Clear any entered hours
+    hoursBox.value = "";
+    chosenHours = 0;
+
+    console.log(chosenSalary);
+
+    // Check steps 1-3 complete
+    if (chosenSalary === 0 || undefined) {
+        alert("Please complete fields 1-3 before selecting Service Length");
+        // Clear selected service length
+        chosenService = "";
+        $(".service-btn").removeClass('selected-btn');
+
+        console.log("test", chosenService);
+    }
+};
+
+// Weeks change event handler
 function calculateWeeks() {
     if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
@@ -339,6 +363,9 @@ function getResults() {
 // Event listener for all hard-coded calculator button clicks
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
+        $(this).siblings().removeClass('selected-btn');
+        $(this).addClass('selected-btn');
+        
         let classes = event.currentTarget.classList;
         // Update global variable with chosen region
         if(classes.contains("region-btn")) {
@@ -348,29 +375,18 @@ buttons.forEach(function(button){
                 chosenRegion = "rTwo";
             } else {
                 console.log("Unknown Region passed to main event listener")
-                alert("An unknown Region variable has been passed to the calculator.")
+                alert("An unknown Region has been passed to the calculator, please request assistance.")
             };
             // Populate the grade bucket with buttons
             addGradeBtns();
         } else if (classes.contains("service-btn")) {
             chosenService = this.innerHTML;
-            // Clear any selected weeks
-            weeksBox.value = "";
-            chosenWeeks = 0;
-            // Clear any entered hours
-            hoursBox.value = "";
-            chosenHours = 0;
+            selectService();
             console.log("Service length", this.innerHTML);
-        } else if (classes.contains("weeks-btn")) {
-            chosenWeeks = Number(this.innerHTML);
-            weeksCalc();
         } else {
             console.log("Unknown button type passed to calculator");
             alert("A button of unknown type has been passed to the calculator.")
         };
-
-        $(this).siblings().removeClass('selected-btn');
-        $(this).addClass('selected-btn');
     })
 });
 
@@ -407,8 +423,8 @@ function weeksInput() {
     calculateWeeks();
 };
 
-// Event listener for hours keystrokes
-hoursBox.addEventListener("change", hoursInput);
+// Event listener for hours input
+hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     chosenHours = hoursBox.value
     console.log(chosenHours);

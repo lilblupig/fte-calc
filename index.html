@@ -60,7 +60,7 @@
                             possible.</p>
                     </div>
                     <div class="col-12 col-md-6 text-justify">
-                        <p>Simply work through each section, selecting the necessary option or
+                        <p>Simply work through each section <strong>in order</strong>, selecting the necessary option or
                             entering the appropriate value where prompted. The calculator will
                             return a summary of contract information below the input fields.</p>
                     </div>
@@ -87,7 +87,7 @@
                     <div id="region-chooser" class="col-12 container-fluid pb-4">
                         <div class="row g-0">
                             <div class="col-12 col-md-4 col-xl-5 text-center text-md-end my-1">
-                                <p>Choose Region:</p>
+                                <p>1/ Choose Region:</p>
                             </div>
                             <div class="col-12 col-md-4 col-xl-2 text-center">
                                 <button id="region-btn-1" class="btn c-btn calculator-btn region-btn">Region 1</button>
@@ -100,7 +100,7 @@
 <!-- Grade Chooser -->
                     <div id="grade-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>Choose grade:</p>
+                            <p>2/ Choose grade:</p>
                         </div>
                         <!-- Grade buttons populate here -->
                         <div id="grade-bucket" class="btn-bucket"></div>
@@ -108,7 +108,7 @@
 <!-- SCP Chooser -->
                     <div id="scp-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>Choose SCP:</p>
+                            <p>3/ Choose SCP:</p>
                         </div>
                         <div id="scp-bucket" class="btn-bucket">
                         </div>
@@ -134,7 +134,7 @@
 <!-- Service Length Chooser -->
                     <div id="service-length" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                             <p>Select Service Length:</p>
+                             <p>4/ Select Service Length:</p>
                         </div>
                         <div id="service-input" class="text-center btn-bucket">
                             <button class="btn c-btn calculator-btn service-btn">Less than 5 years</button>
@@ -144,7 +144,7 @@
 <!-- Working Weeks Chooser -->
                     <div id="weeks-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>Enter Working Weeks:</p>
+                            <p>5/ Enter Working Weeks:</p>
                         </div>
                         <div class="pb-2">
                             <input id="weeks-box" class="number-box" type="number" placeholder="0" />
@@ -159,7 +159,7 @@
 <!-- Hours Worked Input -->
                     <div id="hours-worked" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>Enter Hours Worked per Week:</p>
+                            <p>6/ Enter Hours Worked per Week:</p>
                         </div>
                         <div class="pb-2">
                             <input id="hours-box" class="number-box" type="number" placeholder="0" />
@@ -177,6 +177,7 @@
                     <div class="col-12 py-4">
                         <h1>Results</h1>
                     </div>
+                    <div id="errors"></div>
                     <div id="result-pay" class="col-12 col-md-6">
                         <p>Pay & FTE:</p>
                         <ul>
