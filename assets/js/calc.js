@@ -327,9 +327,7 @@ function calculateWeeks() {
         alert("Please complete fields 1-3 before inputting Working Weeks");
         weeksBox.value = "";
         chosenWeeks = 0;
-    };
-
-    if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
+    } else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
@@ -344,6 +342,8 @@ function calculateWeeks() {
     } else {
         console.log("Invalid number of weeks entered during weeks input");
     };
+
+    
     
     console.log("Paid weeks", paidWeeks);
 
@@ -383,24 +383,24 @@ function getResults() {
         alert("Please complete fields 1-3 before inputting Working Weeks");
         hoursBox.value = "";
         chosenHours = 0;
-    };
+    } else {
+        let weeksFTE = paidWeeks / 52.1428;
+        let hoursFTE = chosenHours / 37;
+        let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
+        console.log("Weeks FTE", weeksFTE);
+        console.log("Hours FTE", hoursFTE);
+        console.log("FTE", FTE);
 
-    let weeksFTE = paidWeeks / 52.1428;
-    let hoursFTE = chosenHours / 37;
-    let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
-    console.log("Weeks FTE", weeksFTE);
-    console.log("Hours FTE", hoursFTE);
-    console.log("FTE", FTE);
-
-    document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
-    document.getElementById("result-fte").innerHTML = FTE;
-    document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
-    document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
-    document.getElementById("result-pension").innerHTML = "To Do";
-    document.getElementById("weeks-total").innerHTML = paidWeeks;
-    document.getElementById("weeks-working").innerHTML = chosenWeeks;
-    document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
-    document.getElementById("week-hours").innerHTML = chosenHours;
+        document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
+        document.getElementById("result-fte").innerHTML = FTE;
+        document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
+        document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
+        document.getElementById("result-pension").innerHTML = "To Do";
+        document.getElementById("weeks-total").innerHTML = paidWeeks;
+        document.getElementById("weeks-working").innerHTML = chosenWeeks;
+        document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
+        document.getElementById("week-hours").innerHTML = chosenHours;
+    };    
 };
 
 // Event listener for all hard-coded calculator button clicks
