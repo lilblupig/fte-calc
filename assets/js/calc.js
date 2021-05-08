@@ -317,17 +317,14 @@ function calculateWeeks() {
     // Check steps 1-4 complete
     if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
         alert("Please complete fields 1-4 before inputting Working Weeks");
-        // Clear entered weeks
         weeksBox.value = "";
         chosenWeeks = 0;
     } else if (chosenService === undefined || chosenService === "") {
         alert("Please choose Service Length before inputting Working Weeks");
-        // Clear entered weeks
         weeksBox.value = "";
         chosenWeeks = 0;
     } else if (chosenSalary === 0 || chosenSalary === undefined) {
         alert("Please complete fields 1-3 before inputting Working Weeks");
-        // Clear entered weeks
         weeksBox.value = "";
         chosenWeeks = 0;
     };
@@ -346,7 +343,7 @@ function calculateWeeks() {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 8.2/43.94) + Number.EPSILON) * 100) / 100;
     } else {
         console.log("Invalid number of weeks entered during weeks input");
-    }
+    };
     
     console.log("Paid weeks", paidWeeks);
 
@@ -357,6 +354,37 @@ function calculateWeeks() {
 
 // Hours keydown event handler - GET RESULTS
 function getResults() {
+    // Check steps 1-5 complete
+    if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined) && (chosenWeeks === 0 || chosenWeeks === undefined)) {
+        alert("Please complete fields 1-5 before inputting Weekly Hours");
+        hoursBox.value = "";
+        chosenHours = 0;
+    } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenService === undefined || chosenService === "")) {
+        alert("Please choose Service Length and Working Weeks before inputting Weekly Hours");
+        hoursBox.value = "";
+        chosenHours = 0;
+    } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenSalary === 0 || chosenSalary === undefined)) {
+        alert("Please complete fields 1-3 and Working Weeks before inputting Weekly Hours");
+        hoursBox.value = "";
+        chosenHours = 0;
+    } else if ((chosenSalary === 0 || chosenSalary === undefined) && (chosenService === undefined || chosenService === "")) {
+        alert("Please complete fields 1-4 before inputting Weekly Hours");
+        hoursBox.value = "";
+        chosenHours = 0;
+    } else if (chosenWeeks === undefined || chosenWeeks === 0) {
+        alert("Please choose Working Weeks before inputting Weekly Hours");
+        hoursBox.value = "";
+        chosenHours = 0;
+    } else if (chosenService === undefined || chosenService === "") {
+        alert("Please choose Service Length before inputting Working Weeks");
+        hoursBox.value = "";
+        chosenHours = 0;
+    } else if (chosenSalary === 0 || chosenSalary === undefined) {
+        alert("Please complete fields 1-3 before inputting Working Weeks");
+        hoursBox.value = "";
+        chosenHours = 0;
+    };
+
     let weeksFTE = paidWeeks / 52.1428;
     let hoursFTE = chosenHours / 37;
     let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
