@@ -206,6 +206,7 @@ const rTwoHolidaysM5M8 = {
 
 // Get elements needed globally
 const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
+const weeksBox = document.getElementById("weeks-box") // Get the weeks worked input box
 const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
 const fteCheck = document.getElementById("fte-check"); // Get the FTE salary display
 const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
@@ -238,6 +239,7 @@ function addGradeBtns() {
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
+    weeksBox.value = "";
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
     // Clear any entered hours
@@ -282,6 +284,7 @@ function addSCPBtns() {
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
     // Clear any selected weeks
+    weeksBox.value = "";
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
     // Clear any entered hours
@@ -316,8 +319,8 @@ function addSCPBtns() {
 // SCP click event handler
 function makeFTEChecks() {
     // Clear any selected weeks
+    weeksBox.value = "";
     chosenWeeks = 0;
-    $(".weeks-btn").removeClass('selected-btn');
     // Clear selected service length
     chosenService = 0;
     $(".service-btn").removeClass('selected-btn');
@@ -344,23 +347,24 @@ function makeFTEChecks() {
     hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
 };
 
-// Weeks click event handler
-function weeksCalc() {
+// Weeks keydown event handler
+function calculateWeeks() {
     if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round((chosenWeeks + rOneHolidaysL5[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-        paidWeeks = Math.round((chosenWeeks + rOneHolidaysM5[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysL5L8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysM5L8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.2/44.94) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysL5M8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round((chosenWeeks + rTwoHolidaysM5M8[chosenWeeks] + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 8.2/43.94) + Number.EPSILON) * 100) / 100;
     } else {
         console.log("No idea what's going on");
     }
+    
     console.log("Paid weeks", paidWeeks);
 
     // Clear any entered hours
@@ -379,7 +383,7 @@ function getResults() {
 
     document.getElementById("result-grade").innerHTML = chosenGrade + chosenSCP;
     document.getElementById("result-fte").innerHTML = FTE;
-    document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE +Number.EPSILON) * 100) / 100;
+    document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
     document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
     document.getElementById("result-pension").innerHTML = "To Do";
     document.getElementById("weeks-total").innerHTML = paidWeeks;
@@ -407,8 +411,8 @@ buttons.forEach(function(button){
         } else if (classes.contains("service-btn")) {
             chosenService = this.innerHTML;
             // Clear any selected weeks
+            weeksBox.value = "";
             chosenWeeks = 0;
-            $(".weeks-btn").removeClass('selected-btn');
             // Clear any entered hours
             hoursBox.value = "";
             chosenHours = 0;
@@ -450,7 +454,16 @@ $('#scp-bucket').on('click', 'button', function(){
     makeFTEChecks();
 });
 
-// Event listener for hard-coded keystrokes
+// Event listener for weeks keystrokes
+weeksBox.addEventListener("input", weeksInput);
+function weeksInput() {
+    chosenWeeks = Number(weeksBox.value);
+    console.log(chosenWeeks);
+
+    calculateWeeks();
+};
+
+// Event listener for hours keystrokes
 hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     chosenHours = hoursBox.value
