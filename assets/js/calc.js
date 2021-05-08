@@ -302,21 +302,36 @@ function selectService() {
     hoursBox.value = "";
     chosenHours = 0;
 
-    console.log(chosenSalary);
-
     // Check steps 1-3 complete
-    if (chosenSalary === 0 || undefined) {
+    if (chosenSalary === 0 || chosenSalary === undefined) {
         alert("Please complete fields 1-3 before selecting Service Length");
         // Clear selected service length
         chosenService = "";
         $(".service-btn").removeClass('selected-btn');
-
-        console.log("test", chosenService);
-    }
+    };
 };
 
 // Weeks change event handler
 function calculateWeeks() {
+
+    // Check steps 1-4 complete
+    if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
+        alert("Please complete fields 1-4 before inputting Working Weeks");
+        // Clear entered weeks
+        weeksBox.value = "";
+        chosenWeeks = 0;
+    } else if (chosenService === undefined || chosenService === "") {
+        alert("Please choose Service Length before inputting Working Weeks");
+        // Clear entered weeks
+        weeksBox.value = "";
+        chosenWeeks = 0;
+    } else if (chosenSalary === 0 || chosenSalary === undefined) {
+        alert("Please complete fields 1-3 before inputting Working Weeks");
+        // Clear entered weeks
+        weeksBox.value = "";
+        chosenWeeks = 0;
+    };
+
     if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
@@ -365,7 +380,7 @@ buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         $(this).siblings().removeClass('selected-btn');
         $(this).addClass('selected-btn');
-        
+
         let classes = event.currentTarget.classList;
         // Update global variable with chosen region
         if(classes.contains("region-btn")) {
