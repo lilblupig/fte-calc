@@ -1,3 +1,5 @@
+
+// Collapse/expand About section
 $(".about-toggle").click(function() {
     if ($("#about-fte-calc").is(":hidden")) {
         $("#about-button").children("span").css("background-image", "url('assets/images/on.svg')");
@@ -7,6 +9,7 @@ $(".about-toggle").click(function() {
     $("#about-fte-calc").slideToggle();
 });
 
+// Collapse/expand More Info section
 $(".info-toggle").click(function() {
     if ($("#more-info").is(":hidden")) {
         $("#info-button").children("span").css("background-image", "url('assets/images/on.svg')");
