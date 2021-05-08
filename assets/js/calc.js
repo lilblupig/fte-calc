@@ -395,7 +395,7 @@ function getResults() {
         chosenHours = 0;
     } else if (chosenHours > 37) {
         alert("Please enter an hours value of 37 or less");
-        hoursBox.value = 0;
+        hoursBox.value = "";
         chosenHours = 0;
     } else {
         let weeksFTE = paidWeeks / 52.1428;
