@@ -148,62 +148,6 @@ const rTwoScales = {
     "71": 86900
 };
 
-const rOneHolidaysL5 = {
-    "38": 5.6,
-    "39": 5.65,
-    "40": 5.8,
-    "41": 5.94,
-    "42": 6.09,
-    "43": 6.23,
-    "44": 6.38
-};
-const rOneHolidaysM5 = {
-    "38": 6.48,
-    "39": 6.65,
-    "40": 6.83,
-    "41": 6.99,
-    "42": 7.17,
-    "43": 7.33,
-    "44": 7.51
-};
-
-const rTwoHolidaysL5L8 = {
-    "38": 5.6,
-    "39": 5.65,
-    "40": 5.8,
-    "41": 5.94,
-    "42": 6.09,
-    "43": 6.23,
-    "44": 6.38
-};
-const rTwoHolidaysM5L8 = {
-    "38": 6.09,
-    "39": 6.25,
-    "40": 6.41,
-    "41": 6.57,
-    "42": 6.73,
-    "43": 6.89,
-    "44": 7.05
-};
-const rTwoHolidaysL5M8 = {
-    "38": 6.48,
-    "39": 6.65,
-    "40": 6.83,
-    "41": 6.99,
-    "42": 7.17,
-    "43": 7.33,
-    "44": 7.51
-};
-const rTwoHolidaysM5M8 = {
-    "38": 7.09,
-    "39": 7.28,
-    "40": 7.46,
-    "41": 7.65,
-    "42": 7.84,
-    "43": 8.02,
-    "44": 8.21
-};
-
 // Get elements needed globally
 const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
 const weeksBox = document.getElementById("weeks-box") // Get the weeks worked input box
@@ -362,7 +306,8 @@ function calculateWeeks() {
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 8.2/43.94) + Number.EPSILON) * 100) / 100;
     } else {
-        console.log("No idea what's going on");
+        console.log("Invalid number of weeks entered during weeks input");
+        alert("Please complete the preceding fields before entering Weeks.")
     }
     
     console.log("Paid weeks", paidWeeks);
@@ -381,7 +326,7 @@ function getResults() {
     console.log("Hours FTE", hoursFTE);
     console.log("FTE", FTE);
 
-    document.getElementById("result-grade").innerHTML = chosenGrade + chosenSCP;
+    document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
     document.getElementById("result-fte").innerHTML = FTE;
     document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
     document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
