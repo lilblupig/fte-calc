@@ -313,21 +313,25 @@ function selectService() {
 
 // Weeks change event handler
 function calculateWeeks() {
-
     // Check steps 1-4 complete
     if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
         alert("Please complete fields 1-4 before inputting Working Weeks");
         weeksBox.value = "";
         chosenWeeks = 0;
+        paidWeeks = 0;
     } else if (chosenService === undefined || chosenService === "") {
         alert("Please choose Service Length before inputting Working Weeks");
         weeksBox.value = "";
         chosenWeeks = 0;
+        paidWeeks = 0;
     } else if (chosenSalary === 0 || chosenSalary === undefined) {
         alert("Please complete fields 1-3 before inputting Working Weeks");
         weeksBox.value = "";
         chosenWeeks = 0;
-    } else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
+        paidWeeks = 0;
+    }   
+        // Undertake calculation for paid weeks
+        else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
@@ -343,9 +347,15 @@ function calculateWeeks() {
         console.log("Invalid number of weeks entered during weeks input");
     };
 
-    
-    
-    console.log("Paid weeks", paidWeeks);
+    // Ensure weeks entry falls between 38 and 44
+    if (38 <= chosenWeeks && chosenWeeks <= 44) {
+        console.log("Paid weeks", paidWeeks);
+    } else {
+        alert("Please enter a value between 38 and 44 weeks");
+        weeksBox.value = "";
+        chosenHours = 0;
+        paidWeeks = 0;
+    };
 
     // Clear any entered hours
     hoursBox.value = "";
