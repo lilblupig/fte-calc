@@ -30,9 +30,9 @@
                 </div>
                 <div class="collapse col-md-auto g-0" id="calcnavlinks">
                     <div class="nav flex-column flex-md-row">
-                        <a class="nav-link quick-link" href="#about-fte-calc">About</a>
-                        <a class="nav-link quick-link" href="#calculator">Calculator</a>
-                        <a class="nav-link quick-link" href="#more-info">More Info</a>
+                        <a id="about-button" class="nav-link quick-link about-toggle"><span class="link-toggler-icon"></span>About</a>
+                        <a href="#calculator" class="nav-link quick-link">Calculator</a>
+                        <a id="info-button" class="nav-link quick-link info-toggle"><span class="link-toggler-icon"></span>More Info</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div id="about-fte-calc" class="container">
                 <div class="row">
                     <div class="col-12 text-center py-4">
-                        <h1>About FTE Calc</h1>
+                        <h1 class="clickable about-toggle">About FTE Calc</h1>
                     </div>
                     <div class="col-12 col-md-6 text-justify pb-md-3">
                         <p>FTE Calc is a tool designed to give quick and easy access to FTE
@@ -173,7 +173,7 @@
                     </div>
                 </div>
 <!-- Results Area -->
-                <div id="results" class="row pb-4 text-center">
+                <div id="results" class="row pb-4 mb-4 text-center">
                     <div class="col-12 py-4">
                         <h1>Results</h1>
                     </div>
@@ -205,7 +205,7 @@
             <div id="more-info" class="container pb-4">
                 <div class="row">
                     <div class="col-12 text-center py-4">
-                        <h1>More Information</h1>
+                        <h1 class="clickable info-toggle">More Information</h1>
                     </div>
                     <div class="col-12 text-center">
                         <p>It is always a good idea to save FTE calculations to PDF (or print) for inclusion on the staff record. Once saved to PDF, add the staff member name and
@@ -239,6 +239,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/calc.js"></script>
 </body>
 
 </html>

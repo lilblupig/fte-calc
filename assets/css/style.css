@@ -13,6 +13,16 @@ body {
     text-align: justify;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    color:#57245E;
+    background-color: #efdef2;
+    border-radius: 10px;
+}
+
 .purple {
     background-color: #8e4e99;
 }
@@ -27,13 +37,14 @@ body {
 
 .logo:hover {
     color: #57245E;
-    background-color: #F2EDF7;
+    background-color: #efdef2;
 }
 
 .quick-link {
     font-size: 30px;
     font-weight: 500;
     color: #fff;
+    cursor: pointer;
 }
 
 .quick-link:hover {
@@ -53,6 +64,18 @@ body {
     background-image: url(../images/icons8-menu.svg);
 }
 
+.link-toggler-icon {
+    background-image: url(../images/on.svg);
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin: 0 0.25em 0 0;
+}
+
 @media (min-width: 768px) {
     #calcnavlinks {
         display: block;
@@ -66,7 +89,7 @@ body {
 }
 
 .calculator-btn {
-    background-color: #F2EDF7;
+    background-color: #efdef2;
     border-color: #8e4e99;
     margin-bottom: 5px;
 }
@@ -82,7 +105,7 @@ body {
 
 .disc-btn {
     display: inline-block;
-    background-color: #F2EDF7;
+    background-color: #efdef2;
     border: solid 1px #8e4e99;
     width: 38px;
     height: 38px;
@@ -131,7 +154,7 @@ body {
 }
 
 .number-box:hover {
-    background-color: #F2EDF7;
+    background-color: #efdef2;
 }
 
 .number-box:focus {
@@ -142,6 +165,7 @@ body {
 
 #results {
     border: solid 1px #a1a1a1;
+    border-radius: 10px;
 }
 
 #result-pay ul, #result-weeks ul {
@@ -158,7 +182,7 @@ body {
 /* Footer */
 
 footer {
-    background-color: #F2EDF7;
+    background-color: #efdef2;
 }
 
 #contact-btn {
