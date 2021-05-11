@@ -173,29 +173,47 @@
                     </div>
                 </div>
 <!-- Results Area -->
-                <div id="results" class="row pb-4 mb-4 text-center">
-                    <div class="col-12 py-4">
+                <div id="results" class="row pb-4 mb-4">
+                    <div class="col-12 py-4 text-center">
                         <h1>Results</h1>
                     </div>
                     <div id="errors"></div>
                     <div id="result-pay" class="col-12 col-md-6">
-                        <p>Pay & FTE:</p>
-                        <ul>
-                            <li>Grade: <span id="result-grade">X-XX</span></li>
-                            <li>FTE: <span id="result-fte">0.0000</span></li>
-                            <li>Salary: £<span id="result-salary">0.00</span></li>
-                            <li>Hourly rate: £<span id="result-rate">0.00</span></li>
-                            <li>Pension band: <span id="result-pension">0.0</span>%</li>
-                        </ul>
+                        <p class="text-center">Pay & FTE:</p>
+                        <table class="table">
+                            <tr>
+                                <td>Grade:</td><td id="result-grade">X-XX</td>
+                            </tr>
+                            <tr>
+                                <td>FTE:</td><td id="result-fte">0.0000</td>
+                            </tr>
+                            <tr>
+                                <td>Salary:</td><td id="result-salary">£0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Hourly rate:</td><td id="result-rate">£0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Pension band:</td><td id="result-pension">0.0%</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="result-weeks" class="col-12 col-md-6">
-                        <p>Working and Holiday Weeks:</p>
-                        <ul>
-                            <li>Total paid weeks: <span id="weeks-total">0.00</span></li>
-                            <li>Working weeks: <span id="weeks-working">0.00</span></li>
-                            <li>Holiday weeks: <span id="weeks-holiday">0.00</span></li>
-                            <li>Working hours: <span id="week-hours">0</span></li>
-                        </ul>
+                        <p class="text-center">Working and Holiday Weeks:</p>
+                        <table class="table">
+                            <tr>
+                                <td>Total paid weeks: </td><td id="weeks-total">0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Working weeks: </td><td id="weeks-working">0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Holiday weeks: </td><td id="weeks-holiday">0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Working hours: </td><td id="week-hours">0</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

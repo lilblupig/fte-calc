@@ -446,15 +446,15 @@ function getResults() {
 
         document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
         document.getElementById("result-fte").innerHTML = FTE;
-        document.getElementById("result-salary").innerHTML = actualSalary;
-        document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
-        document.getElementById("weeks-total").innerHTML = paidWeeks;
-        document.getElementById("weeks-working").innerHTML = chosenWeeks;
+        document.getElementById("result-salary").innerHTML = "£" + actualSalary.toFixed(2);
+        document.getElementById("result-rate").innerHTML = "£" + (chosenSalary / 52.14 / 37).toFixed(2);
+        document.getElementById("weeks-total").innerHTML = paidWeeks.toFixed(2);
+        document.getElementById("weeks-working").innerHTML = chosenWeeks.toFixed(2);
         document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
         document.getElementById("week-hours").innerHTML = chosenHours;
         pensionCalc();
         console.log("Pension", pensionRate);
-        document.getElementById("result-pension").innerHTML = pensionRate;
+        document.getElementById("result-pension").innerHTML = pensionRate + "%";
     };    
 };
 
