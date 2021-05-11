@@ -3,7 +3,7 @@ const rOneGrades = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
 const rTwoGrades = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"];
 
 const rOneSCPs = {
-    "A": [1, 2,],
+    "A": [1, 2],
     "B": [2, 3, 4],
     "C": [4, 5, 6],
     "D": [6, 7, 8],
@@ -148,6 +148,18 @@ const rTwoScales = {
     "71": 86900
 };
 
+const pensionBands = [
+    {"start": 0, "end": 14600, "rate": 5.5},
+    {"start": 14600.01, "end": 22900, "rate": 5.8},
+    {"start": 22900.01, "end": 37200, "rate": 6.5},
+    {"start": 37200.01, "end": 47100, "rate": 6.8},
+    {"start": 47100.01, "end": 65900, "rate": 8.5},
+    {"start": 65900.01, "end": 93400, "rate": 9.9},
+    {"start": 93400.01, "end": 110000, "rate": 10.5},
+    {"start": 110000.01, "end": 165000, "rate": 11.4},
+    {"start": 165000.01, "rate": 12.5}
+];
+
 // Get elements needed globally
 const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
 const weeksBox = document.getElementById("weeks-box") // Get the weeks worked input box
@@ -164,6 +176,8 @@ let chosenService;
 let chosenWeeks = 0;
 let chosenHours;
 let paidWeeks;
+let actualSalary;
+let pensionRate;
 
 // Region click event handler
 function addGradeBtns() {
@@ -362,6 +376,29 @@ function calculateWeeks() {
     chosenHours = 0;
 };
 
+// Pension band calculator for use in getResults function
+function pensionCalc() {
+    if (actualSalary < pensionBands[0]["end"]) {
+        pensionRate = pensionBands[0]["rate"];
+    } else if (pensionBands[0]["end"] < actualSalary && actualSalary < pensionBands[1]["end"]) {
+        pensionRate = pensionBands[1]["rate"];
+    } else if (pensionBands[1]["end"] < actualSalary && actualSalary < pensionBands[2]["end"]) {
+        pensionRate = pensionBands[2]["rate"];
+    } else if (pensionBands[2]["end"] < actualSalary && actualSalary < pensionBands[3]["end"]) {
+        pensionRate = pensionBands[3]["rate"];
+    } else if (pensionBands[3]["end"] < actualSalary && actualSalary < pensionBands[4]["end"]) {
+        pensionRate = pensionBands[4]["rate"];
+    } else if (pensionBands[4]["end"] < actualSalary && actualSalary < pensionBands[5]["end"]) {
+        pensionRate = pensionBands[5]["rate"];
+    } else if (pensionBands[5]["end"] < actualSalary && actualSalary < pensionBands[6]["end"]) {
+        pensionRate = pensionBands[6]["rate"];
+    } else if (pensionBands[6]["end"] < actualSalary && actualSalary < pensionBands[7]["end"]) {
+        pensionRate = pensionBands[7]["rate"];
+    } else {
+        pensionRate = pensionBands[8]["rate"];
+    };
+};
+
 // Hours keydown event handler - GET RESULTS
 function getResults() {
     // Check steps 1-5 complete
@@ -401,19 +438,23 @@ function getResults() {
         let weeksFTE = paidWeeks / 52.1428;
         let hoursFTE = chosenHours / 37;
         let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
+        actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
         console.log("Weeks FTE", weeksFTE);
         console.log("Hours FTE", hoursFTE);
         console.log("FTE", FTE);
+        console.log("Actual Salary", actualSalary);
 
         document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
         document.getElementById("result-fte").innerHTML = FTE;
-        document.getElementById("result-salary").innerHTML = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
+        document.getElementById("result-salary").innerHTML = actualSalary;
         document.getElementById("result-rate").innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
-        document.getElementById("result-pension").innerHTML = "To Do";
         document.getElementById("weeks-total").innerHTML = paidWeeks;
         document.getElementById("weeks-working").innerHTML = chosenWeeks;
         document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
         document.getElementById("week-hours").innerHTML = chosenHours;
+        pensionCalc();
+        console.log("Pension", pensionRate);
+        document.getElementById("result-pension").innerHTML = pensionRate;
     };    
 };
 
