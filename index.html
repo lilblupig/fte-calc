@@ -255,22 +255,62 @@
                 </div>
             </div>
         </section>
-
-<!-- Footer -->
-        <footer>
-            <div id="calc-footer" class="container">
-                <div class="row text-center py-4">
-                    <div class="col-12 col-md-6">
-                       <p>See a problem? <a id="contact-btn" class="btn">Contact Us</a></p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                    <p>Last updated: <span>29/04/2021</span></a>
-                    </div>
-                </div>
-            </div>
-        </footer>
     
     </main>
+
+<!-- Footer -->
+    <footer>
+        <div id="calc-footer" class="container">
+            <div class="row text-center py-4">
+                <div class="col-12 col-md-6">
+                    <p>See a problem? <button id="" type="button" class="btn contact-btn" data-bs-toggle="modal"  data-bs-target="#contactModal">Contact Us</button></p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <p>Last updated: <span>29/04/2021</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- Modal -->
+
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <label for="name">Name:</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input id="name" type="text" />
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input id="email" type="email" />
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="message">Message:</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <textarea id="message" rows="10" cols="30"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn contact-btn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <!-- Scripts -->
     <!-- Scripts for Bootstrap and jQuery -->
