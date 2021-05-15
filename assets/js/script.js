@@ -1,32 +1,42 @@
-
-// Collapse/expand About section
+/*
+Collapse/expand About section
+*/
 $(".about-toggle").click(function() {
+    // Check if section is currently displayed and designate state accordingly
     if ($("#about-fte-calc").is(":hidden")) {
-        $("#about-button").children("span").css("background-image", "url('assets/images/on.svg')");
+        state = "on";
     } else {
-        $("#about-button").children("span").css("background-image", "url('assets/images/off.svg')");
+        state = "off";        
     };
 
-    if ($("#about-fte-calc").is(':hidden')) {
-        $("#about-fte-calc").slideToggle();
+    // Switch the icon for the section toggler
+    $("#about-button").children("span").css("background-image", `url('assets/images/${state}.svg')`);
+    // Show/hide the section
+    $("#about-fte-calc").slideToggle();
+
+    // If section is currently hidden, on click, scroll to newly displayed section
+    if (state === "on") {
         $("html, body").animate({scrollTop: $("#about-fte-calc").offset().top -50});
-    } else {
-        $("#about-fte-calc").slideToggle();
     };
 });
 
-// Collapse/expand More Info section
+/*
+Collapse/expand More Info section
+*/
 $(".info-toggle").click(function() {
     if ($("#more-info").is(":hidden")) {
-        $("#info-button").children("span").css("background-image", "url('assets/images/on.svg')");
+        state = "on";
     } else {
-        $("#info-button").children("span").css("background-image", "url('assets/images/off.svg')");
+        state = "off";        
     };
 
-    if ($("#more-info").is(':hidden')) {
+    // Switch the icon for the section toggler
+        $("#info-button").children("span").css("background-image", `url('assets/images/${state}.svg')`);
+    // Show/hide the section
         $("#more-info").slideToggle();
+
+            // If section is currently hidden, on click, scroll to newly displayed section
+    if (state === "on") {
         $("html, body").animate({scrollTop: $("#more-info").offset().top -50});
-    } else {
-        $("#more-info").slideToggle();
     };
 });

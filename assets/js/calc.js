@@ -1,11 +1,15 @@
-// Get elements needed globally
+/*
+Get elements needed globally
+*/
 const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
 const weeksBox = document.getElementById("weeks-box") // Get the weeks worked input box
 const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
 const fteCheck = document.getElementById("fte-check"); // Get the FTE salary display
 const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
 
-// Store the currently selected options
+/*
+Store the currently selected options in Global variables
+*/
 let chosenRegion;
 let chosenGrade;
 let chosenSCP;
@@ -18,7 +22,16 @@ let actualSalary;
 let pensionRate;
 let regionMap;
 
-// Region click event handler
+/*
+Functions called by event handlers
+*/
+
+/*
+Step 1: Region click event handler
+    Clears any selected following items from Calculator and resets all global variables to zero or ""
+    Gets Grade information relating to chosen Region and populates the Grade bucket with buttons
+    Assigns the appropriate Region to the map variable, to ensure the map shows the right area
+*/
 function addGradeBtns() {
 
     // Clear any existing data from Grade bucket
@@ -45,7 +58,7 @@ function addGradeBtns() {
     hoursBox.value = "";
     chosenHours = 0;
 
-    // Determine region and get all associated grades as array
+    // Determine region and get all associated grades as array, activate map polygon
     let regionGrades;
     if (chosenRegion == "rOne") {
         regionGrades = rOneGrades;
@@ -74,7 +87,14 @@ function addGradeBtns() {
     console.log("Calculating FTE for", chosenRegion);
 };
 
-// Grade click event handler
+/*
+Step 2: Grade click event handler
+    Clears any selected items from Calculator after Grade bucket and resets associated global variables to zero or ""
+    Region and Grade buttons, and the associated values remain as selected
+    Assigns selected Grade value to Global variable for use later
+    Gets Spinal Column Point information relating to chosen Region and Grade and populates the SCP bucket with buttons
+*/
+
 function addSCPBtns() {
     // Clear any existing data from SCP bucket
     let clearBtns = document.getElementById("scp-bucket"); 
@@ -120,7 +140,15 @@ function addSCPBtns() {
     console.log("Grade", chosenGrade);
 };
 
-// SCP click event handler
+/*
+Step 3: SCP click event handler
+    Clears any selected items from Calculator after SCP bucket and resets associated global variables to zero or ""
+    Region, Grade and SCP buttons, and the associated values remain as selected
+    Check Region and retrieve SCP salaries as appropriate
+    Assigns selected SCP value and associated salary to Global variables for use later
+    Populates the Full Time Equivalent check fields for user to ensure info is correct and timely
+*/
+
 function makeFTEChecks() {
     // Clear selected service length
     chosenService = "";
@@ -151,7 +179,14 @@ function makeFTEChecks() {
     hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
 };
 
-// Service Length click event handler
+/*
+Step 4: Service Length click event handler
+    Clears any selected items from Calculator after Service Length chooser and resets associated global variables to zero or ""
+    Region, Grade, SCP and Service buttons, and the associated values remain as selected
+    Checks that steps 1-3 have been completed, if not resets later fields and prompts user
+    Assigns selected Service value to Global variables for use later
+*/
+
 function selectService() {
     // Clear any selected weeks
     weeksBox.value = "";
@@ -169,9 +204,18 @@ function selectService() {
     };
 };
 
-// Weeks change event handler
+/*
+Step 5: Weeks change event handler
+    Clears any selected items from Calculator after Weeks entry and resets associated global variables to zero or ""
+    Region, Grade, SCP, Service buttons and Weeks entry, and the associated values, remain as selected
+    Checks that steps 1-4 have been completed, if not resets this and later fields, and prompts user in line with completed fields
+    Checks that input is between 38 and 44 weeks, and if not prompts the user and clears the field
+    If no errors, checks Region and Service selections and calculates Paid Weeks
+    Assigns Paid Weeks value to Global variables for use later
+*/
+
 function calculateWeeks() {
-    // Check steps 1-4 complete
+    // Check steps 1-4 complete, if not prompts user and clears field
     if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
         alert("Please complete fields 1-4 before inputting Working Weeks");
         weeksBox.value = "";
@@ -188,12 +232,15 @@ function calculateWeeks() {
         chosenWeeks = 0;
         paidWeeks = 0;
     }   
-        // Undertake calculation for paid weeks
-        else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
+      // Undertake calculation for paid weeks
+      // Region One only has two cases, more or less than 5 years
+      else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
-    } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+    } 
+      // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
+      else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.2/44.94) + Number.EPSILON) * 100) / 100;
@@ -220,7 +267,12 @@ function calculateWeeks() {
     chosenHours = 0;
 };
 
-// Pension band calculator for use in getResults function
+/*
+Preliminary to step 6: Pension band calculator for use in getResults function
+    Uses Actual Salary calculated in Step 6 to find the appropriate pension band
+    Assigns Pension Band value to Global variables for use later
+*/
+
 function pensionCalc() {
     if (actualSalary < pensionBands[0]["end"]) {
         pensionRate = pensionBands[0]["rate"];
@@ -243,7 +295,15 @@ function pensionCalc() {
     };
 };
 
-// Hours keydown event handler - GET RESULTS
+/*
+Step 6: Hours keydown event handler - GET RESULTS
+    Checks that steps 1-5 have been completed, if not resets the field and prompts user in line with completed fields
+    Checks that input is less than 37 hours, and if not prompts the user and clears the field
+    If no errors, calculates all remaining values, including Actual Salary
+    Calls Pension Band finder function
+    Assigns all appropriate values to the Results field
+*/
+
 function getResults() {
     // Check steps 1-5 complete
     if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined) && (chosenWeeks === 0 || chosenWeeks === undefined)) {
@@ -279,6 +339,7 @@ function getResults() {
         hoursBox.value = "";
         chosenHours = 0;
     } else {
+        // If no errors, calculate results
         let weeksFTE = paidWeeks / 52.1428;
         let hoursFTE = chosenHours / 37;
         let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
@@ -288,6 +349,7 @@ function getResults() {
         console.log("FTE", FTE);
         console.log("Actual Salary", actualSalary);
 
+        // Post results to Results field on page
         document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
         document.getElementById("result-fte").innerHTML = FTE;
         document.getElementById("result-salary").innerHTML = "£" + actualSalary.toFixed(2);
@@ -302,7 +364,16 @@ function getResults() {
     };    
 };
 
-// Event listener for all hard-coded calculator button clicks
+/*
+Event Listeners
+*/
+
+/*
+Event listener for all hard-coded calculator button clicks, Step 1: Region and Step 4: Service
+    Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
+    Checks button type, if Region, calls addGradeBtns function (Step 1 above), if Service, calls selectService function (Step 4 above)
+*/
+
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         $(this).siblings().removeClass('selected-btn');
@@ -332,7 +403,12 @@ buttons.forEach(function(button){
     })
 });
 
-// Event listener for generated Grade button clicks
+/*
+Event listener for generated Grade button clicks, Step 2: Grade
+    Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
+    Calls addSCPBtns function (Step 2 above)
+*/
+
 $('#grade-bucket').on('click', 'button', function (){
     // Clear any previous selection and highlight selected item
     $(this).siblings().removeClass('selected-btn');
@@ -345,7 +421,12 @@ $('#grade-bucket').on('click', 'button', function (){
     addSCPBtns();
 });
 
-// Event listener for generated SCP button clicks
+/*
+Event listener for generated SCP button clicks, Step 3: SCP
+    Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
+    Calls makeFTEchecks function (Step 3 above)
+*/
+
 $('#scp-bucket').on('click', 'button', function(){
     chosenSCP = this.innerHTML;
 
@@ -356,18 +437,30 @@ $('#scp-bucket').on('click', 'button', function(){
     makeFTEChecks();
 });
 
-// Event listener for weeks keystrokes
+/*
+Event listener for weeks keystrokes, Step 5: Weeks
+    Gets the value entered in the Weeks box, and assigns it to a Global variable when the user moves out of the field
+    Calls calculateWeeks function (Step 5 above)
+*/
+
 weeksBox.addEventListener("change", weeksInput);
 function weeksInput() {
+    // Get user input on leave-field
     chosenWeeks = Number(weeksBox.value);
     console.log(chosenWeeks);
 
     calculateWeeks();
 };
 
-// Event listener for hours input
+/*
+Event listener for hours input, Step 6: Hours
+    Gets the value entered in the Hours box, and assigns it to a Global variable on every change
+    Calls getResults function (Step 6 above) and updates the Results field on every keystroke
+*/
+
 hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
+    // Get user input on keydown
     chosenHours = hoursBox.value
     console.log(chosenHours);
 
