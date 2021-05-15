@@ -14,13 +14,16 @@
 </head>
 
 <body>
+
 <!-- Nav Bar -->
     <nav id="page-nav" class="purple fixed-top">
         <div class="container-fluid">
             <div class="row justify-content-md-center">
+                <!-- Logo - always visible-->
                 <div class="col-auto g-md-0">
                     <a class="nav-link logo px-0 px-md-3" href="#">FTE Calc</a>
                 </div>
+                <!-- Hamburger button - not visible after tablet size-->
                 <div class="col d-md-none text-end">
                     <button class="hamburger" type="button" data-bs-toggle="collapse"
                         data-bs-target="#calcnavlinks" aria-expanded="false"  aria-controls="calcnavlinks" 
@@ -28,6 +31,7 @@
                         <span class="navbar-toggler-icon fte-toggler-icon"></span>
                     </button>
                 </div>
+                <!-- Standard nav links - visible after tablet size -->
                 <div class="collapse col-md-auto g-0" id="calcnavlinks">
                     <div class="nav flex-column flex-md-row">
                         <a id="about-button" class="nav-link quick-link about-toggle"><span class="link-toggler-icon"></span>About</a>
@@ -39,6 +43,7 @@
         </div>
     </nav>
 
+<!-- Empty div for padding under fixed nav, margin on element not sufficient re dynamic content-->
     <div id="empty-div" aria-hidden="true"></div>
 
     <main>
@@ -113,8 +118,8 @@
                         <div>
                             <p><span class="step-no">3</span> Choose SCP:</p>
                         </div>
-                        <div id="scp-bucket" class="btn-bucket">
-                        </div>
+                        <!-- SCP buttons populate here -->
+                        <div id="scp-bucket" class="btn-bucket"></div>
                     </div>
     <!-- Interim check: Full Time Check shows here -->
                     <div id="full-time-checker" class="col-12 col-md-6 col-lg-4 text-center py-4">
