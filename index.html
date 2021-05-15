@@ -84,11 +84,11 @@
                     <div class="col-12 text-center py-4">
                         <h1>Calculator</h1>
                     </div>
-    <!-- Region Chooser -->
+    <!-- Step 1: Region Chooser -->
                     <div id="region-chooser" class="col-12 container-fluid pb-4">
                         <div class="row g-0">
                             <div class="col-12 col-md-4 col-xl-5 text-center text-md-end my-1">
-                                <p>1/ Choose Region:</p>
+                                <p><span class="step-no">1</span> Choose Region:</p>
                             </div>
                             <div class="col-12 col-md-4 col-xl-2 text-center">
                                 <button id="region-btn-1" class="btn c-btn calculator-btn region-btn">Region 1</button>
@@ -98,23 +98,23 @@
                     </div>
                 </div>
                 <div class="row pb-4">
-    <!-- Grade Chooser -->
+    <!-- Step 2: Grade Chooser -->
                     <div id="grade-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>2/ Choose grade:</p>
+                            <p><span class="step-no">2</span> Choose grade:</p>
                         </div>
                         <!-- Grade buttons populate here -->
                         <div id="grade-bucket" class="btn-bucket"></div>
                     </div>
-    <!-- SCP Chooser -->
+    <!-- Step 3: SCP Chooser -->
                     <div id="scp-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>3/ Choose SCP:</p>
+                            <p><span class="step-no">3</span> Choose SCP:</p>
                         </div>
                         <div id="scp-bucket" class="btn-bucket">
                         </div>
                     </div>
-    <!-- Full Time Checker -->
+    <!-- Interim check: Full Time Check shows here -->
                     <div id="full-time-checker" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
                             <p>Check Full Time Info:</p>
@@ -132,20 +132,20 @@
                             </div>
                         </div>
                     </div>
-    <!-- Service Length Chooser -->
+    <!-- Step 4: Service Length Chooser -->
                     <div id="service-length" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                             <p>4/ Select Service Length:</p>
+                             <p><span class="step-no">4</span> Select Service Length:</p>
                         </div>
                         <div id="service-input" class="text-center btn-bucket">
                             <button class="btn c-btn calculator-btn service-btn">Less than 5 years</button>
                             <button class="btn c-btn calculator-btn service-btn">5 years or more</button>
                         </div>
                     </div>
-    <!-- Working Weeks Chooser -->
+    <!-- Step 5: Working Weeks Chooser -->
                     <div id="weeks-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>5/ Enter Working Weeks:</p>
+                            <p><span class="step-no">5</span> Enter Working Weeks:</p>
                         </div>
                         <div class="pb-2">
                             <input id="weeks-box" class="number-box" type="number" placeholder="0" />
@@ -157,10 +157,10 @@
                             </div>
                         </div>
                     </div>
-    <!-- Hours Worked Input -->
+    <!-- Step 6: Hours Worked Input -->
                     <div id="hours-worked" class="col-12 col-md-6 col-lg-4 text-center py-4">
                         <div>
-                            <p>6/ Enter Hours Worked per Week:</p>
+                            <p><span class="step-no">6</span> Enter Hours Worked per Week:</p>
                         </div>
                         <div class="pb-2">
                             <input id="hours-box" class="number-box" type="number" placeholder="0" />

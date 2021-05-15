@@ -161,6 +161,13 @@ body {
     box-shadow: 0 0 0 0.25rem #8e4e997e;
 }
 
+.step-no {
+    background-color:#a1a1a1;
+    border: solid 1px #000;
+    border-radius: 50%;
+    padding: 0.1rem 0.4rem;
+}
+
 /* Results*/
 
 #results {
