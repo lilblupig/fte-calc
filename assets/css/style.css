@@ -82,6 +82,10 @@ body {
     }
 }
 
+#empty-div {
+    margin-top: 4rem;
+}
+
 /* Calculator */
 
 #region-chooser p {

@@ -15,7 +15,7 @@
 
 <body>
 <!-- Nav Bar -->
-    <nav class="purple">
+    <nav id="page-nav" class="purple fixed-top">
         <div class="container-fluid">
             <div class="row justify-content-md-center">
                 <div class="col-auto g-md-0">
@@ -39,13 +39,15 @@
         </div>
     </nav>
 
+    <div id="empty-div" aria-hidden="true"></div>
+
     <main>
 <!-- About this Calculator -->
         <section>
             <div id="about-fte-calc" class="container">
                 <div class="row">
                     <div class="col-12 text-center py-4">
-                        <h1 class="clickable about-toggle">About FTE Calc</h1>
+                        <h1>About FTE Calc</h1>
                     </div>
                     <div class="col-12 col-md-6 text-justify pb-md-3">
                         <p>FTE Calc is a tool designed to give quick and easy access to FTE
@@ -233,7 +235,7 @@
             <div id="more-info" class="container pb-4">
                 <div class="row">
                     <div class="col-12 text-center py-4">
-                        <h1 class="clickable info-toggle">More Information</h1>
+                        <h1>More Information</h1>
                     </div>
                     <div class="col-12 col-md-6 text-center">
                         <p>It is always a good idea to save FTE calculations to PDF (or print) for inclusion on the staff record. Once saved to PDF, add the staff member name and
