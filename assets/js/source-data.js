@@ -43,7 +43,7 @@ const rTwoSCPs = {
     "15": [48, 49, 50, 51, 52, 53, 54],
     "16": [53, 54, 55, 56, 57, 58, 59],
     "17": [60, 61, 62, 63, 64, 65, 66],
-    "18": [65, 66, 67, 68, 69, 70, 71]
+    "18": [65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
 };
 
 // Full Time Annual salary applicable to each SCP for Region One
@@ -155,7 +155,10 @@ const rTwoScales = {
     "68": 81700,
     "69": 83400,
     "70": 85200,
-    "71": 86900
+    "71": 86900,
+    "72": 95000,
+    "73": 120000,
+    "74": 180000
 };
 
 // Working and holiday weeks for both regions, by Grade and Service length
