@@ -203,17 +203,12 @@ Step 3: SCP click event handler
     Populates the Full Time Equivalent check fields for user to ensure info is correct and timely
 */
 
-function makeFTEChecks() {
-    // Clear selected service length
-    chosenService = "";
-    $(".service-btn").removeClass('selected-btn');
-    // Clear any selected weeks
-    weeksBox.value = "";
-    chosenWeeks = 0;
-    // Clear any entered hours
-    hoursBox.value = "";
-    chosenHours = 0;
-
+function scpClick() {
+    clearService();
+    clearWeeks();
+    clearHours();
+    resetResults();
+    
     // Determine region and get salary for selected SCP
     if (chosenRegion == "rOne") {
         chosenSalary = rOneScales[chosenSCP];
@@ -461,7 +456,7 @@ $('#scp-bucket').on('click', 'button', function(){
     $(this).siblings().removeClass('selected-btn');
     $(this).addClass('selected-btn');
 
-    makeFTEChecks();
+    scpClick();
 });
 
 /*
