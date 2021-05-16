@@ -331,7 +331,7 @@ function enterWeeks() {
     } else if (chosenWeeks == 0 || chosenWeeks == "") {
          console.log(chosenWeeks);
     } else {
-        alert("Please enter a value between 38 and 44 weeks");
+        alert(`Please enter a value between ${_minWeeks} and ${_maxWeeks} weeks`);
         clearWeeks()
     };
 
