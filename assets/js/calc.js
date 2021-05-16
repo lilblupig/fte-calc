@@ -280,22 +280,14 @@ Preliminary to step 6: Pension band calculator for use in getResults function
 function pensionCalc() {
     if (actualSalary < pensionBands[0]["end"]) {
         pensionRate = pensionBands[0]["rate"];
-    } else if (pensionBands[0]["end"] < actualSalary && actualSalary < pensionBands[1]["end"]) {
-        pensionRate = pensionBands[1]["rate"];
-    } else if (pensionBands[1]["end"] < actualSalary && actualSalary < pensionBands[2]["end"]) {
-        pensionRate = pensionBands[2]["rate"];
-    } else if (pensionBands[2]["end"] < actualSalary && actualSalary < pensionBands[3]["end"]) {
-        pensionRate = pensionBands[3]["rate"];
-    } else if (pensionBands[3]["end"] < actualSalary && actualSalary < pensionBands[4]["end"]) {
-        pensionRate = pensionBands[4]["rate"];
-    } else if (pensionBands[4]["end"] < actualSalary && actualSalary < pensionBands[5]["end"]) {
-        pensionRate = pensionBands[5]["rate"];
-    } else if (pensionBands[5]["end"] < actualSalary && actualSalary < pensionBands[6]["end"]) {
-        pensionRate = pensionBands[6]["rate"];
-    } else if (pensionBands[6]["end"] < actualSalary && actualSalary < pensionBands[7]["end"]) {
-        pensionRate = pensionBands[7]["rate"];
+    } else if (actualSalary > pensionBands[pensionBands.length-2]["end"]) {
+        pensionRate = pensionBands[pensionBands.length-1]["rate"];
     } else {
-        pensionRate = pensionBands[8]["rate"];
+        for (let i = 0; i < pensionBands.length - 1; i++) {
+            if (pensionBands[i]["end"] < actualSalary && actualSalary <= pensionBands[i + 1]["end"]) {
+                pensionRate = pensionBands[i + 1]["rate"];
+            };
+        };
     };
 };
 
