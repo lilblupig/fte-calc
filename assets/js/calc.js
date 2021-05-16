@@ -438,21 +438,19 @@ buttons.forEach(function(button){
     })
 });
 
-/*
-Event listener for generated Grade button clicks, Step 2: Grade
+/* Event listener for generated Grade button clicks, Step 2: Grade
     Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
-    Calls addSCPBtns function (Step 2 above)
-*/
-
+    Calls gradeClick function (Step 2 above)
+    */
 $('#grade-bucket').on('click', 'button', function (){
-    // Clear any previous selection and highlight selected item
+    // Remove class indicating selection from all elements, add class to clicked item
     $(this).siblings().removeClass('selected-btn');
     $(this).addClass('selected-btn');
 
     // Update global variable with chosen grade
     chosenGrade = this.innerHTML;
 
-    // Generate the relevant SCP buttons
+    // Call the event handler
     gradeClick();
 });
 
