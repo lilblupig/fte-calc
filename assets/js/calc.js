@@ -6,6 +6,10 @@ const weeksBox = document.getElementById("weeks-box") // Get the weeks worked in
 const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
 const fteCheck = document.getElementById("fte-check"); // Get the FTE salary display
 const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
+const _fullTimeWeeks = 52.14; // Weeks in a full time year
+const _fullTimeHours = 37;  // Hours in a full time week
+const _minWeeks = 38; // Minimum number of working weeks
+const _maxWeeks = 44; //Maximum number of working weeks
 
 /*
 Store the currently selected options in Global variables
@@ -176,7 +180,7 @@ function makeFTEChecks() {
     
     // Populate FTE/hourly rate check
     fteCheck.innerHTML = chosenSalary.toFixed(2);
-    hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
+    hourlyCheck.innerHTML = (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
 };
 
 /*
@@ -235,25 +239,25 @@ function calculateWeeks() {
       // Undertake calculation for paid weeks
       // Region One only has two cases, more or less than 5 years
       else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
     } 
       // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
       else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.2/44.94) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 8.2/43.94) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
     } else {
         console.log("Invalid number of weeks entered during weeks input");
     };
 
     // Ensure weeks entry falls between 38 and 44
-    if (38 <= chosenWeeks && chosenWeeks <= 44) {
+    if (_minWeeks <= chosenWeeks && chosenWeeks <= _maxWeeks) {
         console.log("Paid weeks", paidWeeks);
     } else {
         alert("Please enter a value between 38 and 44 weeks");
@@ -276,22 +280,14 @@ Preliminary to step 6: Pension band calculator for use in getResults function
 function pensionCalc() {
     if (actualSalary < pensionBands[0]["end"]) {
         pensionRate = pensionBands[0]["rate"];
-    } else if (pensionBands[0]["end"] < actualSalary && actualSalary < pensionBands[1]["end"]) {
-        pensionRate = pensionBands[1]["rate"];
-    } else if (pensionBands[1]["end"] < actualSalary && actualSalary < pensionBands[2]["end"]) {
-        pensionRate = pensionBands[2]["rate"];
-    } else if (pensionBands[2]["end"] < actualSalary && actualSalary < pensionBands[3]["end"]) {
-        pensionRate = pensionBands[3]["rate"];
-    } else if (pensionBands[3]["end"] < actualSalary && actualSalary < pensionBands[4]["end"]) {
-        pensionRate = pensionBands[4]["rate"];
-    } else if (pensionBands[4]["end"] < actualSalary && actualSalary < pensionBands[5]["end"]) {
-        pensionRate = pensionBands[5]["rate"];
-    } else if (pensionBands[5]["end"] < actualSalary && actualSalary < pensionBands[6]["end"]) {
-        pensionRate = pensionBands[6]["rate"];
-    } else if (pensionBands[6]["end"] < actualSalary && actualSalary < pensionBands[7]["end"]) {
-        pensionRate = pensionBands[7]["rate"];
+    } else if (actualSalary > pensionBands[pensionBands.length-2]["end"]) {
+        pensionRate = pensionBands[pensionBands.length-1]["rate"];
     } else {
-        pensionRate = pensionBands[8]["rate"];
+        for (let i = 0; i < pensionBands.length - 1; i++) {
+            if (pensionBands[i]["end"] < actualSalary && actualSalary <= pensionBands[i + 1]["end"]) {
+                pensionRate = pensionBands[i + 1]["rate"];
+            };
+        };
     };
 };
 
@@ -334,14 +330,14 @@ function getResults() {
         alert("Please complete fields 1-3 before inputting Working Weeks");
         hoursBox.value = "";
         chosenHours = 0;
-    } else if (chosenHours > 37) {
-        alert("Please enter an hours value of 37 or less");
+    } else if (chosenHours > _fullTimeHours) {
+        alert(`Please enter an hours value of ${_fullTimeHours} or less`);
         hoursBox.value = "";
         chosenHours = 0;
     } else {
         // If no errors, calculate results
-        let weeksFTE = paidWeeks / 52.1428;
-        let hoursFTE = chosenHours / 37;
+        let weeksFTE = paidWeeks / _fullTimeWeeks;
+        let hoursFTE = chosenHours / _fullTimeHours;
         let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
         actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
         console.log("Weeks FTE", weeksFTE);
@@ -353,7 +349,7 @@ function getResults() {
         document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
         document.getElementById("result-fte").innerHTML = FTE;
         document.getElementById("result-salary").innerHTML = "£" + actualSalary.toFixed(2);
-        document.getElementById("result-rate").innerHTML = "£" + (chosenSalary / 52.14 / 37).toFixed(2);
+        document.getElementById("result-rate").innerHTML = "£" + (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
         document.getElementById("weeks-total").innerHTML = paidWeeks.toFixed(2);
         document.getElementById("weeks-working").innerHTML = chosenWeeks.toFixed(2);
         document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;

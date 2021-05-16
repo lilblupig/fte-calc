@@ -1,7 +1,7 @@
 /*
-Collapse/expand About section
+Collapse/expand About section on click (not enter)
 */
-$(".about-toggle").click(function() {
+$(".about-toggle").click(function(event) {
     // Check if section is currently displayed and designate state accordingly
     if ($("#about-fte-calc").is(":hidden")) {
         state = "on";
@@ -14,8 +14,10 @@ $(".about-toggle").click(function() {
     // Show/hide the section
     $("#about-fte-calc").slideToggle();
 
-    // If section is currently hidden, on click, scroll to newly displayed section
-    if (state === "on") {
+    // If section is currently visible, on click prevent scroll to newly hidden section
+    if (state === "off") {
+        event.preventDefault();
+    } else {
         $("html, body").animate({scrollTop: $("#about-fte-calc").offset().top -50});
     };
 });
@@ -23,7 +25,7 @@ $(".about-toggle").click(function() {
 /*
 Collapse/expand More Info section
 */
-$(".info-toggle").click(function() {
+$(".info-toggle").click(function(event) {
     if ($("#more-info").is(":hidden")) {
         state = "on";
     } else {
@@ -35,8 +37,10 @@ $(".info-toggle").click(function() {
     // Show/hide the section
         $("#more-info").slideToggle();
 
-            // If section is currently hidden, on click, scroll to newly displayed section
-    if (state === "on") {
+    // If section is currently visible, on click prevent scroll to newly hidden section
+    if (state === "off") {
+        event.preventDefault();
+    } else {
         $("html, body").animate({scrollTop: $("#more-info").offset().top -50});
     };
 });
