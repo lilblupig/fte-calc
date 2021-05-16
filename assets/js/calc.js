@@ -137,10 +137,9 @@ function regionClick() {
             initMap()
         } else {
             // If neither condition is satisfied, handle the error
-            console.log("Unknown Region passed to gradeClick");
-            alert("An unknown Region variable has been passed to the calculator while adding grade buttons.")
+            console.log("Unknown Region passed to regionClick event handler");
+            alert("An unknown Region variable has been passed to the calculator while executing the Region click function, please try again. If this error persists, please Contact Us for support.")
         };
-
     } 
     // Catch unforeseen errors
     catch (error) {
@@ -162,14 +161,12 @@ function regionClick() {
     console.log("Calculating FTE for", chosenRegion);
 };
 
-/*
-Step 2: Grade click event handler
+/* Step 2: Grade click event handler
     Clears any selected items from Calculator after Grade bucket and resets associated global variables to zero or ""
     Region and Grade buttons, and the associated values remain as selected
     Assigns selected Grade value to Global variable for use later
     Gets Spinal Column Point information relating to chosen Region and Grade and populates the SCP bucket with buttons
-*/
-
+    */
 function gradeClick() {
     clearSCPs();
     clearFTE();
@@ -180,13 +177,20 @@ function gradeClick() {
 
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
-    if (chosenRegion == "rOne") {
-        gradeSCPs = rOneSCPs[chosenGrade]; 
-    } else if (chosenRegion == "rTwo") {
-        gradeSCPs = rTwoSCPs[chosenGrade];
-    } else {
-        console.log("Unknown Region passed to addSCPbtns");
-        alert("An unknown Region variable has been passed to the calculator while adding SCP buttons.")
+    try {
+        if (chosenRegion == "rOne") {
+            gradeSCPs = rOneSCPs[chosenGrade]; 
+        } else if (chosenRegion == "rTwo") {
+            gradeSCPs = rTwoSCPs[chosenGrade];
+        } else {
+            console.log("Unknown Region passed to gradeClick event handler, please try again. If this error persists, please Contact Us for support.");
+            alert("An unknown Region variable has been passed to the calculator while  executing the Grade click function, please try again. If this error persists, please Contact Us for support.")
+        };
+    }
+    // Catch unforeseen errors
+    catch(error) {
+        console.log("Unknown error on gradeClick event handler");
+            alert("An unknown error has occured on Grade event handler, please try again. If this error persists, please Contact Us for support.")
     };
 
     // Produce HTML elements for buttons and append to parent
