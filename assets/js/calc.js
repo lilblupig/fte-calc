@@ -260,7 +260,10 @@ Step 5: Weeks change event handler
     Assigns Paid Weeks value to Global variables for use later
 */
 
-function calculateWeeks() {
+function enterWeeks() {
+    clearHours();
+    resetResults();
+
     // Check steps 1-4 complete, if not prompts user and clears field
     if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
         alert("Please complete fields 1-4 before inputting Working Weeks");
@@ -307,10 +310,6 @@ function calculateWeeks() {
         chosenHours = 0;
         paidWeeks = 0;
     };
-
-    // Clear any entered hours
-    hoursBox.value = "";
-    chosenHours = 0;
 };
 
 /*
@@ -468,7 +467,7 @@ function weeksInput() {
     chosenWeeks = Number(weeksBox.value);
     console.log(chosenWeeks);
 
-    calculateWeeks();
+    enterWeeks();
 };
 
 /*
