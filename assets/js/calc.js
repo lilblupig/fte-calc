@@ -27,40 +27,102 @@ let pensionRate;
 let regionMap;
 
 /*
-Functions called by event handlers
+---------------Functions called by Event Handlers---------------
 */
 
-/*
-Step 1: Region click event handler
-    Clears any selected following items from Calculator and resets all global variables to zero or ""
-    Gets Grade information relating to chosen Region and populates the Grade bucket with buttons
-    Assigns the appropriate Region to the map variable, to ensure the map shows the right area
-*/
-function addGradeBtns() {
-
-    // Clear any existing data from Grade bucket
+/* The following clearXxx functions all reset the selections and variables for a step in the Calculator, called by multiple handlers */
+// Clear any previously produced buttons from Grade bucket
+function clearGrades() {
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
     chosenGrade = "";
     regionMap = "";
-    // Clear any previously produced SCP buttons from bucket
+};
+
+// Clear any previously produced buttons from SCP bucket
+function clearSCPs() {
     let clearSCP = document.getElementById("scp-bucket");
     clearSCP.innerHTML = "";
     chosenSCP = "";
     chosenSalary = 0;
-    // Clear any previously displayed FTE/hours checks
+};
+
+// Clear any previously displayed FTE/hours checks
+function clearFTE() {
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
-    // Clear selected service length
+};
+
+// Clear selected service length
+function clearService() {
     chosenService = "";
     $(".service-btn").removeClass('selected-btn');
-    // Clear any selected weeks
+};
+
+// Clear any selected weeks
+function clearWeeks() {
     weeksBox.value = "";
     chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
-    // Clear any entered hours
+};
+
+// Clear any entered hours
+function clearHours() {
     hoursBox.value = "";
     chosenHours = 0;
+};
+
+/* Clears any results posted to Results field on page, called by most handlers */
+function resetResults() {
+    document.getElementById("result-grade").innerHTML = "" + "-" + "";
+    document.getElementById("result-fte").innerHTML = "0.0000";
+    document.getElementById("result-salary").innerHTML = "£0.00";
+    document.getElementById("result-rate").innerHTML = "£0.00";
+    document.getElementById("result-pension").innerHTML = "0.0%";
+    document.getElementById("weeks-total").innerHTML = "0.00";
+    document.getElementById("weeks-working").innerHTML = "0.00";
+    document.getElementById("weeks-holiday").innerHTML = "0.00";
+    document.getElementById("week-hours").innerHTML = "0";
+};
+
+/* Preliminary to step 6: Pension band calculator for use in getResults function
+    Uses Actual Salary calculated in Step 6 to find the appropriate pension band
+    Assigns Pension Band value to Global variables for use later
+    */
+function pensionCalc() {
+    if (actualSalary < pensionBands[0]["end"]) {
+        pensionRate = pensionBands[0]["rate"];
+    } else if (actualSalary > pensionBands[pensionBands.length-2]["end"]) {
+        pensionRate = pensionBands[pensionBands.length-1]["rate"];
+    } else {
+        for (let i = 0; i < pensionBands.length - 1; i++) {
+            if (pensionBands[i]["end"] < actualSalary && actualSalary <= pensionBands[i + 1]["end"]) {
+                pensionRate = pensionBands[i + 1]["rate"];
+            };
+        };
+    };
+};
+
+
+/*
+---------------Functions called by Event Listeners---------------
+*/
+
+/* Step 1: Region click event handler
+    Clears any selections made in following steps and resets all global variables to zero or ""
+    Resets Results field
+    Gets Grade information relating to chosen Region and populates the Grade bucket with buttons
+    Assigns the appropriate Region to the map variable, to ensure the map shows the right area
+    */
+function regionClick() {
+    // Clear previous data
+    clearGrades();
+    clearSCPs();
+    clearFTE();
+    clearService();
+    clearWeeks();
+    clearHours();
+    resetResults();
 
     // Determine region and get all associated grades as array, activate map polygon
     let regionGrades;
@@ -86,7 +148,7 @@ function addGradeBtns() {
         let gradeBucket = document.getElementById("grade-bucket");
         gradeBucket.appendChild(newBtn);
     };
-    
+
     // Log chosen region to console
     console.log("Calculating FTE for", chosenRegion);
 };
@@ -272,26 +334,6 @@ function calculateWeeks() {
 };
 
 /*
-Preliminary to step 6: Pension band calculator for use in getResults function
-    Uses Actual Salary calculated in Step 6 to find the appropriate pension band
-    Assigns Pension Band value to Global variables for use later
-*/
-
-function pensionCalc() {
-    if (actualSalary < pensionBands[0]["end"]) {
-        pensionRate = pensionBands[0]["rate"];
-    } else if (actualSalary > pensionBands[pensionBands.length-2]["end"]) {
-        pensionRate = pensionBands[pensionBands.length-1]["rate"];
-    } else {
-        for (let i = 0; i < pensionBands.length - 1; i++) {
-            if (pensionBands[i]["end"] < actualSalary && actualSalary <= pensionBands[i + 1]["end"]) {
-                pensionRate = pensionBands[i + 1]["rate"];
-            };
-        };
-    };
-};
-
-/*
 Step 6: Hours keydown event handler - GET RESULTS
     Checks that steps 1-5 have been completed, if not resets the field and prompts user in line with completed fields
     Checks that input is less than 37 hours, and if not prompts the user and clears the field
@@ -340,10 +382,12 @@ function getResults() {
         let hoursFTE = chosenHours / _fullTimeHours;
         let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
         actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
+        pensionCalc();
         console.log("Weeks FTE", weeksFTE);
         console.log("Hours FTE", hoursFTE);
         console.log("FTE", FTE);
         console.log("Actual Salary", actualSalary);
+        console.log("Pension", pensionRate);
 
         // Post results to Results field on page
         document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
@@ -354,11 +398,10 @@ function getResults() {
         document.getElementById("weeks-working").innerHTML = chosenWeeks.toFixed(2);
         document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
         document.getElementById("week-hours").innerHTML = chosenHours;
-        pensionCalc();
-        console.log("Pension", pensionRate);
         document.getElementById("result-pension").innerHTML = pensionRate + "%";
     };    
 };
+
 
 /*
 Event Listeners
@@ -387,7 +430,7 @@ buttons.forEach(function(button){
                 alert("An unknown Region has been passed to the calculator, please request assistance.")
             };
             // Populate the grade bucket with buttons
-            addGradeBtns();
+            regionClick();
         } else if (classes.contains("service-btn")) {
             chosenService = this.innerHTML;
             selectService();
