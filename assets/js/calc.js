@@ -126,17 +126,26 @@ function regionClick() {
 
     // Determine region and get all associated grades as array, activate map polygon
     let regionGrades;
-    if (chosenRegion == "rOne") {
-        regionGrades = rOneGrades;
-        regionMap = bournemouthMap;
-        initMap()
-    } else if (chosenRegion == "rTwo") {
-        regionGrades = rTwoGrades;
-        regionMap = bristolMap;
-        initMap()
-    } else {
-        console.log("Unknown Region passed to addGradeBtns");
-        alert("An unknown Region variable has been passed to the calculator while adding grade buttons.")
+    try {
+        if (chosenRegion == "rOne") {
+            regionGrades = rOneGrades;
+            regionMap = bournemouthMap;
+            initMap()
+        } else if (chosenRegion == "rTwo") {
+            regionGrades = rTwoGrades;
+            regionMap = bristolMap;
+            initMap()
+        } else {
+            // If neither condition is satisfied, handle the error
+            console.log("Unknown Region passed to gradeClick");
+            alert("An unknown Region variable has been passed to the calculator while adding grade buttons.")
+        };
+
+    } 
+    // Catch unforeseen errors
+    catch (error) {
+        console.log("Unknown error on regionClick event handler");
+            alert("An unknown error has occured on Region event handler, please try again. If this error persists, please Contact Us for support.")
     };
 
     // Produce HTML elements for buttons and append to parent
@@ -434,7 +443,7 @@ buttons.forEach(function(button){
             };
         }
         // Catch unforeseen errors
-        catch(err) {
+        catch(error) {
             console.log("Unknown error on html button click listener");
             alert("An unknown error has occured on click listener, please try again. If this error persists, please Contact Us for support.")
         };
