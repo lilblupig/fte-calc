@@ -248,23 +248,21 @@ function scpClick() {
     hourlyCheck.innerHTML = (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
 };
 
-/*
-Step 4: Service Length click event handler
+/* Step 4: Service Length click event handler
     Clears any selected items from Calculator after Service Length chooser and resets associated global variables to zero or ""
     Region, Grade, SCP and Service buttons, and the associated values remain as selected
     Checks that steps 1-3 have been completed, if not resets later fields and prompts user
     Assigns selected Service value to Global variables for use later
-*/
-
+    */
 function serviceClick() {
     // Clear previous data
     clearWeeks();
     clearHours();
     resetResults();
 
-    // Check steps 1-3 complete
+    // Error handling - Check steps 1-3 complete
     if (chosenSalary === 0 || chosenSalary === undefined) {
-        alert("Please complete fields 1-3 before selecting Service Length");
+        alert("Please complete Steps 1-3 before selecting Service Length");
         // Clear selected service length
         chosenService = "";
         $(".service-btn").removeClass('selected-btn');
