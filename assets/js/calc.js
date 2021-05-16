@@ -236,13 +236,10 @@ Step 4: Service Length click event handler
     Assigns selected Service value to Global variables for use later
 */
 
-function selectService() {
-    // Clear any selected weeks
-    weeksBox.value = "";
-    chosenWeeks = 0;
-    // Clear any entered hours
-    hoursBox.value = "";
-    chosenHours = 0;
+function serviceClick() {
+    clearWeeks();
+    clearHours();
+    resetResults();
 
     // Check steps 1-3 complete
     if (chosenSalary === 0 || chosenSalary === undefined) {
@@ -416,7 +413,7 @@ buttons.forEach(function(button){
             regionClick();
         } else if (classes.contains("service-btn")) {
             chosenService = this.innerHTML;
-            selectService();
+            serviceClick();
             console.log("Service length", this.innerHTML);
         } else {
             console.log("Unknown button type passed to calculator");
