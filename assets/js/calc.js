@@ -168,6 +168,7 @@ function regionClick() {
     Gets Spinal Column Point information relating to chosen Region and Grade and populates the SCP bucket with buttons
     */
 function gradeClick() {
+    // Clear previous data
     clearSCPs();
     clearFTE();
     clearService();
@@ -184,7 +185,7 @@ function gradeClick() {
             gradeSCPs = rTwoSCPs[chosenGrade];
         } else {
             console.log("Unknown Region passed to gradeClick event handler, please try again. If this error persists, please Contact Us for support.");
-            alert("An unknown Region variable has been passed to the calculator while  executing the Grade click function, please try again. If this error persists, please Contact Us for support.")
+            alert("An unknown Region variable has been passed to the calculator while executing the Grade click function, please try again. If this error persists, please Contact Us for support.")
         };
     }
     // Catch unforeseen errors
@@ -207,29 +208,35 @@ function gradeClick() {
     console.log("Grade", chosenGrade);
 };
 
-/*
-Step 3: SCP click event handler
+/* Step 3: SCP click event handler
     Clears any selected items from Calculator after SCP bucket and resets associated global variables to zero or ""
     Region, Grade and SCP buttons, and the associated values remain as selected
     Check Region and retrieve SCP salaries as appropriate
     Assigns selected SCP value and associated salary to Global variables for use later
     Populates the Full Time Equivalent check fields for user to ensure info is correct and timely
-*/
-
+    */
 function scpClick() {
+    // Clear previous data
     clearService();
     clearWeeks();
     clearHours();
     resetResults();
     
-    // Determine region and get salary for selected SCP
-    if (chosenRegion == "rOne") {
-        chosenSalary = rOneScales[chosenSCP];
-    } else if (chosenRegion == "rTwo") {
-        chosenSalary = rTwoScales[chosenSCP];
-    } else {
-        console.log("Unknown Region passed to SCP click listener");
-        alert("An unknown Region variable has been passed to the calculator while selecting salary.")
+    try{
+        // Determine region and get salary for selected SCP
+        if (chosenRegion == "rOne") {
+            chosenSalary = rOneScales[chosenSCP];
+        } else if (chosenRegion == "rTwo") {
+            chosenSalary = rTwoScales[chosenSCP];
+        } else {
+            console.log("Unknown Region passed to SCP click listener");
+            alert("An unknown Region variable has been passed to the calculator while executing the SCP click function, please try again. If this error persists, please Contact Us for support.")
+        };
+    }
+    // Catch unforeseen errors
+    catch(error) {
+        console.log("Unknown error on scpClick event handler");
+            alert("An unknown error has occured on SCP event handler, please try again. If this error persists, please Contact Us for support.")
     };
     
     // Log chosen SCP & related salary to console
@@ -250,6 +257,7 @@ Step 4: Service Length click event handler
 */
 
 function serviceClick() {
+    // Clear previous data
     clearWeeks();
     clearHours();
     resetResults();
@@ -277,6 +285,7 @@ Step 5: Weeks change event handler
 */
 
 function enterWeeks() {
+    // Clear previous data
     clearHours();
     resetResults();
 
