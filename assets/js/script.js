@@ -37,7 +37,7 @@ $(".info-toggle").click(function(event) {
     // Show/hide the section
         $("#more-info").slideToggle();
 
-    // If section is currently hidden, on click, scroll to newly displayed section
+    // If section is currently visible, on click prevent scroll to newly hidden section
     if (state === "off") {
         event.preventDefault();
     } else {
