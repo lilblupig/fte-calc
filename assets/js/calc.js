@@ -332,7 +332,7 @@ function enterWeeks() {
          console.log(chosenWeeks);
     } else {
         alert(`Please enter a value between ${_minWeeks} and ${_maxWeeks} weeks`);
-        clearWeeks()
+        clearWeeks();
     };
 
     // Log chosen Weeks to the console
@@ -372,8 +372,8 @@ function getResults() {
         } else if (chosenSalary === 0 || chosenSalary === undefined) {
             alert("Please complete fields 1-3 before inputting Working Weeks");
             clearHours();
-        } else if (chosenHours > _fullTimeHours) {
-            alert(`Please enter an hours value of ${_fullTimeHours} or less`);
+        } else if (chosenHours > _fullTimeHours || chosenHours < 0) {
+            alert(`Please enter an hours value between 0 and ${_fullTimeHours}`);
             clearHours();
         } else {
             // If no errors, calculate results
