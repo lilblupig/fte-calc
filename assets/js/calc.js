@@ -161,25 +161,13 @@ Step 2: Grade click event handler
     Gets Spinal Column Point information relating to chosen Region and Grade and populates the SCP bucket with buttons
 */
 
-function addSCPBtns() {
-    // Clear any existing data from SCP bucket
-    let clearBtns = document.getElementById("scp-bucket"); 
-    clearBtns.innerHTML = "";
-    chosenSCP = "";
-    chosenSalary = 0;
-    // Clear any previously displayed FTE/hours checks
-    fteCheck.innerHTML = "0.00";
-    hourlyCheck.innerHTML = "0.00";
-    // Clear selected service length
-    chosenService = "";
-    $(".service-btn").removeClass('selected-btn');
-    // Clear any selected weeks
-    weeksBox.value = "";
-    chosenWeeks = 0;
-    $(".weeks-btn").removeClass('selected-btn');
-    // Clear any entered hours
-    hoursBox.value = "";
-    chosenHours = 0;
+function gradeClick() {
+    clearSCPs();
+    clearFTE();
+    clearService();
+    clearWeeks();
+    clearHours();
+    resetResults();
 
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
@@ -457,7 +445,7 @@ $('#grade-bucket').on('click', 'button', function (){
     chosenGrade = this.innerHTML;
 
     // Generate the relevant SCP buttons
-    addSCPBtns();
+    gradeClick();
 });
 
 /*
