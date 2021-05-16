@@ -248,6 +248,9 @@ function serviceClick() {
         chosenService = "";
         $(".service-btn").removeClass('selected-btn');
     };
+    
+    // Log chosen Service to the console
+    console.log("Service length", chosenService);
 };
 
 /*
@@ -383,40 +386,54 @@ function getResults() {
 
 
 /*
-Event Listeners
+---------------Event Listeners---------------
 */
 
-/*
-Event listener for all hard-coded calculator button clicks, Step 1: Region and Step 4: Service
+/* Event listener for all hard-coded calculator button clicks, Step 1: Region and Step 4: Service
     Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
-    Checks button type, if Region, calls addGradeBtns function (Step 1 above), if Service, calls selectService function (Step 4 above)
-*/
-
+    Checks button type, if Region, calls regionClick function (Step 1 above), if Service, calls serviceClick function (Step 4 above)
+    */
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
+        // Remove class indicating selection from all elements, add class to clicked item
         $(this).siblings().removeClass('selected-btn');
         $(this).addClass('selected-btn');
-
+        
+        // Create variable which lists all classes attached to the clicked item
         let classes = event.currentTarget.classList;
-        // Update global variable with chosen region
-        if(classes.contains("region-btn")) {
-            if (this.id === "region-btn-1") {
-                chosenRegion = "rOne";
-            } else if (this.id === "region-btn-2") {
-                chosenRegion = "rTwo";
-            } else {
-                console.log("Unknown Region passed to main event listener")
-                alert("An unknown Region has been passed to the calculator, please request assistance.")
+
+        try {
+            // Use classes variable to determine button type
+            if(classes.contains("region-btn")) {
+            // Re STEP 1 - If Region button clicked, check which button, and assign region to chosenRegion variable
+                if (this.id === "region-btn-1") {
+                    chosenRegion = "rOne";
+                } else if (this.id === "region-btn-2") {
+                    chosenRegion = "rTwo";
+                } else {
+                    console.log("Unknown Region passed to main event listener")
+                    alert("An unknown Region has been passed to the calculator, please request assistance.")
+                };
+                // Then, call the event handler
+                regionClick();
+            }
+
+            // Re STEP 4 - If not Region button, check if Service button, and assign to chosenService variable
+            else if (classes.contains("service-btn")) {
+                chosenService = this.innerHTML;
+                // Then, call the event handler
+                serviceClick();
+            }
+            // If neither condition is satisfied, handle the error
+            else {
+                console.log("Unknown button type passed to calculator");
+                alert("A button of unknown type has been passed to the calculator, please try again. If this error persists, please Contact Us for support.")
             };
-            // Populate the grade bucket with buttons
-            regionClick();
-        } else if (classes.contains("service-btn")) {
-            chosenService = this.innerHTML;
-            serviceClick();
-            console.log("Service length", this.innerHTML);
-        } else {
-            console.log("Unknown button type passed to calculator");
-            alert("A button of unknown type has been passed to the calculator.")
+        }
+        // Catch unforeseen errors
+        catch(err) {
+            console.log("Unknown error on html button click listener");
+            alert("An unknown error has occured on click listener, please try again. If this error persists, please Contact Us for support.")
         };
     })
 });
