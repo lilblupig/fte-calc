@@ -158,6 +158,16 @@ const rTwoScales = {
     "71": 86900
 };
 
+// Working and holiday weeks for both regions, by Grade and Service length
+const holidays = [
+    {"Region": "R1", "Grade": "Any", "Service": "<5", "Working": 45.54, "Holidays": 6.6},
+    {"Region": "R1", "Grade": "Any", "Service": ">5", "Working": 44.54, "Holidays": 7.6},
+    {"Region": "R2", "Grade": "<8", "Service": "<5", "Working": 45.54, "Holidays": 6.6},
+    {"Region": "R2", "Grade": "<8", "Service": ">5", "Working": 44.94, "Holidays": 7.2},
+    {"Region": "R2", "Grade": ">8", "Service": "<5", "Working": 44.54, "Holidays": 7.6},
+    {"Region": "R2", "Grade": ">8", "Service": ">5", "Working": 43.94, "Holidays": 8.2}
+];
+
 // At the time of writing, Pension Bands are generic across both Regions, and determined by actual annual salary
 const pensionBands = [
     {"start": 0, "end": 14600, "rate": 5.5},

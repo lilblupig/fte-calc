@@ -8,6 +8,8 @@ const fteCheck = document.getElementById("fte-check"); // Get the FTE salary dis
 const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
 const _fullTimeWeeks = 52.14; // Weeks in a full time year
 const _fullTimeHours = 37;  // Hours in a full time week
+const _minWeeks = 38; // Minimum number of working weeks
+const _maxWeeks = 44; //Maximum number of working weeks
 
 /*
 Store the currently selected options in Global variables
@@ -237,25 +239,25 @@ function calculateWeeks() {
       // Undertake calculation for paid weeks
       // Region One only has two cases, more or less than 5 years
       else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
     } 
       // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
       else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 6.6/45.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.2/44.94) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 7.6/44.54) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
     } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * 8.2/43.94) + Number.EPSILON) * 100) / 100;
+        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
     } else {
         console.log("Invalid number of weeks entered during weeks input");
     };
 
     // Ensure weeks entry falls between 38 and 44
-    if (38 <= chosenWeeks && chosenWeeks <= 44) {
+    if (_minWeeks <= chosenWeeks && chosenWeeks <= _maxWeeks) {
         console.log("Paid weeks", paidWeeks);
     } else {
         alert("Please enter a value between 38 and 44 weeks");
