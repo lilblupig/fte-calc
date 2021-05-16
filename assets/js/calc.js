@@ -6,6 +6,8 @@ const weeksBox = document.getElementById("weeks-box") // Get the weeks worked in
 const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
 const fteCheck = document.getElementById("fte-check"); // Get the FTE salary display
 const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
+const _fullTimeWeeks = 52.14; // Weeks in a full time year
+const _fullTimeHours = 37;  // Hours in a full time week
 
 /*
 Store the currently selected options in Global variables
@@ -176,7 +178,7 @@ function makeFTEChecks() {
     
     // Populate FTE/hourly rate check
     fteCheck.innerHTML = chosenSalary.toFixed(2);
-    hourlyCheck.innerHTML = (chosenSalary / 52.14 / 37).toFixed(2);
+    hourlyCheck.innerHTML = (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
 };
 
 /*
@@ -334,14 +336,14 @@ function getResults() {
         alert("Please complete fields 1-3 before inputting Working Weeks");
         hoursBox.value = "";
         chosenHours = 0;
-    } else if (chosenHours > 37) {
-        alert("Please enter an hours value of 37 or less");
+    } else if (chosenHours > _fullTimeHours) {
+        alert(`Please enter an hours value of ${_fullTimeHours} or less`);
         hoursBox.value = "";
         chosenHours = 0;
     } else {
         // If no errors, calculate results
-        let weeksFTE = paidWeeks / 52.1428;
-        let hoursFTE = chosenHours / 37;
+        let weeksFTE = paidWeeks / _fullTimeWeeks;
+        let hoursFTE = chosenHours / _fullTimeHours;
         let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
         actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
         console.log("Weeks FTE", weeksFTE);
@@ -353,7 +355,7 @@ function getResults() {
         document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
         document.getElementById("result-fte").innerHTML = FTE;
         document.getElementById("result-salary").innerHTML = "£" + actualSalary.toFixed(2);
-        document.getElementById("result-rate").innerHTML = "£" + (chosenSalary / 52.14 / 37).toFixed(2);
+        document.getElementById("result-rate").innerHTML = "£" + (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
         document.getElementById("weeks-total").innerHTML = paidWeeks.toFixed(2);
         document.getElementById("weeks-working").innerHTML = chosenWeeks.toFixed(2);
         document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
