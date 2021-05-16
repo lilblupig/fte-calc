@@ -454,19 +454,19 @@ $('#grade-bucket').on('click', 'button', function (){
     gradeClick();
 });
 
-/*
-Event listener for generated SCP button clicks, Step 3: SCP
+/* Event listener for generated SCP button clicks, Step 3: SCP
     Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
     Calls makeFTEchecks function (Step 3 above)
-*/
-
+    */
 $('#scp-bucket').on('click', 'button', function(){
-    chosenSCP = this.innerHTML;
-
-    // Clear any previous selection and highlight selected item
+    // Remove class indicating selection from all elements, add class to clicked item
     $(this).siblings().removeClass('selected-btn');
     $(this).addClass('selected-btn');
 
+    // Update global variable with chosen grade
+    chosenSCP = this.innerHTML;
+
+    // Call the event handler
     scpClick();
 });
 
