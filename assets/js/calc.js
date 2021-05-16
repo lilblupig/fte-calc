@@ -313,6 +313,8 @@ function enterWeeks() {
         chosenHours = 0;
         paidWeeks = 0;
     };
+
+    console.log(chosenWeeks);
 };
 
 /*
@@ -365,6 +367,7 @@ function getResults() {
         let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
         actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
         pensionCalc();
+        console.log(chosenHours);
         console.log("Weeks FTE", weeksFTE);
         console.log("Hours FTE", hoursFTE);
         console.log("FTE", FTE);
@@ -456,7 +459,7 @@ $('#grade-bucket').on('click', 'button', function (){
 
 /* Event listener for generated SCP button clicks, Step 3: SCP
     Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
-    Calls makeFTEchecks function (Step 3 above)
+    Calls scpClick function (Step 3 above)
     */
 $('#scp-bucket').on('click', 'button', function(){
     // Remove class indicating selection from all elements, add class to clicked item
@@ -470,32 +473,28 @@ $('#scp-bucket').on('click', 'button', function(){
     scpClick();
 });
 
-/*
-Event listener for weeks keystrokes, Step 5: Weeks
+/* Event listener for weeks keystrokes, Step 5: Weeks
     Gets the value entered in the Weeks box, and assigns it to a Global variable when the user moves out of the field
-    Calls calculateWeeks function (Step 5 above)
-*/
-
+    Calls enterWeeks function (Step 5 above)
+    */
 weeksBox.addEventListener("change", weeksInput);
 function weeksInput() {
-    // Get user input on leave-field
+    // Get user input on leaving field
     chosenWeeks = Number(weeksBox.value);
-    console.log(chosenWeeks);
-
+    
+    // Call the event handler
     enterWeeks();
 };
 
-/*
-Event listener for hours input, Step 6: Hours
+/* Event listener for hours input, Step 6: Hours
     Gets the value entered in the Hours box, and assigns it to a Global variable on every change
     Calls getResults function (Step 6 above) and updates the Results field on every keystroke
-*/
-
+    */
 hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     // Get user input on keydown
     chosenHours = hoursBox.value
-    console.log(chosenHours);
 
+    // Call the event handler
     getResults();
 };
