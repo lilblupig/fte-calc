@@ -62,7 +62,7 @@ function clearService() {
 // Clear any selected weeks
 function clearWeeks() {
     weeksBox.value = "";
-    chosenWeeks = 0;
+    chosenWeeks = "";
     $(".weeks-btn").removeClass('selected-btn');
 };
 
@@ -326,6 +326,8 @@ function enterWeeks() {
     // Ensure weeks entry falls between 38 and 44, if not, prompt user and clear field
     if (_minWeeks <= chosenWeeks && chosenWeeks <= _maxWeeks) {
         console.log("Paid weeks", paidWeeks);
+    } else if (chosenWeeks == 0 || chosenWeeks == "") {
+         console.log(chosenWeeks);
     } else {
         alert("Please enter a value between 38 and 44 weeks");
         clearWeeks()
