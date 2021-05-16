@@ -1,6 +1,7 @@
 /*
 Get elements needed globally
 */
+
 const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
 const weeksBox = document.getElementById("weeks-box") // Get the weeks worked input box
 const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
@@ -25,6 +26,7 @@ let paidWeeks;
 let actualSalary;
 let pensionRate;
 let regionMap;
+
 
 /*
 ---------------Functions called by Event Handlers---------------
@@ -347,64 +349,63 @@ Step 6: Hours keydown event handler - GET RESULTS
 */
 
 function getResults() {
-    // Check steps 1-5 complete
-    if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined) && (chosenWeeks === 0 || chosenWeeks === undefined)) {
-        alert("Please complete fields 1-5 before inputting Weekly Hours");
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenService === undefined || chosenService === "")) {
-        alert("Please choose Service Length and Working Weeks before inputting Weekly Hours");
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenSalary === 0 || chosenSalary === undefined)) {
-        alert("Please complete fields 1-3 and Working Weeks before inputting Weekly Hours");
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else if ((chosenSalary === 0 || chosenSalary === undefined) && (chosenService === undefined || chosenService === "")) {
-        alert("Please complete fields 1-4 before inputting Weekly Hours");
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else if (chosenWeeks === undefined || chosenWeeks === 0) {
-        alert("Please choose Working Weeks before inputting Weekly Hours");
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else if (chosenService === undefined || chosenService === "") {
-        alert("Please choose Service Length before inputting Working Weeks");
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else if (chosenSalary === 0 || chosenSalary === undefined) {
-        alert("Please complete fields 1-3 before inputting Working Weeks");
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else if (chosenHours > _fullTimeHours) {
-        alert(`Please enter an hours value of ${_fullTimeHours} or less`);
-        hoursBox.value = "";
-        chosenHours = 0;
-    } else {
-        // If no errors, calculate results
-        let weeksFTE = paidWeeks / _fullTimeWeeks;
-        let hoursFTE = chosenHours / _fullTimeHours;
-        let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
-        actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
-        pensionCalc();
-        console.log(chosenHours);
-        console.log("Weeks FTE", weeksFTE);
-        console.log("Hours FTE", hoursFTE);
-        console.log("FTE", FTE);
-        console.log("Actual Salary", actualSalary);
-        console.log("Pension", pensionRate);
+    try {
+        // Check steps 1-5 complete, if not, prompt user per input information and reset field
+        if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined) && (chosenWeeks === 0 || chosenWeeks === undefined)) {
+            alert("Please complete fields 1-5 before inputting Weekly Hours");
+            clearHours();
+        } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenService === undefined || chosenService === "")) {
+            alert("Please choose Service Length and Working Weeks before inputting Weekly Hours");
+            clearHours();
+        } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenSalary === 0 || chosenSalary === undefined)) {
+            alert("Please complete fields 1-3 and Working Weeks before inputting Weekly Hours");
+            clearHours();
+        } else if ((chosenSalary === 0 || chosenSalary === undefined) && (chosenService === undefined || chosenService === "")) {
+            alert("Please complete fields 1-4 before inputting Weekly Hours");
+            clearHours();
+        } else if (chosenWeeks === undefined || chosenWeeks === 0) {
+            alert("Please choose Working Weeks before inputting Weekly Hours");
+            clearHours();
+        } else if (chosenService === undefined || chosenService === "") {
+            alert("Please choose Service Length before inputting Working Weeks");
+            clearHours();
+        } else if (chosenSalary === 0 || chosenSalary === undefined) {
+            alert("Please complete fields 1-3 before inputting Working Weeks");
+            clearHours();
+        } else if (chosenHours > _fullTimeHours) {
+            alert(`Please enter an hours value of ${_fullTimeHours} or less`);
+            clearHours();
+        } else {
+            // If no errors, calculate results
+            let weeksFTE = paidWeeks / _fullTimeWeeks;
+            let hoursFTE = chosenHours / _fullTimeHours;
+            let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
+            actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
+            pensionCalc();
+            console.log(chosenHours);
+            console.log("Weeks FTE", weeksFTE);
+            console.log("Hours FTE", hoursFTE);
+            console.log("FTE", FTE);
+            console.log("Actual Salary", actualSalary);
+            console.log("Pension", pensionRate);
 
-        // Post results to Results field on page
-        document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
-        document.getElementById("result-fte").innerHTML = FTE;
-        document.getElementById("result-salary").innerHTML = "£" + actualSalary.toFixed(2);
-        document.getElementById("result-rate").innerHTML = "£" + (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
-        document.getElementById("weeks-total").innerHTML = paidWeeks.toFixed(2);
-        document.getElementById("weeks-working").innerHTML = chosenWeeks.toFixed(2);
-        document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
-        document.getElementById("week-hours").innerHTML = chosenHours;
-        document.getElementById("result-pension").innerHTML = pensionRate + "%";
-    };    
+            // Post results to Results field on page
+            document.getElementById("result-grade").innerHTML = chosenGrade + "-" + chosenSCP;
+            document.getElementById("result-fte").innerHTML = FTE;
+            document.getElementById("result-salary").innerHTML = "£" + actualSalary.toFixed(2);
+            document.getElementById("result-rate").innerHTML = "£" + (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
+            document.getElementById("weeks-total").innerHTML = paidWeeks.toFixed(2);
+            document.getElementById("weeks-working").innerHTML = chosenWeeks.toFixed(2);
+            document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
+            document.getElementById("week-hours").innerHTML = chosenHours;
+            document.getElementById("result-pension").innerHTML = pensionRate + "%";
+        };
+    }
+    // Catch unforeseen errors
+    catch(error) {
+        console.log("Unknown error on getResults event handler");
+        alert("An unknown error has occured on Hours event handler, please try again. If this error persists, please Contact Us for support.");
+    }; 
 };
 
 
