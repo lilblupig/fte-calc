@@ -138,13 +138,13 @@ function regionClick() {
         } else {
             // If neither condition is satisfied, handle the error
             console.log("Unknown Region passed to regionClick event handler");
-            alert("An unknown Region variable has been passed to the calculator while executing the Region click function, please try again. If this error persists, please Contact Us for support.")
+            alert("An unknown Region variable has been passed to the calculator while executing the Region click function, please try again. If this error persists, please Contact Us for support.");
         };
     } 
     // Catch unforeseen errors
     catch (error) {
         console.log("Unknown error on regionClick event handler");
-            alert("An unknown error has occured on Region event handler, please try again. If this error persists, please Contact Us for support.")
+        alert("An unknown error has occured on Region event handler, please try again. If this error persists, please Contact Us for support.");
     };
 
     // Produce HTML elements for buttons and append to parent
@@ -185,13 +185,13 @@ function gradeClick() {
             gradeSCPs = rTwoSCPs[chosenGrade];
         } else {
             console.log("Unknown Region passed to gradeClick event handler, please try again. If this error persists, please Contact Us for support.");
-            alert("An unknown Region variable has been passed to the calculator while executing the Grade click function, please try again. If this error persists, please Contact Us for support.")
+            alert("An unknown Region variable has been passed to the calculator while executing the Grade click function, please try again. If this error persists, please Contact Us for support.");
         };
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on gradeClick event handler");
-            alert("An unknown error has occured on Grade event handler, please try again. If this error persists, please Contact Us for support.")
+        alert("An unknown error has occured on Grade event handler, please try again. If this error persists, please Contact Us for support.");
     };
 
     // Produce HTML elements for buttons and append to parent
@@ -230,13 +230,13 @@ function scpClick() {
             chosenSalary = rTwoScales[chosenSCP];
         } else {
             console.log("Unknown Region passed to SCP click listener");
-            alert("An unknown Region variable has been passed to the calculator while executing the SCP click function, please try again. If this error persists, please Contact Us for support.")
+            alert("An unknown Region variable has been passed to the calculator while executing the SCP click function, please try again. If this error persists, please Contact Us for support.");
         };
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on scpClick event handler");
-            alert("An unknown error has occured on SCP event handler, please try again. If this error persists, please Contact Us for support.")
+        alert("An unknown error has occured on SCP event handler, please try again. If this error persists, please Contact Us for support.");
     };
     
     // Log chosen SCP & related salary to console
@@ -272,68 +272,66 @@ function serviceClick() {
     console.log("Service length", chosenService);
 };
 
-/*
-Step 5: Weeks change event handler
+/* Step 5: Weeks change event handler
     Clears any selected items from Calculator after Weeks entry and resets associated global variables to zero or ""
     Region, Grade, SCP, Service buttons and Weeks entry, and the associated values, remain as selected
     Checks that steps 1-4 have been completed, if not resets this and later fields, and prompts user in line with completed fields
     Checks that input is between 38 and 44 weeks, and if not prompts the user and clears the field
     If no errors, checks Region and Service selections and calculates Paid Weeks
     Assigns Paid Weeks value to Global variables for use later
-*/
-
+    */
 function enterWeeks() {
     // Clear previous data
     clearHours();
     resetResults();
 
-    // Check steps 1-4 complete, if not prompts user and clears field
-    if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
-        alert("Please complete fields 1-4 before inputting Working Weeks");
-        weeksBox.value = "";
-        chosenWeeks = 0;
-        paidWeeks = 0;
-    } else if (chosenService === undefined || chosenService === "") {
-        alert("Please choose Service Length before inputting Working Weeks");
-        weeksBox.value = "";
-        chosenWeeks = 0;
-        paidWeeks = 0;
-    } else if (chosenSalary === 0 || chosenSalary === undefined) {
-        alert("Please complete fields 1-3 before inputting Working Weeks");
-        weeksBox.value = "";
-        chosenWeeks = 0;
-        paidWeeks = 0;
-    }   
-      // Undertake calculation for paid weeks
-      // Region One only has two cases, more or less than 5 years
-      else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
-    } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
-    } 
-      // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
-      else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
-    } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+    try{
+        // Check steps 1-4 complete, if not prompts user and clears field
+        if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
+            alert("Please complete fields 1-4 before inputting Working Weeks");
+            clearWeeks()
+        } else if (chosenService === undefined || chosenService === "") {
+            alert("Please choose Service Length before inputting Working Weeks");
+            clearWeeks()
+        } else if (chosenSalary === 0 || chosenSalary === undefined) {
+            alert("Please complete fields 1-3 before inputting Working Weeks");
+            clearWeeks()
+        }   
+        // If steps 1-4 complete, undertake calculation for paid weeks
+        // Region One only has two cases, more or less than 5 years
+          else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
+        } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
+        } 
+          // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
+          else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
+        } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
         paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
-    } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
-    } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
-    } else {
-        console.log("Invalid number of weeks entered during weeks input");
+        } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
+        } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
+        } else {
+            console.log("Invalid number of weeks entered during weeks input");
+        };
+    }
+    // Catch unforeseen errors
+    catch(error) {
+        console.log("Unknown error on enterWeeks event handler");
+        alert("An unknown error has occured on Weeks event handler, please try again. If this error persists, please Contact Us for support.");
     };
 
-    // Ensure weeks entry falls between 38 and 44
+    // Ensure weeks entry falls between 38 and 44, if not, prompt user and clear field
     if (_minWeeks <= chosenWeeks && chosenWeeks <= _maxWeeks) {
         console.log("Paid weeks", paidWeeks);
     } else {
         alert("Please enter a value between 38 and 44 weeks");
-        weeksBox.value = "";
-        chosenHours = 0;
-        paidWeeks = 0;
+        clearWeeks()
     };
 
+    // Log chosen Weeks to the console
     console.log(chosenWeeks);
 };
 
