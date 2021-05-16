@@ -1,7 +1,7 @@
-/* Get Google Font */
+/*-- Get Google Font --*/
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;200;300;400;500;600;700&display=swap');
 
-/* Generic Styling used across the page */
+/*-- Generic Styling used across the page --*/
 body {
     font-family: Lato, Helvetica, sans-serif;
 }
@@ -29,7 +29,11 @@ body {
     background-color: #8e4e99;
 }
 
-/* Nav Bar */
+.scroll-top {
+    scroll-margin-top: 4rem;
+}
+
+/*-- Nav Bar --*/
 
 .logo {
     font-size: 30px;
