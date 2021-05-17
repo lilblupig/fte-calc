@@ -246,7 +246,7 @@
                         <h1>More Information</h1>
                     </div>
                     <div class="col-12 col-md-6 text-center">
-                        <p>The map to the right displays a visual representation of the chosen Region when selected.</p>
+                        <p>The map in this section displays a visual representation of the chosen Region when selected.</p>
                         <p>It is always a good idea to save FTE calculations to PDF (or print) for inclusion on the staff record. Once saved to PDF, add the staff member name and
                             staff number (if known) using the comment tool.</p>
                         <p>More information regarding the employee pension contribution rates for the Local Government pension scheme can be found <a href="https://www.lgpsmember.org/toj/thinking-joining-how.php" target="_blank" rel="noopener">here</a>.</p>
@@ -267,7 +267,7 @@
         <div id="calc-footer" class="container">
             <div class="row text-center py-4">
                 <div class="col-12 col-md-6">
-                    <p>See a problem? <button id="" type="button" class="btn contact-btn" data-bs-toggle="modal"  data-bs-target="#contactModal">Contact Us</button></p>
+                    <p>See a problem? <button id="" type="button" class="btn contact-btn" data-bs-toggle="modal"  data-bs-target="#contactModal" aria-controls="#contactModal" aria-label="Open Contact Form modal">Contact Us</button></p>
                 </div>
                 <div class="col-12 col-md-6">
                     <p>Last updated: <span>29/04/2021</span></a>
@@ -291,19 +291,19 @@
                     <label for="name">Name:</label>
                 </div>
                 <div class="col-12 col-md-9 pb-1">
-                    <input id="name" name="name" type="text" />
+                    <input id="name" name="name" type="text" required />
                 </div>
                 <div class="col-12 col-md-3">
                     <label for="email">Email:</label>
                 </div>
                 <div class="col-12 col-md-9 pb-1">
-                    <input id="email" name="emailaddress" type="email" />
+                    <input id="email" name="emailaddress" type="email" required />
                 </div>
                 <div class="col-12 col-md-3">
                     <label for="message">Message:</label>
                 </div>
                 <div class="col-12 col-md-9 pb-1">
-                    <textarea id="message" name="contactquery" rows="10" cols="30"></textarea>
+                    <textarea id="message" name="contactquery" rows="10" cols="30" required></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
