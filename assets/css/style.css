@@ -225,3 +225,31 @@ footer {
         min-height: 25rem;
     }
 }
+
+/* For Printing (primarily to PDF) */
+
+@media print {
+    nav, footer, #about-fte-calc, #more-info, #empty-div, #results h1 {
+        display: none;
+    }
+
+    body {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .print-half {
+        width: 50%;
+        float: left;
+    }
+
+    .print-third {
+        width: 33%;
+        float: left;
+    }
+    
+    #results {
+        margin: 0;
+        padding: 10px 0 0 0 !important;
+    }
+}

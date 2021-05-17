@@ -280,6 +280,7 @@ You can find more information on cloning a repository from GitHub [here](https:/
 Where did the website content come from?
 
 slideToggle status fix found at https://forum.jquery.com/topic/state-of-slidetoggle
+Print fix found at https://stackoverflow.com/questions/51099397/printing-breaks-bootstrap-layout/51209031
 
 #### Media
 * The photographs used for the website were obtained from [Pexels.com](https://www.pexels.com/):
