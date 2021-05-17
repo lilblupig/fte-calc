@@ -1,12 +1,38 @@
+/* On window load, go to local storage and see if About or More Info sections were hidden
+    If they were, hide them and change the toggle icon to off position
+    */
+window.onload = getToggle();  // On load, call the check function
+
+function getToggle() {
+    console.log("About", localStorage["#about-fte-calc"]); // Log the current stored status to the console
+    console.log("Info", localStorage["#more-info"]); // Log the current stored status to the console
+
+    // Check if About section was hidden, and if so, hide and change toggle
+    if (localStorage["#about-fte-calc"] == ":hidden") {
+        $("#about-fte-calc").hide();
+        $("#about-button").children("span").css("background-image", `url('assets/images/off.svg')`);
+    }
+
+    // Check if More section was hidden, and if so, hide and change toggle
+    if (localStorage["#more-info"] == ":hidden") {
+        $("#more-info").hide();
+        $("#info-button").children("span").css("background-image", `url('assets/images/off.svg')`);
+    }
+};
+
 /*
-Collapse/expand About section on click (not enter)
+Collapse/expand About section on click
 */
 $(".about-toggle").click(function(event) {
     // Check if section is currently displayed and designate state accordingly
     if ($("#about-fte-calc").is(":hidden")) {
         state = "on";
+        localStorage.removeItem("#about-fte-calc");
+        console.log(localStorage["#about-fte-calc"]);
     } else {
-        state = "off";        
+        state = "off";
+        localStorage.setItem("#about-fte-calc", ":hidden");
+        console.log(localStorage["#about-fte-calc"]);
     };
 
     // Switch the icon for the section toggler
@@ -23,13 +49,17 @@ $(".about-toggle").click(function(event) {
 });
 
 /*
-Collapse/expand More Info section
+Collapse/expand More Info section on click
 */
 $(".info-toggle").click(function(event) {
     if ($("#more-info").is(":hidden")) {
         state = "on";
+        localStorage.removeItem("#more-info");
+        console.log(localStorage["#more-info"]);
     } else {
-        state = "off";        
+        state = "off";
+        localStorage.setItem("#more-info", ":hidden");
+        console.log(localStorage["#more-info"]);
     };
 
     // Switch the icon for the section toggler

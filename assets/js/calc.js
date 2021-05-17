@@ -372,7 +372,7 @@ function getResults() {
         } else if (chosenSalary === 0 || chosenSalary === undefined) {
             alert("Please complete fields 1-3 before inputting Working Weeks");
             clearHours();
-        } else if (chosenHours > _fullTimeHours || chosenHours < 0) {
+        } else if (!(0 < chosenHours && chosenHours <= _fullTimeHours)) {
             alert(`Please enter an hours value between 0 and ${_fullTimeHours}`);
             clearHours();
         } else {

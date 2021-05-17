@@ -4,8 +4,8 @@ Google Maps API - displays a map of the regions
 function initMap() {
     // Produces the map, determines initial zoom level and map center
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 7,
-        center: { lng: -1.90000, lat: 51.00000 },
+        zoom: 8,
+        center: { lng: -2.20000, lat: 51.10000 },
       });
 
     // Renders a polygon of each region on the map
