@@ -281,9 +281,11 @@ Where did the website content come from?
 
 slideToggle status fix found at https://forum.jquery.com/topic/state-of-slidetoggle
 Print fix found at https://stackoverflow.com/questions/51099397/printing-breaks-bootstrap-layout/51209031
+Footer fix found at https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/
 
 #### Media
 * The photographs used for the website were obtained from [Pexels.com](https://www.pexels.com/):
+[About section photo](https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/) by George Becker
 
 * Icon used for Favicon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
 * Icons used for Togglers made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
