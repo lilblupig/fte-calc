@@ -1,3 +1,10 @@
+// Provide Maps function with placeholder polygon coordinates to eliminate console error
+const placeholderMap = [
+    { lng: -1.87818062, lat: 50.71513748 },
+    { lng: -1.87818062, lat: 50.71513748 },
+    { lng: -1.87818062, lat: 50.71513748 },
+];
+
 // Coordinates for outline of Bournemouth from GADM database: https://gadm.org/download_country_v3.html
 const bournemouthMap = [
 { lng: -1.87818062, lat: 50.71513748 },

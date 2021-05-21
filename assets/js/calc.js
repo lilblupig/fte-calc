@@ -25,14 +25,14 @@ let chosenHours;
 let paidWeeks;
 let actualSalary;
 let pensionRate;
-let regionMap;
+let regionMap = placeholderMap;
 
 
 /*
 ---------------Functions called by Event Handlers---------------
 */
 
-/* The following clearXxx functions all reset the selections and variables for a step in the Calculator, called by multiple handlers */
+/* The following clears functions all reset the selections and variables for a step in the Calculator, called by multiple handlers */
 // Clear any previously produced buttons from Grade bucket
 function clearGrades() {
     let clearBtns = document.getElementById("grade-bucket");
