@@ -82,16 +82,24 @@ body {
     margin: 0 0.25em 0 0;
 }
 
-/* Display/hide Hamburger/Standard nav at tablet breakpoint */
+  /* Display/hide Hamburger/Standard nav at tablet breakpoint */
 @media (min-width: 768px) {
     #calcnavlinks {
         display: block;
     }
 }
 
-/* Padding so that fixed nav does not block top of content, fixed or dynamic */
+  /* Padding so that fixed nav does not block top of content, fixed or dynamic */
 #empty-div {
     margin-top: 4rem;
+}
+
+/* About Section */
+#blackboard {
+    height: 30vh;
+
+    background: url("../images/blackboard.jpg") no-repeat center center;
+    background-size: cover;
 }
 
 /* Calculator */
