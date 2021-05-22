@@ -193,6 +193,19 @@ body {
     padding: 0.1rem 0.4rem;
 }
 
+/* Progress Bar */
+#progress-bar {
+    width: 100%;
+    background-color: #a1a1a1;
+}
+
+.bar-start {
+    width: 1%;
+    height: 25px;
+    background-color: #efdef2;
+    padding-right: 3px;
+}
+
 /* Results*/
 
 #results {

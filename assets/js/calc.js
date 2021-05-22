@@ -87,6 +87,18 @@ function resetResults() {
     document.getElementById("week-hours").innerHTML = "0";
 };
 
+/* Progress bar
+    */
+
+const steps = [17, 33, 50, 67, 83, 100];
+
+function moveBar(complete) {
+    let bar = document.getElementById("calc-progress");
+    bar.style.width = complete + "%";
+
+    $("#calc-progress").html(complete + "%");
+}
+
 /* Preliminary to step 6: Pension band calculator for use in getResults function
     Uses Actual Salary calculated in Step 6 to find the appropriate pension band
     Assigns Pension Band value to Global variables for use later
@@ -125,6 +137,9 @@ function regionClick() {
     clearWeeks();
     clearHours();
     resetResults();
+
+    // Move progress bar
+    moveBar(steps[0]);
 
     // Determine region and get all associated grades as array, activate map polygon
     let regionGrades;
@@ -178,6 +193,9 @@ function gradeClick() {
     clearHours();
     resetResults();
 
+    // Move progress bar
+    moveBar(steps[1]);
+
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
     try {
@@ -223,6 +241,9 @@ function scpClick() {
     clearWeeks();
     clearHours();
     resetResults();
+
+    // Move progress bar
+    moveBar(steps[2]);
     
     try{
         // Determine region and get salary for selected SCP
@@ -268,6 +289,9 @@ function serviceClick() {
         // Clear selected service length
         chosenService = "";
         $(".service-btn").removeClass('selected-btn');
+    } else {
+        // Move progress bar
+        moveBar(steps[3]);
     };
     
     // Log chosen Service to the console
@@ -291,32 +315,50 @@ function enterWeeks() {
         // Check steps 1-4 complete, if not prompts user and clears field
         if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
             alert("Please complete fields 1-4 before inputting Working Weeks");
-            clearWeeks()
+            clearWeeks();
+            return;
         } else if (chosenService === undefined || chosenService === "") {
             alert("Please choose Service Length before inputting Working Weeks");
-            clearWeeks()
+            clearWeeks();
+            return;
         } else if (chosenSalary === 0 || chosenSalary === undefined) {
             alert("Please complete fields 1-3 before inputting Working Weeks");
-            clearWeeks()
-        }   
-        // If steps 1-4 complete, undertake calculation for paid weeks
-        // Region One only has two cases, more or less than 5 years
-          else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
-        } 
-          // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
-          else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
+            clearWeeks();
+            return;
+        }
+        // Ensure weeks entry falls between 38 and 44, if not, prompt user and clear field
+          else if (_minWeeks > chosenWeeks || chosenWeeks > _maxWeeks) {
+            alert(`Please enter a value between ${_minWeeks} and ${_maxWeeks} weeks`);
+            clearWeeks();
+            // Move progress bar back to step 4
+            moveBar(steps[3]);
+            return;
+        } else if (chosenWeeks == 0 || chosenWeeks == "") { // Previous error handler may insert these values when clearing
+            console.log(chosenWeeks);
         } else {
+            console.log("Paid weeks", paidWeeks);
+            // If steps 1-4 complete, undertake calculation for paid weeks
+            // Region One only has two cases, more or less than 5 years
+            if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
+            } 
+            // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
+              else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else {
             console.log("Invalid number of weeks entered during weeks input");
+            };
+
+            // Move progress bar
+            moveBar(steps[4]);
         };
     }
     // Catch unforeseen errors
@@ -325,15 +367,7 @@ function enterWeeks() {
         alert("An unknown error has occured on Weeks event handler, please try again. If this error persists, please Contact Us for support.");
     };
 
-    // Ensure weeks entry falls between 38 and 44, if not, prompt user and clear field
-    if (_minWeeks <= chosenWeeks && chosenWeeks <= _maxWeeks) {
-        console.log("Paid weeks", paidWeeks);
-    } else if (chosenWeeks == 0 || chosenWeeks == "") {
-         console.log(chosenWeeks);
-    } else {
-        alert(`Please enter a value between ${_minWeeks} and ${_maxWeeks} weeks`);
-        clearWeeks();
-    };
+    
 
     // Log chosen Weeks to the console
     console.log(chosenWeeks);
@@ -376,6 +410,9 @@ function getResults() {
             alert(`Please enter an hours value between 0 and ${_fullTimeHours}`);
             clearHours();
         } else {
+            // Move progress bar
+            moveBar(steps[5]);
+
             // If no errors, calculate results
             let weeksFTE = paidWeeks / _fullTimeWeeks;
             let hoursFTE = chosenHours / _fullTimeHours;
