@@ -20,4 +20,4 @@ function initMap() {
     });
 
     mapPolygon.setMap(map);
-};
+}
