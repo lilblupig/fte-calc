@@ -135,13 +135,16 @@ In line with structure map and user needs, the wireframes show the initial desir
 1. [Mobile](assets/documents/fte-calc-mobile-final.pdf) 375px
 1. [Tablet](assets/documents/fte-calc-tablet-final.pdf) 768px
 1. [PC/Laptop](assets/documents/fte-calc-pc-final.pdf) 1200px
-1. [Large Screen](assets/documents/fte-calc-large.pdf) 2560px
 
 ##### Summary of Changes
+* About and More Info sections can be toggled on or off and the status is saved to local storage for continuity on next use.
+* Added image to About section as very text heavy.
 * Changed paragraph order in About section to move required info list to the end as disrupting read flow and display.
+* Added progress indicator bar on PC, this is not shown on tablet or mobile as the scrolling nature of the page renders the progress bar invisible for most of the input.
 * Changed service length input from Radio to matched buttons as better fit with the rest of the style of the webpage.  Even with styling adjusted, the radio buttons looked small and out of touch with the rest of the inputs.
 * After meeting with partner, change weeks to text input as some legacy agreements contain working weeks such as 38.2 to represent term time only plus a certain number of inset days.  This does produce issues with anticipated error handing and data input control which will be addressed below.
-* Make About and More Info sections collapsible for regular users to avoid unnecessary scrolling.
+* Introduce map to visually represent selected areas.
+* Large screen design abandoned as Bootstrap column size pixel limitation makes manipulating the data side by side very difficult, and would require significant custom styling and media queries to achieve.
 
 ### **Surface**
 
