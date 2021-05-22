@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,317 +8,324 @@
     <meta name="keywords" content="Academy, School, FTE, Calculator" />
     <meta name="description" content="Support staff FTE calculator for academic institutions" />
     <link rel="icon" href="assets/images/favicon.png" type="image/x-icon" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css" />
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-    <script type="text/javascript">(function(){emailjs.init("user_UlY5CRsOdXy9h7gppcwY9");})();</script>
     <title>Academy FTE Calculator</title>
 </head>
 
 <body>
+    <div id="page-container">
 
-<!-- Nav Bar -->
-    <nav id="page-nav" class="purple fixed-top">
-        <div class="container-fluid">
-            <div class="row justify-content-md-center">
-                <!-- Logo - always visible-->
-                <div class="col-auto g-md-0">
-                    <a class="nav-link logo px-0 px-md-3" href="#">FTE Calc</a>
-                </div>
-                <!-- Hamburger button - not visible after tablet size-->
-                <div class="col d-md-none text-end">
-                    <button class="hamburger" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#calcnavlinks" aria-expanded="false"  aria-controls="calcnavlinks" 
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon fte-toggler-icon"></span>
-                    </button>
-                </div>
-                <!-- Standard nav links - visible after tablet size -->
-                <div class="collapse col-md-auto g-0" id="calcnavlinks">
-                    <div class="nav flex-column flex-md-row">
-                        <a href="#about-fte-calc" id="about-button" class="nav-link quick-link about-toggle" aria-controls="#about-fte-calc" aria-label="Toggle About section"><span class="link-toggler-icon"></span>About</a>
-                        <a href="#calculator" class="nav-link quick-link">Calculator</a>
-                        <a href="#more-info" id="info-button" class="nav-link quick-link info-toggle" aria-controls="#more-info" aria-label="Toggle More Info section"><span class="link-toggler-icon"></span>More Info</a>
+        <!-- Nav Bar -->
+        <nav id="page-nav" class="purple fixed-top">
+            <div class="container-fluid">
+                <div class="row justify-content-md-center">
+                    <!-- Logo - always visible-->
+                    <div class="col-auto g-md-0">
+                        <a class="nav-link logo px-0 px-md-3" href="#">FTE Calc</a>
+                    </div>
+                    <!-- Hamburger button - not visible after tablet size-->
+                    <div class="col d-md-none text-end">
+                        <button class="hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#calcnavlinks"
+                            aria-expanded="false" aria-controls="calcnavlinks" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon fte-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <!-- Standard nav links - visible after tablet size -->
+                    <div class="collapse col-md-auto g-0" id="calcnavlinks">
+                        <div class="nav flex-column flex-md-row">
+                            <a href="#about-fte-calc" id="about-button" class="nav-link quick-link about-toggle" aria-label="Toggle About section"><span class="link-toggler-icon"></span>About</a>
+                            <a href="#calculator" class="nav-link quick-link">Calculator</a>
+                            <a href="#more-info" id="info-button" class="nav-link quick-link info-toggle" aria-label="Toggle More Info section"><span class="link-toggler-icon"></span>More Info</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-<!-- Empty div for padding under fixed nav, margin on element not sufficient re dynamic content-->
-    <div id="empty-div" aria-hidden="true"></div>
+        <!-- Empty div for padding under fixed nav, margin on element not sufficient re dynamic content-->
+        <div id="empty-div-top" aria-hidden="true"></div>
 
-    <main>
-<!-- About this Calculator -->
-        <section>
-            <div id="about-fte-calc" class="container scroll-top">
-                <div class="row">
-                    <div class="col-12 text-center py-4">
-                        <h1>About FTE Calc</h1>
+        <main>
+            <!-- About this Calculator -->
+            <section>
+                <div id="about-fte-calc" class="container scroll-top">
+                    <div class="row">
+                        <div class="col-12 text-center py-4">
+                            <h1>About FTE Calc</h1>
+                        </div>
+                        <div id="blackboard" class="mb-4">
+                            &nbsp;
+                        </div>
+                        <div class="col-12 col-md-6 text-justify pb-md-3">
+                            <p>FTE Calc is a tool designed to give quick and easy access to FTE information for academic organisations working across two regions, where each region has differing pay scales, holiday allocations and pension contribution bands.</p>
+                        </div>
+                        <div class="col-12 col-md-6 text-justify">
+                            <p>This is most commonly required for contract information, either for new staff or contract variations. As such, the calculator is designed to return data commonly used in contract preparation, as quickly and easily as possible.</p>
+                        </div>
+                        <div class="col-12 col-md-6 text-justify">
+                            <p>Simply work through each section <strong>in order</strong>, selecting the necessary option or entering the appropriate value where prompted. The calculator will return a summary of contract information below the input fields.</p>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <p>You will need:</p>
+                            <ul>
+                                <li>Pay grade and Spinal Column Point for relevant scale</li>
+                                <li>The number of weeks to be worked</li>
+                                <li>The number of hours to be worked each week</li>
+                                <li>Whether five or more years service has been completed</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-12 col-md-6 text-justify pb-md-3">
-                        <p>FTE Calc is a tool designed to give quick and easy access to FTE
-                            information for academic organisations working across two regions,
-                            where each region has differing pay scales, holiday allocations and
-                            pension contribution bands.</p>
+                </div>
+            </section>
+
+            <!-- Calculator Input Area -->
+            <section>
+                <div id="calculator" class="container scroll-top">
+                    <div class="row">
+                        <div class="col-12 text-center py-4">
+                            <h1>Calculator</h1>
+                        </div>
+                        <!-- Step 1: Region Chooser -->
+                        <div id="region-chooser" class="col-12 container-fluid pb-4">
+                            <div class="row g-0">
+                                <div class="col-12 col-md-4 col-xl-5 text-center text-md-end my-1 print-half">
+                                    <p><span class="step-no">1</span> Choose Region:</p>
+                                </div>
+                                <div class="col-12 col-md-4 col-xl-2 text-center print-half">
+                                    <button id="region-btn-1" class="btn c-btn calculator-btn region-btn">Region 1</button>
+                                    <button id="region-btn-2" class="btn c-btn calculator-btn region-btn">Region 2</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12 col-md-6 text-justify">
-                        <p>This is most commonly required for contract information, either for new
-                            staff or contract variations. As such, the calculator is designed to return
-                            data commonly used in contract preparation, as quickly and easily as
-                            possible.</p>
+                    <!-- Progress Bar (not shown on mobile/tablet as off-screen) -->
+                    <div class="row d-none d-lg-flex">
+                        <div class="col-12 col-md-3 text-center text-md-end">Progress:</div>
+                        <div class="col-12 col-md-6">
+                            <div id="progress-bar" class="g-0 text-end">
+                                <div id="calc-progress" class="bar-start">0%</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12 col-md-6 text-justify">
-                        <p>Simply work through each section <strong>in order</strong>, selecting the necessary option or
-                            entering the appropriate value where prompted. The calculator will
-                            return a summary of contract information below the input fields.</p>
+                    <div class="row pb-4">
+                        <!-- Step 2: Grade Chooser -->
+                        <div id="grade-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
+                            <div>
+                                <p><span class="step-no">2</span> Choose grade:</p>
+                            </div>
+                            <!-- Grade buttons populate here -->
+                            <div id="grade-bucket" class="btn-bucket"></div>
+                        </div>
+                        <!-- Step 3: SCP Chooser -->
+                        <div id="scp-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
+                            <div>
+                                <p><span class="step-no">3</span> Choose SCP:</p>
+                            </div>
+                            <!-- SCP buttons populate here -->
+                            <div id="scp-bucket" class="btn-bucket"></div>
+                        </div>
+                        <!-- Interim check: Full Time Check shows here -->
+                        <div id="full-time-checker" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
+                            <div>
+                                <p>Check Full Time Info:</p>
+                            </div>
+                            <div class="pb-2">
+                                <p class="lighter-text">Full Time Salary</p>
+                                <div id="fte-check" class="ft-check">
+                                    0.00
+                                </div>
+                            </div>
+                            <div>
+                                <p class="lighter-text">Hourly Rate</p>
+                                <div id="hourly-check" class="ft-check">
+                                    0.00
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 4: Service Length Chooser -->
+                        <div id="service-length" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
+                            <div>
+                                <p><span class="step-no">4</span> Select Service Length:</p>
+                            </div>
+                            <div id="service-input" class="text-center btn-bucket">
+                                <button class="btn c-btn calculator-btn service-btn">Less than 5 years</button>
+                                <button class="btn c-btn calculator-btn service-btn">5 years or more</button>
+                            </div>
+                        </div>
+                        <!-- Step 5: Working Weeks Chooser -->
+                        <div id="weeks-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
+                            <div>
+                                <p><span class="step-no">5</span> Enter Working Weeks:</p>
+                            </div>
+                            <div class="pb-2">
+                                <input id="weeks-box" class="number-box" type="text" placeholder="0" />
+                            </div>
+                            <div>
+                                <p class="lighter-text">FTE Weeks</p>
+                                <div class="ft-check">
+                                    52.14
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 6: Hours Worked Input -->
+                        <div id="hours-worked" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
+                            <div>
+                                <p><span class="step-no">6</span> Enter Hours Worked per Week:</p>
+                            </div>
+                            <div class="pb-2">
+                                <input id="hours-box" class="number-box" type="text" placeholder="0" />
+                            </div>
+                            <div>
+                                <p class="lighter-text">FTE Hours</p>
+                                <div class="ft-check">
+                                    37
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Area -->
+            <section>
+                <div id="results" class="container pb-4 mb-4">
+                    <div class="row">
+                        <div class="col-12 py-4 text-center d-print-none">
+                            <h1>Results</h1>
+                        </div>
+
+                        <!-- Info re Pay and FTE returned here -->
+                        <div id="result-pay" class="col-12 col-md-6 print-half">
+                            <p class="text-center">Pay & FTE:</p>
+                            <table class="table">
+                                <tr>
+                                    <td>Grade:</td>
+                                    <td id="result-grade">X-XX</td>
+                                </tr>
+                                <tr>
+                                    <td>FTE:</td>
+                                    <td id="result-fte">0.0000</td>
+                                </tr>
+                                <tr>
+                                    <td>Salary:</td>
+                                    <td id="result-salary">£0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Hourly rate:</td>
+                                    <td id="result-rate">£0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Pension band:</td>
+                                    <td id="result-pension">0.0%</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Info re weeks working and holiday returned here -->
+                        <div id="result-weeks" class="col-12 col-md-6 print-half">
+                            <p class="text-center">Working and Holiday Weeks:</p>
+                            <table class="table">
+                                <tr>
+                                    <td>Total paid weeks: </td>
+                                    <td id="weeks-total">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Working weeks: </td>
+                                    <td id="weeks-working">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Holiday weeks: </td>
+                                    <td id="weeks-holiday">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Working hours: </td>
+                                    <td id="week-hours">0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- More Information -->
+            <section>
+                <div id="more-info" class="container scroll-top">
+                    <div class="row">
+                        <div class="col-12 text-center py-4">
+                            <h1>More Information</h1>
+                        </div>
+                        <div class="col-12 col-md-6 text-center">
+                            <p>The map in this section displays a visual representation of the chosen Region when selected.</p>
+                            <p>It is always a good idea to save FTE calculations to PDF (or print) for inclusion on the staff record. Once saved to PDF, add the staff member name and staff number (if known) using the comment tool.</p>
+                            <p>More information regarding the employee pension contribution rates for the LGPS can be found on the <a href="https://www.lgpsmember.org/toj/thinking-joining-how.php" target="_blank" rel="noopener">Local Government Pension Scheme website</a>.</p>
+                            <p>The LGPS and Local Government pay scales are revised each year at the start of April. Please check the last updated date in the footer of this page to ensure that the data used has not lapsed.</p>
+                        </div>
+                        <div id="map" class="col-12 col-md-6">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Empty div for padding under fixed nav, margin on element not sufficient re dynamic content-->
+        <div id="empty-div-bottom" aria-hidden="true"></div>
+
+        <!-- Footer -->
+        <footer>
+            <div id="calc-footer" class="container">
+                <div class="row text-center py-4">
+                    <div class="col-12 col-md-6">
+                        <p>See a problem? <button type="button" class="btn contact-btn" data-bs-toggle="modal" data-bs-target="#contactModal" aria-label="Open Contact Form modal">Contact Us</button></p>
                     </div>
                     <div class="col-12 col-md-6">
-                        <p>You will need:</p>
-                        <ul>
-                            <li>Pay grade and Spinal Column Point for relevant scale</li>
-                            <li>The number of weeks to be worked</li>
-                            <li>The number of hours to be worked each week</li>
-                            <li>Whether five or more years service has been completed</li>
-                        </ul>
+                        <p>Last updated: <span>17/05/2021</span></p>
                     </div>
                 </div>
             </div>
-        </section>
+        </footer>
 
-<!-- Calculator Input Area -->
-        <section>
-            <div id="calculator" class="container">
-                <div class="row">
-                    <div class="col-12 text-center py-4">
-                        <h1>Calculator</h1>
+        <!-- Modal -->
+        <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-    <!-- Step 1: Region Chooser -->
-                    <div id="region-chooser" class="col-12 container-fluid pb-4">
-                        <div class="row g-0">
-                            <div class="col-12 col-md-4 col-xl-5 text-center text-md-end my-1 print-half">
-                                <p><span class="step-no">1</span> Choose Region:</p>
+                    <div id="contact-form" class="modal-body container-fluid">
+                        <form onsubmit="return sendMail(this);" class="row">
+                            <div class="col-12 col-md-3">
+                                <label for="name">Name:</label>
                             </div>
-                            <div class="col-12 col-md-4 col-xl-2 text-center print-half">
-                                <button id="region-btn-1" class="btn c-btn calculator-btn region-btn">Region 1</button>
-                                <button id="region-btn-2" class="btn c-btn calculator-btn region-btn">Region 2</button>
+                            <div class="col-12 col-md-9 pb-1">
+                                <input id="name" name="name" type="text" required />
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pb-4">
-    <!-- Step 2: Grade Chooser -->
-                    <div id="grade-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
-                        <div>
-                            <p><span class="step-no">2</span> Choose grade:</p>
-                        </div>
-                        <!-- Grade buttons populate here -->
-                        <div id="grade-bucket" class="btn-bucket"></div>
-                    </div>
-    <!-- Step 3: SCP Chooser -->
-                    <div id="scp-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
-                        <div>
-                            <p><span class="step-no">3</span> Choose SCP:</p>
-                        </div>
-                        <!-- SCP buttons populate here -->
-                        <div id="scp-bucket" class="btn-bucket"></div>
-                    </div>
-    <!-- Interim check: Full Time Check shows here -->
-                    <div id="full-time-checker" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
-                        <div>
-                            <p>Check Full Time Info:</p>
-                        </div>
-                        <div class="pb-2">
-                            <p class="lighter-text">Full Time Salary</p>
-                            <div id="fte-check" class="ft-check">
-                                0.00
+                            <div class="col-12 col-md-3">
+                                <label for="email">Email:</label>
                             </div>
-                        </div>
-                        <div>
-                            <p class="lighter-text">Hourly Rate</p>
-                            <div id="hourly-check" class="ft-check">
-                                0.00
+                            <div class="col-12 col-md-9 pb-1">
+                                <input id="email" name="emailaddress" type="email" required />
                             </div>
-                        </div>
-                    </div>
-    <!-- Step 4: Service Length Chooser -->
-                    <div id="service-length" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
-                        <div>
-                             <p><span class="step-no">4</span> Select Service Length:</p>
-                        </div>
-                        <div id="service-input" class="text-center btn-bucket">
-                            <button class="btn c-btn calculator-btn service-btn">Less than 5 years</button>
-                            <button class="btn c-btn calculator-btn service-btn">5 years or more</button>
-                        </div>
-                    </div>
-    <!-- Step 5: Working Weeks Chooser -->
-                    <div id="weeks-chooser" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
-                        <div>
-                            <p><span class="step-no">5</span> Enter Working Weeks:</p>
-                        </div>
-                        <div class="pb-2">
-                            <input id="weeks-box" class="number-box" type="text" placeholder="0" />
-                        </div>
-                        <div>
-                            <p class="lighter-text">FTE Weeks</p>
-                            <div class="ft-check">
-                                52.14
+                            <div class="col-12 col-md-3">
+                                <label for="message">Message:</label>
                             </div>
-                        </div>
-                    </div>
-    <!-- Step 6: Hours Worked Input -->
-                    <div id="hours-worked" class="col-12 col-md-6 col-lg-4 text-center py-4 print-third">
-                        <div>
-                            <p><span class="step-no">6</span> Enter Hours Worked per Week:</p>
-                        </div>
-                        <div class="pb-2">
-                            <input id="hours-box" class="number-box" type="text" placeholder="0" />
-                        </div>
-                        <div>
-                            <p class="lighter-text">FTE Hours</p>
-                            <div class="ft-check">
-                                37
+                            <div class="col-12 col-md-9 pb-1">
+                                <textarea id="message" name="contactquery" rows="10" cols="30" required></textarea>
                             </div>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn contact-btn">Send</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </section>
-
-<!-- Results Area -->
-        <section>
-            <div id="results" class="container pb-4 mb-4">
-                <div class="row">
-                    <div class="col-12 py-4 text-center d-print-none">
-                        <h1>Results</h1>
-                    </div>
-
-    <!-- Info re Pay and FTE returned here -->
-                    <div id="result-pay" class="col-12 col-md-6 print-half">
-                        <p class="text-center">Pay & FTE:</p>
-                        <table class="table">
-                            <tr>
-                                <td>Grade:</td><td id="result-grade">X-XX</td>
-                            </tr>
-                            <tr>
-                                <td>FTE:</td><td id="result-fte">0.0000</td>
-                            </tr>
-                            <tr>
-                                <td>Salary:</td><td id="result-salary">£0.00</td>
-                            </tr>
-                            <tr>
-                                <td>Hourly rate:</td><td id="result-rate">£0.00</td>
-                            </tr>
-                            <tr>
-                                <td>Pension band:</td><td id="result-pension">0.0%</td>
-                            </tr>
-                        </table>
-                    </div>
-
-    <!-- Info re weeks working and holiday returned here -->
-                    <div id="result-weeks" class="col-12 col-md-6 print-half">
-                        <p class="text-center">Working and Holiday Weeks:</p>
-                        <table class="table">
-                            <tr>
-                                <td>Total paid weeks: </td><td id="weeks-total">0.00</td>
-                            </tr>
-                            <tr>
-                                <td>Working weeks: </td><td id="weeks-working">0.00</td>
-                            </tr>
-                            <tr>
-                                <td>Holiday weeks: </td><td id="weeks-holiday">0.00</td>
-                            </tr>
-                            <tr>
-                                <td>Working hours: </td><td id="week-hours">0</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-<!-- More Information -->
-        <section>
-            <div id="more-info" class="container mb-4 scroll-top">
-                <div class="row">
-                    <div class="col-12 text-center py-4">
-                        <h1>More Information</h1>
-                    </div>
-                    <div class="col-12 col-md-6 text-center">
-                        <p>The map in this section displays a visual representation of the chosen Region when selected.</p>
-                        <p>It is always a good idea to save FTE calculations to PDF (or print) for inclusion on the staff record. Once saved to PDF, add the staff member name and
-                            staff number (if known) using the comment tool.</p>
-                        <p>More information regarding the employee pension contribution rates for the Local Government pension scheme can be found <a href="https://www.lgpsmember.org/toj/thinking-joining-how.php" target="_blank" rel="noopener">here</a>.</p>
-                        <p>The LGPS and Local Government pay scales are revised each year at the start of April. Please check the last updated date in the footer of this page to
-                            ensure that the data used has not lapsed.</p>
-                    </div>
-                    <div id="map" class="col-12 col-sm-6">
-
-                    </div>
-                </div>
-            </div>
-        </section>
-    
-    </main>
-
-<!-- Footer -->
-    <footer>
-        <div id="calc-footer" class="container">
-            <div class="row text-center py-4">
-                <div class="col-12 col-md-6">
-                    <p>See a problem? <button id="" type="button" class="btn contact-btn" data-bs-toggle="modal"  data-bs-target="#contactModal" aria-controls="#contactModal" aria-label="Open Contact Form modal">Contact Us</button></p>
-                </div>
-                <div class="col-12 col-md-6">
-                    <p>Last updated: <span>17/05/2021</span></a>
                 </div>
             </div>
         </div>
-    </footer>
-
-<!-- Modal -->
-
-  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div id="contact-form" class="modal-body container-fluid">
-            <form onsubmit="return sendMail(this);" class="row">
-                <div class="col-12 col-md-3">
-                    <label for="name">Name:</label>
-                </div>
-                <div class="col-12 col-md-9 pb-1">
-                    <input id="name" name="name" type="text" required />
-                </div>
-                <div class="col-12 col-md-3">
-                    <label for="email">Email:</label>
-                </div>
-                <div class="col-12 col-md-9 pb-1">
-                    <input id="email" name="emailaddress" type="email" required />
-                </div>
-                <div class="col-12 col-md-3">
-                    <label for="message">Message:</label>
-                </div>
-                <div class="col-12 col-md-9 pb-1">
-                    <textarea id="message" name="contactquery" rows="10" cols="30" required></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn contact-btn">Send</button>
-                </div>
-            </form>
-        </div>
-        
-      </div>
     </div>
-  </div>
 
-
-<!-- Scripts -->
+    <!-- Scripts -->
     <!-- Scripts for Bootstrap and jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
@@ -332,7 +340,10 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiBDziL6sAaLXX28V6M8eevXQ1yd2GuwA&callback=initMap"></script>
     <script src="assets/js/maps.js"></script>
     <script src="assets/js/calc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script > (function () {emailjs.init("user_UlY5CRsOdXy9h7gppcwY9");})();</script>
     <script src="assets/js/email.js"></script>
+
 </body>
 
 </html>

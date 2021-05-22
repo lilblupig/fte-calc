@@ -25,21 +25,21 @@ let chosenHours;
 let paidWeeks;
 let actualSalary;
 let pensionRate;
-let regionMap;
+let regionMap = placeholderMap;
 
 
 /*
 ---------------Functions called by Event Handlers---------------
 */
 
-/* The following clearXxx functions all reset the selections and variables for a step in the Calculator, called by multiple handlers */
+/* The following clears functions all reset the selections and variables for a step in the Calculator, called by multiple handlers */
 // Clear any previously produced buttons from Grade bucket
 function clearGrades() {
     let clearBtns = document.getElementById("grade-bucket");
     clearBtns.innerHTML = "";
     chosenGrade = "";
     regionMap = "";
-};
+}
 
 // Clear any previously produced buttons from SCP bucket
 function clearSCPs() {
@@ -47,32 +47,32 @@ function clearSCPs() {
     clearSCP.innerHTML = "";
     chosenSCP = "";
     chosenSalary = 0;
-};
+}
 
 // Clear any previously displayed FTE/hours checks
 function clearFTE() {
     fteCheck.innerHTML = "0.00";
     hourlyCheck.innerHTML = "0.00";
-};
+}
 
 // Clear selected service length
 function clearService() {
     chosenService = "";
     $(".service-btn").removeClass('selected-btn');
-};
+}
 
 // Clear any selected weeks
 function clearWeeks() {
     weeksBox.value = "";
     chosenWeeks = "";
     $(".weeks-btn").removeClass('selected-btn');
-};
+}
 
 // Clear any entered hours
 function clearHours() {
     hoursBox.value = "";
     chosenHours = 0;
-};
+}
 
 /* Clears any results posted to Results field on page, called by most handlers */
 function resetResults() {
@@ -85,7 +85,19 @@ function resetResults() {
     document.getElementById("weeks-working").innerHTML = "0.00";
     document.getElementById("weeks-holiday").innerHTML = "0.00";
     document.getElementById("week-hours").innerHTML = "0";
-};
+}
+
+/* Progress bar
+    */
+
+const steps = [17, 33, 50, 67, 83, 100];
+
+function moveBar(complete) {
+    let bar = document.getElementById("calc-progress");
+    bar.style.width = complete + "%";
+
+    $("#calc-progress").html(complete + "%");
+}
 
 /* Preliminary to step 6: Pension band calculator for use in getResults function
     Uses Actual Salary calculated in Step 6 to find the appropriate pension band
@@ -100,10 +112,10 @@ function pensionCalc() {
         for (let i = 0; i < pensionBands.length - 1; i++) {
             if (pensionBands[i]["end"] < actualSalary && actualSalary <= pensionBands[i + 1]["end"]) {
                 pensionRate = pensionBands[i + 1]["rate"];
-            };
-        };
-    };
-};
+            }
+        }
+    }
+}
 
 
 /*
@@ -126,28 +138,31 @@ function regionClick() {
     clearHours();
     resetResults();
 
+    // Move progress bar
+    moveBar(steps[0]);
+
     // Determine region and get all associated grades as array, activate map polygon
     let regionGrades;
     try {
         if (chosenRegion == "rOne") {
             regionGrades = rOneGrades;
             regionMap = bournemouthMap;
-            initMap()
+            initMap();
         } else if (chosenRegion == "rTwo") {
             regionGrades = rTwoGrades;
             regionMap = bristolMap;
-            initMap()
+            initMap();
         } else {
             // If neither condition is satisfied, handle the error
             console.log("Unknown Region passed to regionClick event handler");
             alert("An unknown Region variable has been passed to the calculator while executing the Region click function, please try again. If this error persists, please Contact Us for support.");
-        };
+        }
     } 
     // Catch unforeseen errors
     catch (error) {
         console.log("Unknown error on regionClick event handler");
         alert("An unknown error has occured on Region event handler, please try again. If this error persists, please Contact Us for support.");
-    };
+    }
 
     // Produce HTML elements for buttons and append to parent
     for (let i = 0; i < regionGrades.length; i++) {
@@ -157,11 +172,11 @@ function regionClick() {
     
         let gradeBucket = document.getElementById("grade-bucket");
         gradeBucket.appendChild(newBtn);
-    };
+    }
 
     // Log chosen region to console
     console.log("Calculating FTE for", chosenRegion);
-};
+}
 
 /* Step 2: Grade click event handler
     Clears any selected items from Calculator after Grade bucket and resets associated global variables to zero or ""
@@ -178,6 +193,9 @@ function gradeClick() {
     clearHours();
     resetResults();
 
+    // Move progress bar
+    moveBar(steps[1]);
+
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
     try {
@@ -188,13 +206,13 @@ function gradeClick() {
         } else {
             console.log("Unknown Region passed to gradeClick event handler, please try again. If this error persists, please Contact Us for support.");
             alert("An unknown Region variable has been passed to the calculator while executing the Grade click function, please try again. If this error persists, please Contact Us for support.");
-        };
+        }
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on gradeClick event handler");
         alert("An unknown error has occured on Grade event handler, please try again. If this error persists, please Contact Us for support.");
-    };
+    }
 
     // Produce HTML elements for buttons and append to parent
     for (let i = 0; i < gradeSCPs.length; i++) {
@@ -204,11 +222,11 @@ function gradeClick() {
     
         let gradeBucket = document.getElementById("scp-bucket");
         gradeBucket.appendChild(newBtn);
-    };
+    }
 
     // Log chosen grade to console
     console.log("Grade", chosenGrade);
-};
+}
 
 /* Step 3: SCP click event handler
     Clears any selected items from Calculator after SCP bucket and resets associated global variables to zero or ""
@@ -223,6 +241,9 @@ function scpClick() {
     clearWeeks();
     clearHours();
     resetResults();
+
+    // Move progress bar
+    moveBar(steps[2]);
     
     try{
         // Determine region and get salary for selected SCP
@@ -233,13 +254,13 @@ function scpClick() {
         } else {
             console.log("Unknown Region passed to SCP click listener");
             alert("An unknown Region variable has been passed to the calculator while executing the SCP click function, please try again. If this error persists, please Contact Us for support.");
-        };
+        }
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on scpClick event handler");
         alert("An unknown error has occured on SCP event handler, please try again. If this error persists, please Contact Us for support.");
-    };
+    }
     
     // Log chosen SCP & related salary to console
     console.log("SCP", chosenSCP);
@@ -248,7 +269,7 @@ function scpClick() {
     // Populate FTE/hourly rate check
     fteCheck.innerHTML = chosenSalary.toFixed(2);
     hourlyCheck.innerHTML = (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
-};
+}
 
 /* Step 4: Service Length click event handler
     Clears any selected items from Calculator after Service Length chooser and resets associated global variables to zero or ""
@@ -268,11 +289,14 @@ function serviceClick() {
         // Clear selected service length
         chosenService = "";
         $(".service-btn").removeClass('selected-btn');
+    } else {
+        // Move progress bar
+        moveBar(steps[3])
     };
     
     // Log chosen Service to the console
     console.log("Service length", chosenService);
-};
+}
 
 /* Step 5: Weeks change event handler
     Clears any selected items from Calculator after Weeks entry and resets associated global variables to zero or ""
@@ -291,52 +315,60 @@ function enterWeeks() {
         // Check steps 1-4 complete, if not prompts user and clears field
         if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined)) {
             alert("Please complete fields 1-4 before inputting Working Weeks");
-            clearWeeks()
+            clearWeeks();
+            return;
         } else if (chosenService === undefined || chosenService === "") {
             alert("Please choose Service Length before inputting Working Weeks");
-            clearWeeks()
+            clearWeeks();
+            return;
         } else if (chosenSalary === 0 || chosenSalary === undefined) {
             alert("Please complete fields 1-3 before inputting Working Weeks");
-            clearWeeks()
-        }   
-        // If steps 1-4 complete, undertake calculation for paid weeks
-        // Region One only has two cases, more or less than 5 years
-          else if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
-        } 
-          // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
-          else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-        paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
-        } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
+            clearWeeks();
+            return;
+        }
+        // Ensure weeks entry falls between 38 and 44, if not, prompt user and clear field
+          else if (_minWeeks > chosenWeeks || chosenWeeks > _maxWeeks) {
+            alert(`Please enter a value between ${_minWeeks} and ${_maxWeeks} weeks`);
+            clearWeeks();
+            // Move progress bar back to step 4
+            moveBar(steps[3]);
+            return;
+        } else if (chosenWeeks == 0 || chosenWeeks == "") { // Previous error handler may insert these values when clearing
+            console.log(chosenWeeks);
         } else {
+            console.log("Paid weeks", paidWeeks);
+            // If steps 1-4 complete, undertake calculation for paid weeks
+            // Region One only has two cases, more or less than 5 years
+            if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
+            } 
+            // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
+              else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
+            } else {
             console.log("Invalid number of weeks entered during weeks input");
+            }
+
+            // Move progress bar
+            moveBar(steps[4])
         };
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on enterWeeks event handler");
         alert("An unknown error has occured on Weeks event handler, please try again. If this error persists, please Contact Us for support.");
-    };
-
-    // Ensure weeks entry falls between 38 and 44, if not, prompt user and clear field
-    if (_minWeeks <= chosenWeeks && chosenWeeks <= _maxWeeks) {
-        console.log("Paid weeks", paidWeeks);
-    } else if (chosenWeeks == 0 || chosenWeeks == "") {
-         console.log(chosenWeeks);
-    } else {
-        alert(`Please enter a value between ${_minWeeks} and ${_maxWeeks} weeks`);
-        clearWeeks();
-    };
+    }
 
     // Log chosen Weeks to the console
-    console.log(chosenWeeks);
+    console.log(chosenWeeks)
 };
 
 /*
@@ -376,6 +408,9 @@ function getResults() {
             alert(`Please enter an hours value between 0 and ${_fullTimeHours}`);
             clearHours();
         } else {
+            // Move progress bar
+            moveBar(steps[5]);
+
             // If no errors, calculate results
             let weeksFTE = paidWeeks / _fullTimeWeeks;
             let hoursFTE = chosenHours / _fullTimeHours;
@@ -399,14 +434,14 @@ function getResults() {
             document.getElementById("weeks-holiday").innerHTML = Math.round((paidWeeks - chosenWeeks + Number.EPSILON) * 100) / 100;
             document.getElementById("week-hours").innerHTML = chosenHours;
             document.getElementById("result-pension").innerHTML = pensionRate + "%";
-        };
+        }
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on getResults event handler");
         alert("An unknown error has occured on Hours event handler, please try again. If this error persists, please Contact Us for support.");
-    }; 
-};
+    }
+}
 
 
 /*
@@ -435,9 +470,9 @@ buttons.forEach(function(button){
                 } else if (this.id === "region-btn-2") {
                     chosenRegion = "rTwo";
                 } else {
-                    console.log("Unknown Region passed to main event listener")
-                    alert("An unknown Region has been passed to the calculator, please request assistance.")
-                };
+                    console.log("Unknown Region passed to main event listener");
+                    alert("An unknown Region has been passed to the calculator, please request assistance.");
+                }
                 // Then, call the event handler
                 regionClick();
             }
@@ -451,15 +486,15 @@ buttons.forEach(function(button){
             // If neither condition is satisfied, handle the error
             else {
                 console.log("Unknown button type passed to calculator");
-                alert("A button of unknown type has been passed to the calculator, please try again. If this error persists, please Contact Us for support.")
-            };
+                alert("A button of unknown type has been passed to the calculator, please try again. If this error persists, please Contact Us for support.");
+            }
         }
         // Catch unforeseen errors
         catch(error) {
             console.log("Unknown error on html button click listener");
-            alert("An unknown error has occured on click listener, please try again. If this error persists, please Contact Us for support.")
-        };
-    })
+            alert("An unknown error has occured on click listener, please try again. If this error persists, please Contact Us for support.");
+        }
+    });
 });
 
 /* Event listener for generated Grade button clicks, Step 2: Grade
@@ -505,7 +540,7 @@ function weeksInput() {
     
     // Call the event handler
     enterWeeks();
-};
+}
 
 /* Event listener for hours input, Step 6: Hours
     Gets the value entered in the Hours box, and assigns it to a Global variable on every change
@@ -514,8 +549,8 @@ function weeksInput() {
 hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     // Get user input on keydown
-    chosenHours = hoursBox.value
+    chosenHours = hoursBox.value;
 
     // Call the event handler
     getResults();
-};
+}

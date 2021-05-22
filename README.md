@@ -38,13 +38,13 @@ Note, testing information can be found in a separate document:
 ### **Overview and Broad Design Choices**
 The colour scheme and font choices have been taken from the branding of the academy trust which contributed to the production of the page, however some colour combinations were tweaked slightly to improve acessibility.
 
-Otherwise, the page is designed entirely with the end user in mind, since their goals are completely aligned with those of the owners.  The project is a one page design as the user will want to open the page, enter the data, get the results and close it or restart the calculation for another staff member as quickly as possible.
+Otherwise, the page is designed primarily with the end user in mind, since their goals are completely aligned with those of the owners.  The project is a one page design as the user will want to open the page, enter the data, get the results and close it or restart the calculation for another staff member as quickly as possible.
 
-There is a brief summary of how the calculator works at the top of the page, along with the information required to complete an FTE request.  This is deliberately short and to the point, as a returning user will want to get straight to the calculator every time.
+There is a brief summary of how the calculator works at the top of the page, along with the information required to complete an FTE request.  This is deliberately short and to the point, as a returning user will want to get straight to the calculator every time.  After discussion with end users the Abour section is toggle-able, and the status of this is saved to local storage every time it is changed.
 
-The calculator itself is fluid and dynamic, with the sole intention of reducing the required number of clicks/keystrokes to as few as possible.  Drop down menus were considered for data selection, and a scrolling number selector for hours entry.  These were both rejected on the basis that this approach would require twice as many clicks as simply having dynamic clickable content right there on the page.  The summary data is returned in a plain, simple format to make it easy to copy and paste for inclusion on contracts or pay queries.
+The calculator itself is fluid and dynamic, with the sole intention of reducing the required number of clicks/keystrokes to as few as possible.  Drop down menus were considered for data selection, and a scrolling number selector for hours entry.  These were both rejected on the basis that this approach would require twice as many clicks as simply having dynamic clickable content right there on the page.  The summary data is returned in a plain, simple format to make it easy to copy and paste for inclusion on contracts or pay queries.  Finally the print styles have been refined such that the calculator and results will fit easily on to an A4 page for printing or saving to PDF.
 
-There is a closing summary at the bottom of the page referring to any publicly available resources, and reminding the user to print or save the page as evidence of the basis of calculation.  Finally, this section asks the user to check that the pay scales have not been changed (this generally happens annually) since the page was last updated, with the last updated date shown clearly in the footer.
+There is a closing summary at the bottom of the page referring to any publicly available resources, and reminding the user to print or save the page as evidence of the basis of calculation.  This section includes a map which highlights an area on the map which would relate to the specific regions in question.  This uses placeholder data for the project.  Finally, this section asks the user to check that the pay scales have not been changed (this generally happens annually) since the page was last updated, with the last updated date shown clearly in the footer.
 
 The footer also contains a Contact modal link which feeds back to the developer, so that any issues can be resolved.
 
@@ -73,7 +73,7 @@ The user needs are closely aligned with the owner needs and wants, in that they 
 
 *Broadly, how does the website meet these needs?*
 
-Single page application, no wasted navigation time. The interface is also designed to reduce the click burden of the user which in turn should improve time consumption.  The results should be displayed after 5 clicks and two keystrokes. There is an intermediate check of the full time figures obtained, to ensure source data is correct.
+Single page application, no wasted navigation time. The interface is also designed to reduce the click burden of the user which in turn should improve time consumption.  The results should be displayed after four clicks and four keystrokes. There is an intermediate check of the full time figures obtained, to ensure source data is correct.
 
 Owner aims:
 * Improve accuracy and reduce payroll and contractual errors requiring resolution.
@@ -88,7 +88,7 @@ User aims:
 ### **Scope**
 *Why does the website exist?*
 
-The website exists to meet a real world need for accurate and timely data.
+The website exists to meet a real world need for accurate, recordable and timely data.
 
 *What does it need to meet the user/owner aims?*
 
@@ -135,13 +135,16 @@ In line with structure map and user needs, the wireframes show the initial desir
 1. [Mobile](assets/documents/fte-calc-mobile-final.pdf) 375px
 1. [Tablet](assets/documents/fte-calc-tablet-final.pdf) 768px
 1. [PC/Laptop](assets/documents/fte-calc-pc-final.pdf) 1200px
-1. [Large Screen](assets/documents/fte-calc-large.pdf) 2560px
 
 ##### Summary of Changes
+* About and More Info sections can be toggled on or off and the status is saved to local storage for continuity on next use.
+* Added image to About section as very text heavy.
 * Changed paragraph order in About section to move required info list to the end as disrupting read flow and display.
+* Added progress indicator bar on PC, this is not shown on tablet or mobile as the scrolling nature of the page renders the progress bar invisible for most of the input.
 * Changed service length input from Radio to matched buttons as better fit with the rest of the style of the webpage.  Even with styling adjusted, the radio buttons looked small and out of touch with the rest of the inputs.
 * After meeting with partner, change weeks to text input as some legacy agreements contain working weeks such as 38.2 to represent term time only plus a certain number of inset days.  This does produce issues with anticipated error handing and data input control which will be addressed below.
-* Make About and More Info sections collapsible for regular users to avoid unnecessary scrolling.
+* Introduce map to visually represent selected areas.
+* Large screen design abandoned as Bootstrap column size pixel limitation makes manipulating the data side by side very difficult, and would require significant custom styling and media queries to achieve.
 
 ### **Surface**
 
@@ -281,9 +284,11 @@ Where did the website content come from?
 
 slideToggle status fix found at https://forum.jquery.com/topic/state-of-slidetoggle
 Print fix found at https://stackoverflow.com/questions/51099397/printing-breaks-bootstrap-layout/51209031
+Footer fix found at https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/
 
 #### Media
 * The photographs used for the website were obtained from [Pexels.com](https://www.pexels.com/):
+[About section photo](https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/) by George Becker
 
 * Icon used for Favicon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
 * Icons used for Togglers made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.

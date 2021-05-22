@@ -57,7 +57,7 @@ function sendMail(contactForm) {
                     <button type="submit" class="btn contact-btn">Send</button>
                 </div>
             </form>`;
-            };
+            }
         },
         function(error) {
             // If unsuccessful, display error messge.  Form not to reset in same session
@@ -70,7 +70,7 @@ function sendMail(contactForm) {
                     </div>
                 </div>`;
         }
-    )
+    );
 
     return false;
-};
+}

@@ -18,7 +18,7 @@ function getToggle() {
         $("#more-info").hide();
         $("#info-button").children("span").css("background-image", `url('assets/images/off.svg')`);
     }
-};
+}
 
 /*
 Collapse/expand About section on click
@@ -33,7 +33,7 @@ $(".about-toggle").click(function(event) {
         state = "off";
         localStorage.setItem("#about-fte-calc", ":hidden");
         console.log(localStorage["#about-fte-calc"]);
-    };
+    }
 
     // Switch the icon for the section toggler
     $("#about-button").children("span").css("background-image", `url('assets/images/${state}.svg')`);
@@ -45,7 +45,7 @@ $(".about-toggle").click(function(event) {
         event.preventDefault();
     } else {
         $("html, body").animate({scrollTop: $("#about-fte-calc").offset().top -50});
-    };
+    }
 });
 
 /*
@@ -60,7 +60,7 @@ $(".info-toggle").click(function(event) {
         state = "off";
         localStorage.setItem("#more-info", ":hidden");
         console.log(localStorage["#more-info"]);
-    };
+    }
 
     // Switch the icon for the section toggler
         $("#info-button").children("span").css("background-image", `url('assets/images/${state}.svg')`);
@@ -72,5 +72,5 @@ $(".info-toggle").click(function(event) {
         event.preventDefault();
     } else {
         $("html, body").animate({scrollTop: $("#more-info").offset().top -50});
-    };
+    }
 });
