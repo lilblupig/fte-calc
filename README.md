@@ -38,13 +38,13 @@ Note, testing information can be found in a separate document:
 ### **Overview and Broad Design Choices**
 The colour scheme and font choices have been taken from the branding of the academy trust which contributed to the production of the page, however some colour combinations were tweaked slightly to improve acessibility.
 
-Otherwise, the page is designed entirely with the end user in mind, since their goals are completely aligned with those of the owners.  The project is a one page design as the user will want to open the page, enter the data, get the results and close it or restart the calculation for another staff member as quickly as possible.
+Otherwise, the page is designed primarily with the end user in mind, since their goals are completely aligned with those of the owners.  The project is a one page design as the user will want to open the page, enter the data, get the results and close it or restart the calculation for another staff member as quickly as possible.
 
-There is a brief summary of how the calculator works at the top of the page, along with the information required to complete an FTE request.  This is deliberately short and to the point, as a returning user will want to get straight to the calculator every time.
+There is a brief summary of how the calculator works at the top of the page, along with the information required to complete an FTE request.  This is deliberately short and to the point, as a returning user will want to get straight to the calculator every time.  After discussion with end users the Abour section is toggle-able, and the status of this is saved to local storage every time it is changed.
 
-The calculator itself is fluid and dynamic, with the sole intention of reducing the required number of clicks/keystrokes to as few as possible.  Drop down menus were considered for data selection, and a scrolling number selector for hours entry.  These were both rejected on the basis that this approach would require twice as many clicks as simply having dynamic clickable content right there on the page.  The summary data is returned in a plain, simple format to make it easy to copy and paste for inclusion on contracts or pay queries.
+The calculator itself is fluid and dynamic, with the sole intention of reducing the required number of clicks/keystrokes to as few as possible.  Drop down menus were considered for data selection, and a scrolling number selector for hours entry.  These were both rejected on the basis that this approach would require twice as many clicks as simply having dynamic clickable content right there on the page.  The summary data is returned in a plain, simple format to make it easy to copy and paste for inclusion on contracts or pay queries.  Finally the print styles have been refined such that the calculator and results will fit easily on to an A4 page for printing or saving to PDF.
 
-There is a closing summary at the bottom of the page referring to any publicly available resources, and reminding the user to print or save the page as evidence of the basis of calculation.  Finally, this section asks the user to check that the pay scales have not been changed (this generally happens annually) since the page was last updated, with the last updated date shown clearly in the footer.
+There is a closing summary at the bottom of the page referring to any publicly available resources, and reminding the user to print or save the page as evidence of the basis of calculation.  This section includes a map which highlights an area on the map which would relate to the specific regions in question.  This uses placeholder data for the project.  Finally, this section asks the user to check that the pay scales have not been changed (this generally happens annually) since the page was last updated, with the last updated date shown clearly in the footer.
 
 The footer also contains a Contact modal link which feeds back to the developer, so that any issues can be resolved.
 
@@ -73,7 +73,7 @@ The user needs are closely aligned with the owner needs and wants, in that they 
 
 *Broadly, how does the website meet these needs?*
 
-Single page application, no wasted navigation time. The interface is also designed to reduce the click burden of the user which in turn should improve time consumption.  The results should be displayed after 5 clicks and two keystrokes. There is an intermediate check of the full time figures obtained, to ensure source data is correct.
+Single page application, no wasted navigation time. The interface is also designed to reduce the click burden of the user which in turn should improve time consumption.  The results should be displayed after four clicks and four keystrokes. There is an intermediate check of the full time figures obtained, to ensure source data is correct.
 
 Owner aims:
 * Improve accuracy and reduce payroll and contractual errors requiring resolution.
@@ -88,7 +88,7 @@ User aims:
 ### **Scope**
 *Why does the website exist?*
 
-The website exists to meet a real world need for accurate and timely data.
+The website exists to meet a real world need for accurate, recordable and timely data.
 
 *What does it need to meet the user/owner aims?*
 
