@@ -5,7 +5,7 @@ FTE Calc is an interactive calculator designed to make producing full time equiv
 
 The calculator is being developed with the input of a multi-academy trust who are in this position, and as such, the color scheme and fonts are in line with their branding, though tweaked a little for accessibility.
 
-The pay scales and other pay data used in this project are entirely fictional. These will be replaced with the actual data when the calculator is finalised and used locally.
+The pay scales and all other data used in this project are entirely fictional. These will be replaced with the actual data when the calculator is finalised and used locally.
 
 ![Am I Responsive Image](assets/readme-images/am-i-responsive.png)
 
@@ -163,11 +163,22 @@ As with colours, the font chosen is taken from the branding of the trust.  Vario
 
 ### **Existing Features**
 Features common to all pages/sections:
+* Responsive navigation which is collapsed on mobile devices to a hamburger menu.
+* Focus on efficient interaction as a priority.
+* Consistent design providing user feedback for all interactive elements.
 
-#### XXXXX
+#### Calculator Page
+* Fully interactive dynamic interface.
+* Information panes can be toggled on and off.
+* Status of toggled elements saved to local storage.
+* Very clear user feedback on error handling.
+* Self resets if user repeats earlier step.
+* Maps API provides graphic feedback for region selection.
 
 ### **Features for Future Implementation**
-1. What | Why
+1. Data input from csv files: this would enable the end user to update the source data when pay scales are updated each year in a simple fashion.
+1. General code refactoring and elimination of global variables: global variables are a significant error risk as they can be (and are) targeted by multiple functions.  The knowledge of the developer was not sufficient to facilitate writing the code in a more secure fashion at the time of development, and the use of global variables is generally noted as a common issue amongst beginner developers.  This improvement would increase the security and stability of the calculator.
+1. Once data fetched from csv files, have the pay scales etc available as a collapsible section for reference.
 
 ## Testing
 
@@ -179,9 +190,9 @@ This section is to provide an brief insight into how the approach to the code st
 
 Changes to design are documented in the [UX section](#ux) under [wireframes](#wireframes).
 
-The project was deployed using GitHub pages once the basic structure of the page was complete.  This allowed for continuous delivery as each change was made, and pushed and enabled testing of the page during development on different devices.
+The project was deployed using GitHub pages once the basic structure of the page was complete.  This allowed for continuous delivery as each change was made, and pushed and enabled testing of the page during development on different devices and by different users with different needs.
 
-Commits were made as each section of each page was added and pushed once a section was complete.
+Commits were made as each section of each page/interactive feature was added and pushed once a section was complete.
 
 ### **Reflections on General Approach to Build**
 What would be done differently next time?  What went right?  Overall opinion.
