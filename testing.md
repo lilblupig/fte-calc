@@ -1,4 +1,4 @@
-# **Title**
+# **FTE Calc**
 
 # Testing
 
@@ -16,17 +16,29 @@ A plan and log for testing the website, this is a manual testing plan due to the
 
 ## Validation Testing
 The project code has been passed through the following code validators:
-* [HTML Code Validator](https://validator.w3.org/) (all pages were checked)
+* [HTML Code Validator](https://validator.w3.org/) (All pages were checked)
 ![HTML Validator result](assets/readme-images/html-validation.png)
 
-* [CSS Code Validator](https://jigsaw.w3.org/css-validator/) (one warning - external stylesheets are not checked)
+* [CSS Code Validator](https://jigsaw.w3.org/css-validator/) (One warning - external stylesheets are not checked)
 ![CSS Validator result](assets/readme-images/css-validation.png)
 ![CSS Validator warning](assets/readme-images/css-validation-warning.png)
 
-* [JS Hint](https://jshint.com/)
+* [JS Hint](https://jshint.com/) (A number of unused variables/undefined variables were found when checking each file, the majority of these relate to items called/defined in other files.  Those which do not relate to external resources for Google Maps API and EmailJS)
+    * calc.js
+![JSHint Validator result](assets/readme-images/jshint-calcjs.png)
+    * email.js
+![JSHint Validator result](assets/readme-images/jshint-emailjs.png)
+    * maps.js
+![JSHint Validator result](assets/readme-images/jshint-mapsjs.png)
+    * polygons-map.js
+![JSHint Validator result](assets/readme-images/jshint-polygons-mapjs.png)
+    * script.js
+![JSHint Validator result](assets/readme-images/jshint-scriptjs.png)
+    * source-data.js
+![JSHint Validator result](assets/readme-images/jshint-source-datajs.png)
 
 * The project has been assessed throughout development using [Lighthouse](https://developers.google.com/web/tools/lighthouse).
-![Lighthouse Ratings](assets/readme-images/lighthouse-XXXX.png)
+![Lighthouse Ratings](assets/readme-images/lighthouse-ftecalc.png)
 
 ## Logic Error Testing
 1. Check that script to determine form validation and success feedback has no errors.
