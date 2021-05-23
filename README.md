@@ -195,25 +195,51 @@ The project was deployed using GitHub pages once the basic structure of the page
 Commits were made as each section of each page/interactive feature was added and pushed once a section was complete.
 
 ### **Reflections on General Approach to Build**
-What would be done differently next time?  What went right?  Overall opinion.
+As reflected in the documentation for [MS1](https://github.com/lilblupig/curls), a general lack of understanding of the technologies involved have influenced the way this project was approached.  There was an attempt to mitigate this for this project by completing further courses and tutorials alongside the course content, but the reality is that building a self-designed project is very different to working through a tutorial.  Further to this reflection, it is understood that this very steep learning curve is likely to be exhibited for all projects working with a new language or technology.
+
+The approach to this project would be similar overall to that taken, but greater understanding of JavaScript and jQuery would mean some technical aspects would have been approached differently.
 
 ### **Lessons Learned**
+There were significant issues with the relity of extracting information from objects and arrays initially, despite extensive research and planning.  The intended plan to work from a JSON object for each pay scale was derailed primarily by this.  With hindsight, most of the issues experienced stemmed from confusing vanilla javascript methods and syntax with those used by jQuery and muddling the two.
 
+Passing data between functions is very important, and this was another significant concept which lacked understanding in reality, again, despite considerable research and practice.  This led to the use of global variables for storing data to be passed between functions.  Guarding the integrity of global variables was time consuming in its own right, with each use or referral being checked for the possibility of corruption and unintended consequences.
+
+A recent foray into PHP, and the lack of global variables as a resource has forced a more rudimentary understanding of passing data using functions and parameters.
+
+The final misunderstanding was the concept of unit testing.  Each new feature or component, or slightest change was tested extensively across the application before moving on to the next component.  It is only recently that a greater understanding of unit testing as isolated testing of the smallest available form of individual components in a sandbox type environment was gained.  This will be a major factor moving forward.
 
 #### Preparation
+The project was approached from inception as a user experience centered project.  In this case, the user requirements are exactly the same as the owner requirements: to achieve consistent results in as short a period of time as possible.  The five planes of UX design were explored and built upon to create a design which is geared almost exclusively towards the niche end use.
 
+Attention was then turned to how to achieve this design, and how to make the components work.  The knowledge that the source data will change annually fuelled the initial plan that data would be sourced from csv or possibly Google Sheets API.
 
 #### Build
+The basic structure of the HTML, CSS and Bootstrap page was constructed first, with static elements standing in for dynamic content during the build.  Once complete, this was deployed to GitHub pages in order to undertake initial device responsiveness testing and to facilitate continuous deployment testing of new features moving forward.
 
+From this point, the master was branched for all changes to insulate functional content from the effects of any potentially detrimental changes.  Pull requests were undertaken at logical intervals and new branches created to continue development.
+
+The plan to use csv files to provide data was soon overridden as there were no readily available guides on parsing csv data to JSON without the use of an external resource.  The decision was made at this point to create a JSOn object of the payscales and use this.  Once again, this was impacted by the inability to extract the required information from the JSON object.
+
+The approach was revised at this point to look at the requirements of each part of the calculator, provide the data needed in the simplest form and just get started on making the components work.  As such, the source data file is initially full of simple arrays and objects and the functions that deal with them are large and quite repetetive.
+
+This does improve as the project proceeds, with the functions dealing with pensions in particular working from an object in the same format as the source spreadsheet, and navigating the object with much more confidence.
+
+Finally, the concept of unit testing was somewhat misunderstood.  Every single change was tested across the whole application with both valid and invalid inputs to search for unexpected results and ensure behaviour was as expected in all cases.  Every component has been tested quite comprehensively, but a recent conversation with regard to unit testing has exposed the error.
+
+There is much to improve in the code of this first release.
 
 ### **Revised Development Process**
 
 Based on the experience of producing the website, the creator would now take the following approach.
 
 #### Preparation
+No changes would be made to the preparation of the design.  User feedback created some modifications to the initial design, but these were an organic result of using the initial draft.
 
+Preparation for the build, and for the dynamic content would now involve looking at how specific things will work on a more granular level.  "How can I get that data from that object?" and "What will I use to get this infomation from this place to this place?" for example.
 
 #### Build
+
+Hopefully, a greater understanding of how each component is to be approached would mean the the build would be more likely to proceed as planned.  The granular understanding of how each part will work should also feed into proper unit testing, as each piece of code should be largely independent of the rest.
 
 ## Deployment
 
