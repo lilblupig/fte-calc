@@ -296,8 +296,6 @@ You can find more information on cloning a repository from GitHub [here](https:/
 ### **Libraries and Frameworks**
 * [Bootstrap 5](https://getbootstrap.com/) is used to provide the grid functionality for uniform design, responsiveness and to enable the use of modal and hamburger menu.
 * [jQuery](https://jquery.com/) is used to simplify the implementation of interactive JavaScript components.
-* [Google Fonts](https://fonts.google.com/) are used to provide the typography for the website.
-* [Font Awesome](https://fontawesome.com/) is used to provide the icons for the website.
 
 ### **Tools**
 * [Git](https://git-scm.com/)/[GitHub](https://github.com/) was used for version control and repository storage.
@@ -310,6 +308,8 @@ You can find more information on cloning a repository from GitHub [here](https:/
 * [Responsively](https://responsively.app/) was used to explore responsiveness across various devices.
 
 ### **Other Resources**
+* [Google Fonts](https://fonts.google.com/) are used to provide the typography for the website.
+* [Font Awesome](https://fontawesome.com/) is used to provide the icons for the website.
 * [Code Institute Full Template](https://github.com/Code-Institute-Org/gitpod-full-template) was used to set up the repository.
 
 ## Credits
@@ -317,20 +317,22 @@ You can find more information on cloning a repository from GitHub [here](https:/
 ### **Website Credits**
 
 #### Content
-Where did the website content come from?
+The content for the website is almost completely fabricated.  Pay scales are false, regions are false.  The text content relates directly to the behaviour of the application and as such, is original.
 
-slideToggle status fix found at https://forum.jquery.com/topic/state-of-slidetoggle
-Print fix found at https://stackoverflow.com/questions/51099397/printing-breaks-bootstrap-layout/51209031
-Footer fix found at https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/
+The documentation from W3C, Bootstrap, Mozilla and Google was used extensively.
+
+A number of tutorials and forum entires helped to resolve some of the more persistent issues:
+
+* [SlideToggle status fix](https://forum.jquery.com/topic/state-of-slidetoggle) found at jQuery forums.
+* [Print fix](https://stackoverflow.com/questions/51099397/printing-breaks-bootstrap-layout/51209031) eventually found at Stack Overflow forums .
+* [Footer fix](https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/) found at a tutorial on the freecodecamp website.
 
 #### Media
 * The photographs used for the website were obtained from [Pexels.com](https://www.pexels.com/):
-[About section photo](https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/) by George Becker
+    * [About section photo](https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/) by George Becker
 
 * Icon used for Favicon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
 * Icons used for Togglers made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
-
-* The diagrams used for the website were obtained from various places:
 
 #### Acknowledgements
 Thank you in particular to:
