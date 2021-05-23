@@ -3,7 +3,7 @@ Get elements needed globally
 */
 
 const buttons = document.querySelectorAll(".c-btn"); // Get all elements with the class 'c-btn'
-const weeksBox = document.getElementById("weeks-box") // Get the weeks worked input box
+const weeksBox = document.getElementById("weeks-box"); // Get the weeks worked input box
 const hoursBox = document.getElementById("hours-box"); // Get the hours worked input box
 const fteCheck = document.getElementById("fte-check"); // Get the FTE salary display
 const hourlyCheck = document.getElementById("hourly-check"); // Get the hourly rate display
@@ -64,7 +64,7 @@ function clearService() {
 // Clear any selected weeks
 function clearWeeks() {
     weeksBox.value = "";
-    chosenWeeks = "";
+    chosenWeeks = 0;
     $(".weeks-btn").removeClass('selected-btn');
 }
 
@@ -87,11 +87,14 @@ function resetResults() {
     document.getElementById("week-hours").innerHTML = "0";
 }
 
-/* Progress bar
-    */
+/*
+Progress bar
+*/
 
+// Percentage completed at each step
 const steps = [17, 33, 50, 67, 83, 100];
 
+// Update progress bar for % complete, and reflect in text
 function moveBar(complete) {
     let bar = document.getElementById("calc-progress");
     bar.style.width = complete + "%";
@@ -99,19 +102,20 @@ function moveBar(complete) {
     $("#calc-progress").html(complete + "%");
 }
 
-/* Preliminary to step 6: Pension band calculator for use in getResults function
+/*  
+Preliminary to step 6: Pension band calculator for use in getResults function
     Uses Actual Salary calculated in Step 6 to find the appropriate pension band
     Assigns Pension Band value to Global variables for use later
-    */
+*/
 function pensionCalc() {
-    if (actualSalary < pensionBands[0]["end"]) {
-        pensionRate = pensionBands[0]["rate"];
-    } else if (actualSalary > pensionBands[pensionBands.length-2]["end"]) {
-        pensionRate = pensionBands[pensionBands.length-1]["rate"];
+    if (actualSalary < pensionBands[0].end) {
+        pensionRate = pensionBands[0].rate;
+    } else if (actualSalary > pensionBands[pensionBands.length-2].end) {
+        pensionRate = pensionBands[pensionBands.length-1].rate;
     } else {
         for (let i = 0; i < pensionBands.length - 1; i++) {
-            if (pensionBands[i]["end"] < actualSalary && actualSalary <= pensionBands[i + 1]["end"]) {
-                pensionRate = pensionBands[i + 1]["rate"];
+            if (pensionBands[i].end < actualSalary && actualSalary <= pensionBands[i + 1].end) {
+                pensionRate = pensionBands[i + 1].rate;
             }
         }
     }
@@ -122,12 +126,13 @@ function pensionCalc() {
 ---------------Functions called by Event Listeners---------------
 */
 
-/* Step 1: Region click event handler
+/*
+Step 1: Region click event handler
     Clears any selections made in following steps and resets all global variables to zero or ""
     Resets Results field
     Gets Grade information relating to chosen Region and populates the Grade bucket with buttons
     Assigns the appropriate Region to the map variable, to ensure the map shows the right area
-    */
+*/
 function regionClick() {
     // Clear previous data
     clearGrades();
@@ -137,9 +142,6 @@ function regionClick() {
     clearWeeks();
     clearHours();
     resetResults();
-
-    // Move progress bar
-    moveBar(steps[0]);
 
     // Determine region and get all associated grades as array, activate map polygon
     let regionGrades;
@@ -156,6 +158,7 @@ function regionClick() {
             // If neither condition is satisfied, handle the error
             console.log("Unknown Region passed to regionClick event handler");
             alert("An unknown Region variable has been passed to the calculator while executing the Region click function, please try again. If this error persists, please Contact Us for support.");
+            return;
         }
     } 
     // Catch unforeseen errors
@@ -163,6 +166,9 @@ function regionClick() {
         console.log("Unknown error on regionClick event handler");
         alert("An unknown error has occured on Region event handler, please try again. If this error persists, please Contact Us for support.");
     }
+    
+    // Move progress bar
+    moveBar(steps[0]);
 
     // Produce HTML elements for buttons and append to parent
     for (let i = 0; i < regionGrades.length; i++) {
@@ -178,12 +184,13 @@ function regionClick() {
     console.log("Calculating FTE for", chosenRegion);
 }
 
-/* Step 2: Grade click event handler
+/*
+Step 2: Grade click event handler
     Clears any selected items from Calculator after Grade bucket and resets associated global variables to zero or ""
     Region and Grade buttons, and the associated values remain as selected
     Assigns selected Grade value to Global variable for use later
     Gets Spinal Column Point information relating to chosen Region and Grade and populates the SCP bucket with buttons
-    */
+*/
 function gradeClick() {
     // Clear previous data
     clearSCPs();
@@ -192,9 +199,6 @@ function gradeClick() {
     clearWeeks();
     clearHours();
     resetResults();
-
-    // Move progress bar
-    moveBar(steps[1]);
 
     // Determine region and get all SCPs associated with chosen grade as array
     let gradeSCPs;
@@ -206,13 +210,18 @@ function gradeClick() {
         } else {
             console.log("Unknown Region passed to gradeClick event handler, please try again. If this error persists, please Contact Us for support.");
             alert("An unknown Region variable has been passed to the calculator while executing the Grade click function, please try again. If this error persists, please Contact Us for support.");
+            return;
         }
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on gradeClick event handler");
         alert("An unknown error has occured on Grade event handler, please try again. If this error persists, please Contact Us for support.");
+        return;
     }
+
+    // Move progress bar
+    moveBar(steps[1]);
 
     // Produce HTML elements for buttons and append to parent
     for (let i = 0; i < gradeSCPs.length; i++) {
@@ -228,13 +237,14 @@ function gradeClick() {
     console.log("Grade", chosenGrade);
 }
 
-/* Step 3: SCP click event handler
+/*
+Step 3: SCP click event handler
     Clears any selected items from Calculator after SCP bucket and resets associated global variables to zero or ""
     Region, Grade and SCP buttons, and the associated values remain as selected
     Check Region and retrieve SCP salaries as appropriate
     Assigns selected SCP value and associated salary to Global variables for use later
     Populates the Full Time Equivalent check fields for user to ensure info is correct and timely
-    */
+*/
 function scpClick() {
     // Clear previous data
     clearService();
@@ -242,9 +252,6 @@ function scpClick() {
     clearHours();
     resetResults();
 
-    // Move progress bar
-    moveBar(steps[2]);
-    
     try{
         // Determine region and get salary for selected SCP
         if (chosenRegion == "rOne") {
@@ -254,13 +261,18 @@ function scpClick() {
         } else {
             console.log("Unknown Region passed to SCP click listener");
             alert("An unknown Region variable has been passed to the calculator while executing the SCP click function, please try again. If this error persists, please Contact Us for support.");
+            return;
         }
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on scpClick event handler");
         alert("An unknown error has occured on SCP event handler, please try again. If this error persists, please Contact Us for support.");
+        return;
     }
+    
+    // Move progress bar
+    moveBar(steps[2]);
     
     // Log chosen SCP & related salary to console
     console.log("SCP", chosenSCP);
@@ -271,12 +283,13 @@ function scpClick() {
     hourlyCheck.innerHTML = (chosenSalary / _fullTimeWeeks / _fullTimeHours).toFixed(2);
 }
 
-/* Step 4: Service Length click event handler
+/*
+Step 4: Service Length click event handler
     Clears any selected items from Calculator after Service Length chooser and resets associated global variables to zero or ""
     Region, Grade, SCP and Service buttons, and the associated values remain as selected
     Checks that steps 1-3 have been completed, if not resets later fields and prompts user
     Assigns selected Service value to Global variables for use later
-    */
+*/
 function serviceClick() {
     // Clear previous data
     clearWeeks();
@@ -289,23 +302,25 @@ function serviceClick() {
         // Clear selected service length
         chosenService = "";
         $(".service-btn").removeClass('selected-btn');
+        return;
     } else {
         // Move progress bar
-        moveBar(steps[3])
-    };
+        moveBar(steps[3]);
+    }
     
     // Log chosen Service to the console
     console.log("Service length", chosenService);
 }
 
-/* Step 5: Weeks change event handler
+/*
+Step 5: Weeks change event handler
     Clears any selected items from Calculator after Weeks entry and resets associated global variables to zero or ""
     Region, Grade, SCP, Service buttons and Weeks entry, and the associated values, remain as selected
     Checks that steps 1-4 have been completed, if not resets this and later fields, and prompts user in line with completed fields
     Checks that input is between 38 and 44 weeks, and if not prompts the user and clears the field
     If no errors, checks Region and Service selections and calculates Paid Weeks
     Assigns Paid Weeks value to Global variables for use later
-    */
+*/
 function enterWeeks() {
     // Clear previous data
     clearHours();
@@ -327,49 +342,51 @@ function enterWeeks() {
             return;
         }
         // Ensure weeks entry falls between 38 and 44, if not, prompt user and clear field
-          else if (_minWeeks > chosenWeeks || chosenWeeks > _maxWeeks) {
+          else if (_minWeeks > chosenWeeks || chosenWeeks > _maxWeeks || isNaN(chosenWeeks)) {
             alert(`Please enter a value between ${_minWeeks} and ${_maxWeeks} weeks`);
             clearWeeks();
             // Move progress bar back to step 4
             moveBar(steps[3]);
             return;
         } else if (chosenWeeks == 0 || chosenWeeks == "") { // Previous error handler may insert these values when clearing
-            console.log(chosenWeeks);
+            console.log("Chosen Weeks", chosenWeeks);
         } else {
-            console.log("Paid weeks", paidWeeks);
             // If steps 1-4 complete, undertake calculation for paid weeks
             // Region One only has two cases, more or less than 5 years
             if (chosenRegion === "rOne" && chosenService === "Less than 5 years") {
-                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0]["Holidays"]/holidays[0]["Working"]) + Number.EPSILON) * 100) / 100;
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[0].Holidays/holidays[0].Working) + Number.EPSILON) * 100) / 100;
             } else if (chosenRegion === "rOne" && chosenService === "5 years or more") {
-                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1]["Holidays"]/holidays[1]["Working"]) + Number.EPSILON) * 100) / 100;
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[1].Holidays/holidays[1].Working) + Number.EPSILON) * 100) / 100;
             } 
             // Region 2 has four cases, more or less than 5 years, and more or less than Grade 8
               else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2]["Holidays"]/holidays[2]["Working"]) + Number.EPSILON) * 100) / 100;
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[2].Holidays/holidays[2].Working) + Number.EPSILON) * 100) / 100;
             } else if (chosenGrade < 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3]["Holidays"]/holidays[3]["Working"]) + Number.EPSILON) * 100) / 100;
+                paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[3].Holidays/holidays[3].Working) + Number.EPSILON) * 100) / 100;
             } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "Less than 5 years") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4]["Holidays"]/holidays[4]["Working"]) + Number.EPSILON) * 100) / 100;
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[4].Holidays/holidays[4].Working) + Number.EPSILON) * 100) / 100;
             } else if (chosenGrade >= 8 && chosenRegion === "rTwo" && chosenService === "5 years or more") {
-            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5]["Holidays"]/holidays[5]["Working"]) + Number.EPSILON) * 100) / 100;
+            paidWeeks = Math.round(((chosenWeeks + chosenWeeks * holidays[5].Holidays/holidays[5].Working) + Number.EPSILON) * 100) / 100;
             } else {
             console.log("Invalid number of weeks entered during weeks input");
+            return;
             }
 
+            // Log chosen Weeks to the console
+            console.log("Chosen weeks", chosenWeeks);
+            console.log("Paid weeks", paidWeeks);
+
             // Move progress bar
-            moveBar(steps[4])
-        };
+            moveBar(steps[4]);
+        }
     }
     // Catch unforeseen errors
     catch(error) {
         console.log("Unknown error on enterWeeks event handler");
         alert("An unknown error has occured on Weeks event handler, please try again. If this error persists, please Contact Us for support.");
+        return;
     }
-
-    // Log chosen Weeks to the console
-    console.log(chosenWeeks)
-};
+}
 
 /*
 Step 6: Hours keydown event handler - GET RESULTS
@@ -386,27 +403,35 @@ function getResults() {
         if ((chosenService === undefined || chosenService === "") && (chosenSalary === 0 || chosenSalary === undefined) && (chosenWeeks === 0 || chosenWeeks === undefined)) {
             alert("Please complete fields 1-5 before inputting Weekly Hours");
             clearHours();
+            return;
         } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenService === undefined || chosenService === "")) {
             alert("Please choose Service Length and Working Weeks before inputting Weekly Hours");
             clearHours();
+            return;
         } else if ((chosenWeeks === undefined || chosenWeeks === 0) && (chosenSalary === 0 || chosenSalary === undefined)) {
             alert("Please complete fields 1-3 and Working Weeks before inputting Weekly Hours");
             clearHours();
+            return;
         } else if ((chosenSalary === 0 || chosenSalary === undefined) && (chosenService === undefined || chosenService === "")) {
             alert("Please complete fields 1-4 before inputting Weekly Hours");
             clearHours();
+            return;
         } else if (chosenWeeks === undefined || chosenWeeks === 0) {
             alert("Please choose Working Weeks before inputting Weekly Hours");
             clearHours();
+            return;
         } else if (chosenService === undefined || chosenService === "") {
             alert("Please choose Service Length before inputting Working Weeks");
             clearHours();
+            return;
         } else if (chosenSalary === 0 || chosenSalary === undefined) {
             alert("Please complete fields 1-3 before inputting Working Weeks");
             clearHours();
+            return;
         } else if (!(0 < chosenHours && chosenHours <= _fullTimeHours)) {
             alert(`Please enter an hours value between 0 and ${_fullTimeHours}`);
             clearHours();
+            return;
         } else {
             // Move progress bar
             moveBar(steps[5]);
@@ -417,7 +442,7 @@ function getResults() {
             let FTE = Math.round((weeksFTE * hoursFTE + Number.EPSILON) * 10000) / 10000;
             actualSalary = Math.round((chosenSalary * FTE + Number.EPSILON) * 100) / 100;
             pensionCalc();
-            console.log(chosenHours);
+            console.log("Chosen hours", chosenHours);
             console.log("Weeks FTE", weeksFTE);
             console.log("Hours FTE", hoursFTE);
             console.log("FTE", FTE);
@@ -440,6 +465,7 @@ function getResults() {
     catch(error) {
         console.log("Unknown error on getResults event handler");
         alert("An unknown error has occured on Hours event handler, please try again. If this error persists, please Contact Us for support.");
+        return;
     }
 }
 
@@ -448,10 +474,11 @@ function getResults() {
 ---------------Event Listeners---------------
 */
 
-/* Event listener for all hard-coded calculator button clicks, Step 1: Region and Step 4: Service
+/*
+Event listener for all hard-coded calculator button clicks, Step 1: Region and Step 4: Service
     Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
     Checks button type, if Region, calls regionClick function (Step 1 above), if Service, calls serviceClick function (Step 4 above)
-    */
+*/
 buttons.forEach(function(button){
     button.addEventListener("click", function(event) {
         // Remove class indicating selection from all elements, add class to clicked item
@@ -471,7 +498,8 @@ buttons.forEach(function(button){
                     chosenRegion = "rTwo";
                 } else {
                     console.log("Unknown Region passed to main event listener");
-                    alert("An unknown Region has been passed to the calculator, please request assistance.");
+                    alert("An unknown Region has been passed to the calculator, please choose region 1 or 2, or request assistance.");
+                    return;
                 }
                 // Then, call the event handler
                 regionClick();
@@ -487,20 +515,23 @@ buttons.forEach(function(button){
             else {
                 console.log("Unknown button type passed to calculator");
                 alert("A button of unknown type has been passed to the calculator, please try again. If this error persists, please Contact Us for support.");
+                return;
             }
         }
         // Catch unforeseen errors
         catch(error) {
             console.log("Unknown error on html button click listener");
             alert("An unknown error has occured on click listener, please try again. If this error persists, please Contact Us for support.");
+            return;
         }
     });
 });
 
-/* Event listener for generated Grade button clicks, Step 2: Grade
+/*
+Event listener for generated Grade button clicks, Step 2: Grade
     Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
     Calls gradeClick function (Step 2 above)
-    */
+*/
 $('#grade-bucket').on('click', 'button', function (){
     // Remove class indicating selection from all elements, add class to clicked item
     $(this).siblings().removeClass('selected-btn');
@@ -513,10 +544,11 @@ $('#grade-bucket').on('click', 'button', function (){
     gradeClick();
 });
 
-/* Event listener for generated SCP button clicks, Step 3: SCP
+/*
+Event listener for generated SCP button clicks, Step 3: SCP
     Clears previous selections for Step using "this" to remove selected-btn class from all items in Step, adds selected-btn class to clicked item
     Calls scpClick function (Step 3 above)
-    */
+*/
 $('#scp-bucket').on('click', 'button', function(){
     // Remove class indicating selection from all elements, add class to clicked item
     $(this).siblings().removeClass('selected-btn');
@@ -529,10 +561,11 @@ $('#scp-bucket').on('click', 'button', function(){
     scpClick();
 });
 
-/* Event listener for weeks keystrokes, Step 5: Weeks
+/*
+Event listener for weeks keystrokes, Step 5: Weeks
     Gets the value entered in the Weeks box, and assigns it to a Global variable when the user moves out of the field
     Calls enterWeeks function (Step 5 above)
-    */
+*/
 weeksBox.addEventListener("change", weeksInput);
 function weeksInput() {
     // Get user input on leaving field
@@ -542,10 +575,11 @@ function weeksInput() {
     enterWeeks();
 }
 
-/* Event listener for hours input, Step 6: Hours
+/*
+Event listener for hours input, Step 6: Hours
     Gets the value entered in the Hours box, and assigns it to a Global variable on every change
     Calls getResults function (Step 6 above) and updates the Results field on every keystroke
-    */
+*/
 hoursBox.addEventListener("input", hoursInput);
 function hoursInput() {
     // Get user input on keydown

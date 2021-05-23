@@ -285,7 +285,7 @@ footer {
 /* For Printing (primarily to PDF) */
 
 @media print {
-    nav, footer, #about-fte-calc, #more-info, #empty-div, #results h1 {
+    nav, footer, #about-fte-calc, #more-info, #empty-div-top, #empty-div-bottom, #results h1 {
         display: none;
     }
 

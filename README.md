@@ -5,7 +5,7 @@ FTE Calc is an interactive calculator designed to make producing full time equiv
 
 The calculator is being developed with the input of a multi-academy trust who are in this position, and as such, the color scheme and fonts are in line with their branding, though tweaked a little for accessibility.
 
-The pay scales and other pay data used in this project are entirely fictional. These will be replaced with the actual data when the calculator is finalised and used locally.
+The pay scales and all other data used in this project are entirely fictional. These will be replaced with the actual data when the calculator is finalised and used locally.
 
 ![Am I Responsive Image](assets/readme-images/am-i-responsive.png)
 
@@ -163,11 +163,22 @@ As with colours, the font chosen is taken from the branding of the trust.  Vario
 
 ### **Existing Features**
 Features common to all pages/sections:
+* Responsive navigation which is collapsed on mobile devices to a hamburger menu.
+* Focus on efficient interaction as a priority.
+* Consistent design providing user feedback for all interactive elements.
 
-#### XXXXX
+#### Calculator Page
+* Fully interactive dynamic interface.
+* Information panes can be toggled on and off.
+* Status of toggled elements saved to local storage.
+* Very clear user feedback on error handling.
+* Self resets if user repeats earlier step.
+* Maps API provides graphic feedback for region selection.
 
 ### **Features for Future Implementation**
-1. What | Why
+1. Data input from csv files: this would enable the end user to update the source data when pay scales are updated each year in a simple fashion.
+1. General code refactoring and elimination of global variables: global variables are a significant error risk as they can be (and are) targeted by multiple functions.  The knowledge of the developer was not sufficient to facilitate writing the code in a more secure fashion at the time of development, and the use of global variables is generally noted as a common issue amongst beginner developers.  This improvement would increase the security and stability of the calculator.
+1. Once data fetched from csv files, have the pay scales etc available as a collapsible section for reference.
 
 ## Testing
 
@@ -179,30 +190,56 @@ This section is to provide an brief insight into how the approach to the code st
 
 Changes to design are documented in the [UX section](#ux) under [wireframes](#wireframes).
 
-The project was deployed using GitHub pages once the basic structure of the page was complete.  This allowed for continuous delivery as each change was made, and pushed and enabled testing of the page during development on different devices.
+The project was deployed using GitHub pages once the basic structure of the page was complete.  This allowed for continuous delivery as each change was made, and pushed and enabled testing of the page during development on different devices and by different users with different needs.
 
-Commits were made as each section of each page was added and pushed once a section was complete.
+Commits were made as each section of each page/interactive feature was added and pushed once a section was complete.
 
 ### **Reflections on General Approach to Build**
-What would be done differently next time?  What went right?  Overall opinion.
+As reflected in the documentation for [MS1](https://github.com/lilblupig/curls), a general lack of understanding of the technologies involved have influenced the way this project was approached.  There was an attempt to mitigate this for this project by completing further courses and tutorials alongside the course content, but the reality is that building a self-designed project is very different to working through a tutorial.  Further to this reflection, it is understood that this very steep learning curve is likely to be exhibited for all projects working with a new language or technology.
+
+The approach to this project would be similar overall to that taken, but greater understanding of JavaScript and jQuery would mean some technical aspects would have been approached differently.
 
 ### **Lessons Learned**
+There were significant issues with the relity of extracting information from objects and arrays initially, despite extensive research and planning.  The intended plan to work from a JSON object for each pay scale was derailed primarily by this.  With hindsight, most of the issues experienced stemmed from confusing vanilla javascript methods and syntax with those used by jQuery and muddling the two.
 
+Passing data between functions is very important, and this was another significant concept which lacked understanding in reality, again, despite considerable research and practice.  This led to the use of global variables for storing data to be passed between functions.  Guarding the integrity of global variables was time consuming in its own right, with each use or referral being checked for the possibility of corruption and unintended consequences.
+
+A recent foray into PHP, and the lack of global variables as a resource has forced a more rudimentary understanding of passing data using functions and parameters.
+
+The final misunderstanding was the concept of unit testing.  Each new feature or component, or slightest change was tested extensively across the application before moving on to the next component.  It is only recently that a greater understanding of unit testing as isolated testing of the smallest available form of individual components in a sandbox type environment was gained.  This will be a major factor moving forward.
 
 #### Preparation
+The project was approached from inception as a user experience centered project.  In this case, the user requirements are exactly the same as the owner requirements: to achieve consistent results in as short a period of time as possible.  The five planes of UX design were explored and built upon to create a design which is geared almost exclusively towards the niche end use.
 
+Attention was then turned to how to achieve this design, and how to make the components work.  The knowledge that the source data will change annually fuelled the initial plan that data would be sourced from csv or possibly Google Sheets API.
 
 #### Build
+The basic structure of the HTML, CSS and Bootstrap page was constructed first, with static elements standing in for dynamic content during the build.  Once complete, this was deployed to GitHub pages in order to undertake initial device responsiveness testing and to facilitate continuous deployment testing of new features moving forward.
 
+From this point, the master was branched for all changes to insulate functional content from the effects of any potentially detrimental changes.  Pull requests were undertaken at logical intervals and new branches created to continue development.
+
+The plan to use csv files to provide data was soon overridden as there were no readily available guides on parsing csv data to JSON without the use of an external resource.  The decision was made at this point to create a JSOn object of the payscales and use this.  Once again, this was impacted by the inability to extract the required information from the JSON object.
+
+The approach was revised at this point to look at the requirements of each part of the calculator, provide the data needed in the simplest form and just get started on making the components work.  As such, the source data file is initially full of simple arrays and objects and the functions that deal with them are large and quite repetetive.
+
+This does improve as the project proceeds, with the functions dealing with pensions in particular working from an object in the same format as the source spreadsheet, and navigating the object with much more confidence.
+
+Finally, the concept of unit testing was somewhat misunderstood.  Every single change was tested across the whole application with both valid and invalid inputs to search for unexpected results and ensure behaviour was as expected in all cases.  Every component has been tested quite comprehensively, but a recent conversation with regard to unit testing has exposed the error.
+
+There is much to improve in the code of this first release.
 
 ### **Revised Development Process**
 
 Based on the experience of producing the website, the creator would now take the following approach.
 
 #### Preparation
+No changes would be made to the preparation of the design.  User feedback created some modifications to the initial design, but these were an organic result of using the initial draft.
 
+Preparation for the build, and for the dynamic content would now involve looking at how specific things will work on a more granular level.  "How can I get that data from that object?" and "What will I use to get this infomation from this place to this place?" for example.
 
 #### Build
+
+Hopefully, a greater understanding of how each component is to be approached would mean the the build would be more likely to proceed as planned.  The granular understanding of how each part will work should also feed into proper unit testing, as each piece of code should be largely independent of the rest.
 
 ## Deployment
 
@@ -259,8 +296,6 @@ You can find more information on cloning a repository from GitHub [here](https:/
 ### **Libraries and Frameworks**
 * [Bootstrap 5](https://getbootstrap.com/) is used to provide the grid functionality for uniform design, responsiveness and to enable the use of modal and hamburger menu.
 * [jQuery](https://jquery.com/) is used to simplify the implementation of interactive JavaScript components.
-* [Google Fonts](https://fonts.google.com/) are used to provide the typography for the website.
-* [Font Awesome](https://fontawesome.com/) is used to provide the icons for the website.
 
 ### **Tools**
 * [Git](https://git-scm.com/)/[GitHub](https://github.com/) was used for version control and repository storage.
@@ -273,6 +308,8 @@ You can find more information on cloning a repository from GitHub [here](https:/
 * [Responsively](https://responsively.app/) was used to explore responsiveness across various devices.
 
 ### **Other Resources**
+* [Google Fonts](https://fonts.google.com/) are used to provide the typography for the website.
+* [Font Awesome](https://fontawesome.com/) is used to provide the icons for the website.
 * [Code Institute Full Template](https://github.com/Code-Institute-Org/gitpod-full-template) was used to set up the repository.
 
 ## Credits
@@ -280,20 +317,22 @@ You can find more information on cloning a repository from GitHub [here](https:/
 ### **Website Credits**
 
 #### Content
-Where did the website content come from?
+The content for the website is almost completely fabricated.  Pay scales are false, regions are false.  The text content relates directly to the behaviour of the application and as such, is original.
 
-slideToggle status fix found at https://forum.jquery.com/topic/state-of-slidetoggle
-Print fix found at https://stackoverflow.com/questions/51099397/printing-breaks-bootstrap-layout/51209031
-Footer fix found at https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/
+The documentation from W3C, Bootstrap, Mozilla and Google was used extensively.
+
+A number of tutorials and forum entires helped to resolve some of the more persistent issues:
+
+* [SlideToggle status fix](https://forum.jquery.com/topic/state-of-slidetoggle) found at jQuery forums.
+* [Print fix](https://stackoverflow.com/questions/51099397/printing-breaks-bootstrap-layout/51209031) eventually found at Stack Overflow forums .
+* [Footer fix](https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/) found at a tutorial on the freecodecamp website.
 
 #### Media
 * The photographs used for the website were obtained from [Pexels.com](https://www.pexels.com/):
-[About section photo](https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/) by George Becker
+    * [About section photo](https://www.pexels.com/photo/1-1-3-text-on-black-chalkboard-374918/) by George Becker
 
 * Icon used for Favicon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
 * Icons used for Togglers made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
-
-* The diagrams used for the website were obtained from various places:
 
 #### Acknowledgements
 Thank you in particular to:
