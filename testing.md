@@ -78,30 +78,31 @@ These components are present on every page, and each page has been tested.
 
 **Intent** - a navbar which collapses to hamburger on mobile.
 
-* All links are valid and link to the appropriate page.
-* Logo alt displays on hover (added title attribute).
+* All links are valid and link to the appropriate page/section.
+* Toggle effects display correctly where relevant.
 * Hover effect occurs correctly for each navigation section.
-* Active class is applied correctly for current page.
 * Resize to mobile/tablet and check that navigation bar collapses to hamburger.
 * Expand hamburger menu and check all sections present, and displaying correctly.
+* Fixed nav does not obscure any content.
 
-**Result** - `Text here to explain what happened when tested`
+**Result** - Both pages opened on PC/laptop, Hudl 2, Nexus 10, Pixel XL, Xiaomi MI9 (Chrome and Firefox) and in Safari on an iMac.  All features respond correctly, no broken links.  Toggle sections work and display correctly and hamburger presents as it should.
 
-**Verdict** - XXXX
+**Verdict** - Pass
 
 ---
 
 #### Hero Images
 
-**Intent** - a full width image relevant to the page content, different for each page.  Primary purpose, to elicit a positive emotional response from the user.  The image should display correctly on all device sizes.  The image should display XXX% height on the home page and XXX% on the 404 page to display redirect information.
+**Intent** - a graphic introduction to the page using an image relevant to the page content.  Primary purpose, to elicit a positive emotional response from the user.  The image should display correctly on all device sizes.  The image should display 30% height as the focus should be on the data and the tool.
 
 * Image fills the viewport as expected depending on page.
 * Resize to mobile/tablet and check that image still displays without distortion.
 * Text remains centered with no overflow at mobile/tablet.
+* Image does not become pixellated on larger screens.
 
-**Result** - `Text here to explain what happened when tested`
+**Result** - Tested as above on multiple devices.  Image displays correctly in all tested scenarios.
 
-**Verdict** - XXXX
+**Verdict** - Pass
 
 ---
 
@@ -109,15 +110,15 @@ These components are present on every page, and each page has been tested.
 
 **Intent** - The footer should be reflective of the design of the nav to bookend each page and provide familiarity to the user.  This helps with intuitive learning.  Any external links should open in new tabs and provide user feedback when hovered over.
 
-* Footer appears in XXX sections.
-* Social media icons display correctly, and show feedback behaviour on hover.
-* Social links open in new tabs to correct locations.
+* Footer appears in two sections.
+* Buttons display correctly, and show feedback behaviour on hover.
+* Modal is opened correctly, and email facility works.
 * Resize to tablet and check for text overflow issues.
 * Resize to mobile and check that sections wrap neatly below one another.
 
-**Result** - `Text here to explain what happened when tested`
+**Result** - Tested on devices as above, all features work as expected, no issues with display or function.
 
-**Verdict** - XXXX
+**Verdict** - Pass
 
 ---
 
@@ -135,45 +136,72 @@ These items are specific to each individual page.
 
 ---
 
-#### Contact Us
+#### Calcultor Home Page
+
+**Intent** - Allow the user to quickly learn about the tool and get started using it as quickly as possible.  If returning user, allow the user to start using the tool immediately.
+
+* All text sections display correctly across tested device widths.
+* All buttons and links display user feedback on hover.
+* All internal links navigate to the correct page/section.
+* Toggle behaviour works as expected, updating section and icon.
+* Returning to the page recalls status of toggled sections.
+* Progress bar fills as steps completed/overwritten (PC only).
+* All calculator bucket components populate as expected.
+* All user errors are handled clearly and instruction given to the user to correct.
+* Results field populates and clears properly as appropriate choices are made in the calculator.
+* Map displays, and shows polygon when region is selected.
+
+**Result** - All elements display as expected, on all devices tested.  Interactive components exhibit correct user feedback.
+Specifically:
+* Calculator, Results, About and More sections wrap as expected on PC/tablet/mobile.
+* Progress bar fills appropriately regardless of step selected.
+* All dynamic content populates as expected and is correctly interactive.
+* Results field populates on completion of step 6 and clears when interacting with any other step.
+* Map displays and Polygons appear as they should.
+
+**Verdict** - Pass
+
+---
+
+#### Contact Us Modal
 
 **Intent** - Encourage the user to get in touch with the owners, and make it as easy as possible to do so.
 
 * All text sections display correctly across tested device widths.
 * All buttons display user feedback on hover.
-* All internal links navigate to the correct page.
-
-Contact Us Form
 * Form contents align nicely and that there is no overflow of content.
 * Fields display correctly on mobile/tablet and PC.
-* Placeholder text displays in fields.
 * Fields and submit button display feedback on hover.
 * Fields display feedback on focus.
 * Try to submit blank form, error messages display with information.
 * Try to submit email in incorrect format, error message displays with information.
 * Try to submit form without question, error message displays with information.
-* Submit correctly completed form, receive success modal.
+* Submit correctly completed form, receive success modal or error message.
+* If successful, form resets after 10 seconds.
+* Clear modal escape options available at all times.
 * Modal information centers correctly with no overflow on all device widths.
 
-**Result** - `Text here to explain what happened when tested`
+**Result** - All fields display as expected and client side validation functional.  At all times both Close and "X" buttons are present.  User feedback for hover/focus is as desired, and the success/error feedback is in line with expectations.
 
-**Verdict** - XXXX
+**Verdict** - Pass
 
 ---
+
 #### 404
 
 **Intent** - Catch users who would normally encounter a browser generated 404 page, and redirect them back to the website as cleanly as possible.
 
 * All text sections display correctly across tested device widths.
 * All buttons and links display user feedback on hover.
-* All internal links navigate to the correct page.
+* All internal links navigate to the correct page/section.
 * User is guided back to the home page.
 * Mistyped url for website to ensure 404 page displays in such situations.
 * Deliberately broke page link to ensure 404 page will display in this instance too.
 
-**Result** - `Text here to explain what happened when tested`
+**Result** - All elements display as expected, on all devices tested.  Interactive components exhibit correct user feedback.  Large button redirects to Calculator page correctly.
+Mistyped url and broken link tests successful.
 
-**Verdict** - XXXX
+**Verdict** - Pass
 
 ---
 
@@ -182,7 +210,11 @@ Contact Us Form
 The colourblind feature on Coolors was used to check that the colours appeared sufficiently different, and not jarring for these users.
 ![Colourblindness assessment via Coolors](assets/readme-images/colourblindness.png)
 
-As well as the use of the Lighthouse assessments of accessibility, the website was browsed at intervals by two users who may experience difficulty.  A dyslexic user with ASD and a colourblind user both XXXXX.
+As well as the use of the Lighthouse assessments of accessibility, the website was browsed at intervals by two users who may experience difficulty.  A dyslexic user with ASD and a colourblind user both participated in testing for this project at various stages.
+
+Users of screen readers have been vorne in mind when implementing each section.  All interactive content is fully navigatable by keyboard and default behaviours have been preserved where known when implementing custom interactions.
+
+There is some concern regarding screen reader requirements which are not known to or understood by the developer, but referring to the W3C [WAI-ARIA documentation](https://www.w3.org/WAI/standards-guidelines/aria/) has hopefully mitigated this as much as possible.
 
 ## Bugs
 
