@@ -43,6 +43,96 @@ The project code has been passed through the following code validators:
 ## Logic Error Testing
 The calculator uses a lot of logic, with the full application tested every time a new component was added or anything changed.  A summary of items tested, their issues and their resolution is below.
 
+### **User Interface Component Logic**
+The user interface includes three interactive components which do not relate to the function of the calculator.  These are the email function, the map and the sections which can be toggled on or off.
+
+* Email Logic:<br>
+This is required to feed back to the user whether the sending of the email has been successful, or not.  The EmailJS boilerplate includes a function(response) and a function(error) which largely handles the logic side of the email process.  This was used to display appropriate information to the user (see [Bugs section](#bugs) for more info).  The logic for the email function has been tested by:
+    1. Sending a correctly completed email
+    1. Sending an incorrectly completed email (disabled client side validation)
+    1. Sending a correctly completed email, but with one or more of the following code adjustments:
+        * EmailJS account or template names incorrect
+        * EmailJS parameters incorrect
+        * EmailJS script parameters incorrect
+        * EmailJS authentication key/user ID incorrect
+
+    All instances result in either the email reaching the developer account, or the specified error message being displayed to the user, as desired.  No cases of unhandled errors have been discovered.
+
+* Map Logic:<br>
+The majority of the map handling logic is provided by the Google API which powers it.  There was a persistent error in the console before the Region buttons were clicked, this was eventually determined to be the lack of a suitable polygon definition being given to the function.  To eliminate this, a placeholder polygon of three identocal co-ordinates was created and is the default value given to regionMap before a region is chosen.  The following actions were undertaken to verify the resilience of the Map API:
+    1. Break the API key - Maps displays an error
+    1. Break the API script source before the key - Map does not display
+    1. Break a polygon lat/lng - Maps displays but polygon does not
+
+    The first and last of these are considered acceptable, the polygon display is not critical to the function of the calculator, which is the primary purpose for the application.  The second instance, where a blank white space displays on the screen is less acceptable, and a message is displayed in the empty div for the user which is shown wherever the map fails to load.  This needs improvement as is currently aria-hidden.  A way to identify the map failure and use that as a condition to insert a message would be preferable.
+
+* Togglers Logic:<br>
+The section visibility togglers were particularly difficult to build (again, see [Bugs section](#bugs)), and produced a wide variety of logical responses to input during their development.  Tests undertaken on the current version are as follows:
+    * Ensure that all functionality is present for keyboard interaction as well as for click.
+    * Ensure that the use of back and forward buttons does not cause problems.
+    * Ensure that new session in same browser calls status from local storage correctly.
+
+    Checks were also undertaken on the outcome of altering element ID or other identifying attributes, all of which yielded undesireable results, primarily the inaction of the toggler.  This is not a particular issue if the section is visible when the code is damaged, but could be problematic if the browser has stored hidden values and something happens on load.  To summarise, this feature has the potential for an unhandled error.
+
+    This issue was evaluated as low risk, the average user is unlikely to be able to modify or damage the code which powers this functionality, and as such no further time has been dedicated to this.
+
+### **Calculator Logic**
+The calculator uses a lot of logical operators to determine both user input and decision making for the code.  Each calculator section has it's own peculiarities, and so each one is addressed separately.  There are some common elements however, all if statements linked to error handling are wrapped in a try/catch function which should collect any unhandled errors.  These are only logged to the console at the moment as they are entirely unforeseen, and there is nothing the user will be able to do about them other than contact support.  Another common featire of all error handling components in the calculator is to return after completion of the error handle should an error be thrown.
+
+* Region Chooser Logic:<br>
+The event listener for this step listens for interaction with any elements (not dynamic) which have the class c-btn, then determines if the button type relates to something of use in the calculator, what and then calls the appropriate event handler.  If the event does not meet the calculator selection criteria then the calculator will display an alert advising the user.  This situation should never arise, but has been tested using buttons with the class c-btn which do not meet any of the criteria.
+
+    The regionClick event handler then assesses which region it has been passed, then sets the map polygon and populates the grade bucket accordingly.  If an unrecognised region is passed to the event handler it too will produce an alert.
+
+    Neither of these scenarios should be able to occur as there are no stray elements on the page with the class c-btn.
+
+* Grade Chooser Logic:<br>
+The event listener for this first set of dynamic content listens for clicks in the Grade bucket on button items.  It then calls the gradeClick event handler.  The event handler determines the region and the grade chosen and populates the SCP bucket.  If it is unable to determine the region or grade an alert will display to the user.  As above, this should not be able to occur, as the only items in the grade bucket will have been populated based on the region.
+
+* SCP Chooser Logic:<br>
+The event listener for the second set of dynamic content works the same way as the first, calling the scpClick event handler.  This also checks the region and retrieves data from the pay scales.  If it is unable to do so, it will display an alert to the user.  Once again, this should not be possible as the buttons can only have populated from valid data selected previously.
+
+* Service Length Logic:<br>
+The service length buttons are available to click at any time, however, they must be clicked after the first three steps are completed in order for the calculator to work.  The event listener is the same as for Region Clicks above.  If it identifies that the clicked button has the class service-btn it will call the serviceClick event handler, and if not an alert will be triggered.
+
+    The serviceClick event handler works differently than the previously described handlers.  First it checks that all three previous steps are complete by checking whether the chosenSalary variable has a value of 0 or undefined, if so it displays an alert to the user which explicilty states that step 1 to 3 must be completed before selecting the service length.  It also clears the service selection and any subsequent fields which may have been completed (should not be possible).  If the prior fields are completed it will assign the service value to the chosenService variable.
+
+    In all other scenarios it will display an alert to the user, though once again, it should not be possible for an unknown service choice to be made.
+
+* Working Weeks Logic:<br>
+The working weeks event listener gets the value enetered in the weeks box when focus moves away from that field.  It then calls the enterWeeks event handler which has a similar initial check to the previous step.  The enterWeeks event hadler first checks to make sure the previous four steps have been completed:
+    * If steps 1-3 have been missed but step 4 has been entered (should not be possible) it will display an alert to the user advising them to complete steps 1-3.
+    * If steps 1-3 are completed by step 4 is not (very possible), it will display an alert to the user advising them to please select a service length before entereing weeks.
+    * If no previous steps are complete (very possible), an alert is displayed to the user advising them to complete steps 1-4 before entering weeks.
+
+    If the tests are passed, the event handler then checks to see if the weeks entered are within the expected contractable ranges defined in the variables _minWeeks and _maxWeeks.  If not, an alert will be displayed to the user advising them to enter a value between 38 and 44 (inclusive) and it will clear the field (see [Bugs section](#bugs)).
+
+    If all steps are complete, and the entry is valid, it will use the previously selected data to determine the appropriate paid holiday weeks and assign it to a variable.
+
+    If none of the above are true, an alert will be displayed to the user (should not be possible).
+
+* Working Hours Logic:<br>
+The hours per week event listener calls the getResults event handler on every keystroke.  Like the previous two event handlers, it checks forst to see if prior steps have been completed and advises the user accordingly:
+    * If all steps 1-5 missing alerts to complete steps 1-5.
+    * If steps 1-3 complete but service and weeks missing, advises to complete steps 4 & 5.
+    * Checks for theoretically impossible scenarios where steps 1-3 are not complete but 4 and/or 5 are and alerts.
+    * If steps 1-4 complete advises to complete step 5.
+    
+    If all steps complete, checks that hours entered are greater than 0 and less than or equal to 37.  If not, advises user via alert.
+
+    If all items are satisfied then calculates results and populaes results field.
+
+    In all other circumastances (should not be possible) an alert is displayed to the user.
+
+All calculator input steps reset the results field, the step in question and any subsequent steps which should mean that the global variables stay clean and only ever contain appropriate information.
+
+All of the above were tested with:
+* Additional elements created with attributes designed to send unidentified data to an event listener or handler (or both).
+* Broken variable names
+* Incorrectly overwritten global variables
+
+In all tested cases the expected alert was returned to the user.  The try/catch function should take care of any unexpected issues.
+
 ## Client Stories Testing
 1. As a new user, I want to immediately find information on how to use the website.
     * On first visit the user is presented initially with the About section, which briefly describes what the tool is and how the tool should be used.
@@ -272,4 +362,4 @@ There are no known remaining bugs in the application.
 Testing first completed 23/05/2021 - AKH
 Testing repeated XX/XX/2021 - AKH
 
-[Return to Top](#title)
+[Return to Top](#fte-calc)
