@@ -355,6 +355,11 @@ The Bootstrap breakpoints mean that on most browsers an A4 page is seen as a sma
 
 This is a small section in the bugs note, but consumed a disproportionate amount of time.  It is unfashionable to print web pages, and so resources for the issue and hand were scarce and unspecific, usually relating to the correction of graphics to produce better printed results etc.
 
+#### **Working Weeks Error Handling**
+There was a recurring issue where the error handler for working weeks entry would correctly throw the "Please complete prior fields..." alert, but incorrectly follow it up with the "Please enter a value between 38 and 44" alert regardless of whether the number of weeks entered was correct.
+
+The logic for this handler was checked, rewritten and removed.  The incorrect error only showed in the wrong context when the first error handler was triggered.  Eventually it became apparent that the first event handler was setting the weeks to zero, which is not a value between 38 and 44.  An additional else if was added to allow for an entry of 0 or "" and stopped this alert from displaying incorrectly purely because the field had been reset.
+
 ### **Remaining Bugs**
 There are no known remaining bugs in the application.
 
