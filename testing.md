@@ -44,26 +44,26 @@ The project code has been passed through the following code validators:
 The calculator uses a lot of logic, with the full application tested every time a new component was added or anything changed.  A summary of items tested, their issues and their resolution is below.
 
 ## Client Stories Testing
-1. As a new user, I want to 
-    1. 
-    1. 
+1. As a new user, I want to immediately find information on how to use the website.
+    * On first visit the user is presented initially with the About section, which briefly describes what the tool is and how the tool should be used.
     ![User story 1 screenshot](assets/readme-images/user-story-1.png)
-1. As a new user, I want to 
-    1. 
-    1. 
+1. As a new user, I want to immediately find information on what I need to complete the task I came for. 
+    * The About section also contains information on what is required to use the site.
     ![User story 2 screenshot](assets/readme-images/user-story-2.png)
-1. As a new user, I want to l
-    1. 
+1. As a new user, I want to very quickly, intuitively learn exactly how the calculator is used to get the data I came for.
+    * The Calculator has clear step indicators showing where to start, for the first few steps the next section does not populate until the currently required section os completed
+    * Should the numerical order or standard left-to-right reading flow not be sufficient, the Calculator will display guidance messages if any of the available steps are completed out of sequence.
     ![User story 3 screenshot](assets/readme-images/user-story-3.png)
-1. As a returning user, I want to 
-    1. 
+1. As a returning user, I want to get straight to using the calculator without pointless interaction such as scrolling or clicking. 
+    * The About and More Info sections can both be toggled off.  This preference is saved to local storage each time it is changed, and should mean that the sections are displayed as the user last left them.
     ![User story 4 screenshot](assets/readme-images/user-story-4.png)
-1. As a returning user, I want to 
-    1. 
-    1. 
+1. As a returning user, I want to be able to provide feedback with regard to my needs/issues with the website.
+    * The footer contains a prominent Contact Us button which prompts a contact form in a modal.  This contains as few fields as possible.
     ![User story 5 screenshot](assets/readme-images/user-story-5.png)
-1. As a frequent user, I want to 
-    1. 
+1. As a frequent user, I want to know that the website is updated with relevant infomation in a timely manner, or to be able to update the source data myself.
+    * The website shows the last updated date clearly in the footer.  This can be used to easily determine the age and relevance of the information it contains.
+    * In addition, the FTE check which appears after step 3 should be compared with a current copy of the relevant pay scales, which will also determine whether the data is current.
+    * It is not currently possible for the user to update pay scales, but this is planned for the future.
     ![User story 6 screenshot](assets/readme-images/user-story-6.png)
 
 ## Manual Testing
