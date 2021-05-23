@@ -41,9 +41,7 @@ The project code has been passed through the following code validators:
 ![Lighthouse Ratings](assets/readme-images/lighthouse-ftecalc.png)
 
 ## Logic Error Testing
-1. Check that script to determine form validation and success feedback has no errors.
-
-1. Check all pages for appropriate Bootstrap grid component ordering.
+The calculator uses a lot of logic, with the full application tested every time a new component was added or anything changed.  A summary of items tested, their issues and their resolution is below.
 
 ## Client Stories Testing
 1. As a new user, I want to 
@@ -192,12 +190,54 @@ Details of any persistent or difficult bugs, and any bugs which remain unresolve
 
 ### **Fixed Bugs**
 
+#### **Section togglers and local storage**
+
+After discussion with the development partners, it was decided that the About section in particular required the user to scroll past the instructions on each use and should therefore be toggle-able.  The More Information section was less intrusive, but again, should the user wish to use the contact modal the More Info section must be scrolled first.
+
+![About section toggled off](assets/readme-images/section-toggle.png)
+
+A click event listener was added to the navigation links, along with toggle images to indicate whether the section is visible or hidden and sildeToggle used to show or hide the sections.
+
+The default behaviour of the links caused the page to navigate to the location of the hidden section, which is particularly unhelpful.  The href attribute was removed from the links to stop this, but it resulted in the unhidden sections not being scrolled to either.  Further issues with this approach were that the links became unselectable by keyboard and therefore could not be activated by users with screen readers or other accessible technologies.
+
+Initially if(:hidden) was used to determine the status of the section and prevent default if hidden.  This also changed the toggle image as appropriate.  However, once evaluated, :hidden will always return the same result.  It was necessary to evaluate if hidden separately and then call the toggle behaviours accordingly which resulted in a lot of repeated code.  It also took some trial and error to understand how the code assessed status and assign the toggle image and scroll-behaviour accordingly.
+
+The fixed nav (required for effective and accessible toggling) caused the title of the toggled section to be hidden on the default behaviour of the link despite the use of scroll-top in CSS.  As such, javascript animate/scrollTop was initiated if the section was not hidden, and an offset used to ensure the newly displayed section was visible in full.  This approach allowed the default behaviour of clicking the link (moving the keyboard selector to the linked section) to continue, whilst simultaneously ensuring the section was displayed.
+
+At review, mentor Reuben Ferrante explained the use of state which was then used to condense the code for this feature considerably.
+
+Finally, the user could easily toggle the sections off, but the next time the page was loaded the sections would be toggled back on again.  Local storage was used to save the status of the toggled sections such that the user can leave them toggled off if desired.
+
+#### **Validation & reset of Bootstrap email modal on send**
+
+The input fields for the modal are all verified client side using the browser/HTML attribute Required. Clicking Send on the Bootstrap modal did nothing in terms of user feedback. The EmailJS boilerplate has response and error handling built in, but this simply logs to the console.
+
+Added some JavaScript to the EmailJS boilerplate code for response/error to replace the modal contents (form) with a success message, or an error message as appropriate.
+
+![Successful email message](assets/readme-images/email-success.png)
+
+This worked when tested, but resulted in the modal contents being fixed at the success or error message when reopened.  Whilst this behaviour is desirable for a failed message (no point allowing repeat attempts should there be a problem), it was not desirable for a successful transmission.
+
+A timeout function was also added to the response code, which would reset the contents of the modal back to the form after 10 seconds.
+
+The user has multiple options to escape the modal at all times.
+
+The success and error messages were shown correctly at all times when tested.
+
+#### **Printing**
+It is necessary to save a copy of the calculation to the file of the staff member for personnel records.  Only the calculator and results sections are required for this, so CSS @print styles were added to remove all unnecessary content form printing, which was successful.
+
+The Bootstrap breakpoints mean that on most browsers an A4 page is seen as a small viewport and therefore the mobile display appeared on the page by default in one long, multi page document.  A number of approaches were tried to correct this but the eventual course of action chosen was to write specific print classes to override the Bootstrap breakpoints when printed.
+
+![Print example](assets/readme-images/print.png)
+
+This is a small section in the bugs note, but consumed a disproportionate amount of time.  It is unfashionable to print web pages, and so resources for the issue and hand were scarce and unspecific, usually relating to the correction of graphics to produce better printed results etc.
 
 ### **Remaining Bugs**
+There are no known remaining bugs in the application.
 
 
-
-Testing first completed XX/XX/2021 - AKH
+Testing first completed 23/05/2021 - AKH
 Testing repeated XX/XX/2021 - AKH
 
 [Return to Top](#title)
