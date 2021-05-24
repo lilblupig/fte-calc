@@ -1,6 +1,7 @@
-/* On window load, go to local storage and see if About or More Info sections were hidden
+/*
+On window load, go to local storage and see if About or More Info sections were hidden
     If they were, hide them and change the toggle icon to off position
-    */
+*/
 window.onload = getToggle();  // On load, call the check function
 
 function getToggle() {
@@ -25,6 +26,7 @@ Collapse/expand About section on click
 */
 $(".about-toggle").click(function(event) {
     // Check if section is currently displayed and designate state accordingly
+    let state = "on"; // Default state
     if ($("#about-fte-calc").is(":hidden")) {
         state = "on";
         localStorage.removeItem("#about-fte-calc");
@@ -52,6 +54,7 @@ $(".about-toggle").click(function(event) {
 Collapse/expand More Info section on click
 */
 $(".info-toggle").click(function(event) {
+    let state = "on"; // Default state
     if ($("#more-info").is(":hidden")) {
         state = "on";
         localStorage.removeItem("#more-info");
