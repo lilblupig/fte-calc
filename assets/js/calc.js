@@ -15,7 +15,7 @@ const _maxWeeks = 44; //Maximum number of working weeks
 /*
 Store the currently selected options in Global variables
 */
-let chosenRegion;
+let chosenRegion = "";
 let chosenGrade;
 let chosenSCP;
 let chosenSalary = 0;
