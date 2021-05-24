@@ -5,9 +5,6 @@ On window load, go to local storage and see if About or More Info sections were 
 window.onload = getToggle();  // On load, call the check function
 
 function getToggle() {
-    console.log("About", localStorage["#about-fte-calc"]); // Log the current stored status to the console
-    console.log("Info", localStorage["#more-info"]); // Log the current stored status to the console
-
     // Check if About section was hidden, and if so, hide and change toggle
     if (localStorage["#about-fte-calc"] == ":hidden") {
         $("#about-fte-calc").hide();
