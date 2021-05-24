@@ -28,9 +28,7 @@ let pensionRate;
 let regionMap = placeholderMap;
 
 
-/*
----------------Functions called by Event Handlers---------------
-*/
+/*---------------Functions called by Event Handlers---------------*/
 
 /* The following clears functions all reset the selections and variables for a step in the Calculator, called by multiple handlers */
 // Clear any previously produced buttons from Grade bucket
@@ -470,9 +468,7 @@ function getResults() {
 }
 
 
-/*
----------------Event Listeners---------------
-*/
+/*---------------Event Listeners---------------*/
 
 /*
 Event listener for all hard-coded calculator button clicks, Step 1: Region and Step 4: Service
