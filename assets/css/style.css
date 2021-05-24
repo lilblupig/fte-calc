@@ -213,6 +213,10 @@ body {
     border-radius: 10px;
 }
 
+#results td {
+    padding: 0.5rem 2rem;
+}
+
 /* More Information */
 
 #more-info a {
