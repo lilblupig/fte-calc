@@ -1,11 +1,18 @@
 /*
 Google Maps API - displays a map of the regions
 */
+
+const mapCentres = {
+    "": { lng: -2.20000, lat: 51.10000 },
+    "rOne": { lng: -1.85000, lat: 50.75000 },
+    "rTwo": { lng: -2.60000, lat: 51.45000 },
+};
+
 function initMap() {
     // Produces the map, determines initial zoom level and map center
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
-        center: { lng: -2.20000, lat: 51.10000 },
+        zoom: 10,
+        center: mapCentres[chosenRegion],
       });
 
     // Renders a polygon of each region on the map
