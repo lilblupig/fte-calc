@@ -206,8 +206,6 @@ Passing data between functions is very important, and this was another significa
 
 A recent foray into PHP, and the lack of global variables as a resource has forced a more rudimentary understanding of passing data using functions and parameters.
 
-The final misunderstanding was the concept of unit testing.  Each new feature or component, or slightest change was tested extensively across the application before moving on to the next component.  It is only recently that a greater understanding of unit testing as isolated testing of the smallest available form of individual components in a sandbox type environment was gained.  This will be a major factor moving forward.
-
 #### Preparation
 The project was approached from inception as a user experience centered project.  In this case, the user requirements are exactly the same as the owner requirements: to achieve consistent results in as short a period of time as possible.  The five planes of UX design were explored and built upon to create a design which is geared almost exclusively towards the niche end use.
 
@@ -223,8 +221,6 @@ The plan to use csv files to provide data was soon overridden as there were no r
 The approach was revised at this point to look at the requirements of each part of the calculator, provide the data needed in the simplest form and just get started on making the components work.  As such, the source data file is initially full of simple arrays and objects and the functions that deal with them are large and quite repetetive.
 
 This does improve as the project proceeds, with the functions dealing with pensions in particular working from an object in the same format as the source spreadsheet, and navigating the object with much more confidence.
-
-Finally, the concept of unit testing was somewhat misunderstood.  Every single change was tested across the whole application with both valid and invalid inputs to search for unexpected results and ensure behaviour was as expected in all cases.  Every component has been tested quite comprehensively, but a recent conversation with regard to unit testing has exposed the error.
 
 There is much to improve in the code of this first release.
 

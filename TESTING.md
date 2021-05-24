@@ -340,7 +340,7 @@ Added some JavaScript to the EmailJS boilerplate code for response/error to repl
 
 This worked when tested, but resulted in the modal contents being fixed at the success or error message when reopened.  Whilst this behaviour is desirable for a failed message (no point allowing repeat attempts should there be a problem), it was not desirable for a successful transmission.
 
-A timeout function was also added to the response code, which would reset the contents of the modal back to the form after 10 seconds.
+A timeout function was also added to the response code, which would reset the contents of the modal back to the form after 5 seconds.
 
 The user has multiple options to escape the modal at all times.
 
@@ -365,6 +365,6 @@ There are no known remaining bugs in the application.
 
 
 Testing first completed 23/05/2021 - AKH
-Testing repeated XX/XX/2021 - AKH
+Testing repeated 24/05/2021 - AKH
 
 [Return to Top](#fte-calc)
